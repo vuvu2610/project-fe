@@ -7,5 +7,4 @@ function PrivateRoute({ auth: { isAuthenticated }, children }) {
   return <>{isAuthenticated ? children : <Navigate to={routes.login} />};</>;
 }
 
-
 export default PrivateRoute;

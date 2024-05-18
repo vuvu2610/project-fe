@@ -4,9 +4,10 @@ import { Fragment } from "react/jsx-runtime";
 import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
 import { privateRoutes, publicRoutes } from "./routes";
+import { RootState } from "./redux/state";
 
 function App() {
-  const user = useSelector((state: any) => state.auth.currentUser);
+  const user = useSelector((state:RootState) => state.auth.currentUser);
   return (
     <Router>
       <div className="app">

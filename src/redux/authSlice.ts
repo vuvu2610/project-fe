@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { AuthState, RootState } from "./state";
 
-interface AuthState {
-  currentUser: {} | null;
-}
+
 
 const initialState: AuthState = {
   currentUser: null,
@@ -31,13 +30,6 @@ const authSlice = createSlice({
         ...action.payload,
       };
     },
-
-    getCurrentUserSucess: (state, action) => {
-      state.currentUser = {
-        ...state.currentUser,
-      };
-    },
-
     sendOTPSuccess: (state, action) => {},
 
     resetPasswordSuccess: (state, action) => {},
@@ -49,7 +41,6 @@ export const {
   registerSuccess,
   logOutSuccess,
   updateUserSuccess,
-  getCurrentUserSucess,
   sendOTPSuccess,
   resetPasswordSuccess,
 } = authSlice.actions;
