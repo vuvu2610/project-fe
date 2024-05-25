@@ -16,7 +16,7 @@ interface Props {
 
 function CardProduct(props: Props) {
   const { data } = props;
-
+  
   return (
     <div className="rounded-3xl shadow-lg p-4 pt-0">
       <Link to={`${routes.product}/${data.id}`} state={{data}}>
