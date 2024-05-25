@@ -21,8 +21,8 @@ function Header() {
         { name: 'Contact', path: '/contact' }
     ];
     return (
-        <div className='w-[80%] py-10 mx-auto flex justify-between'>
-            <a href="#" className="font-bold text-xl text-primary">VuThu</a>
+        <div className='w-full px-[10%] py-10 mx-auto flex justify-between h-full bg-white'>
+            <a href="#" className="font-bold text-xl text-primary">Matcha</a>
             <ul className='flex gap-5 justify-center items-center'>
                 {listMenu.map((menu, index) => (
                     <Link to={menu.path || '/'} key={index}>
