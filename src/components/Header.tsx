@@ -1,6 +1,7 @@
 import { CiSearch, CiUser } from "react-icons/ci";
 import { IoBagOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
+import routes from "../config/routes";
 
 interface MenuItem {
     name: string;
@@ -15,13 +16,13 @@ function Header() {
         <CiUser size={20} />
     ];
     const listMenu: MenuItem[] = [
-        { name: 'Home', path: '/' },
-        { name: 'Shop', path: '/shop' },
+        { name: 'Home', path: routes.home },
+        { name: 'Product', path: routes.product },
         { name: 'Blog', path: '/blog' },
         { name: 'Contact', path: '/contact' }
     ];
     return (
-        <div className='w-full px-[10%] py-10 mx-auto flex justify-between h-full bg-white'>
+        <div className='w-full px-[10%] py-10 mx-auto flex justify-between h-full bg-white shadow-sm'>
             <a href="#" className="font-bold text-xl text-primary">Matcha</a>
             <ul className='flex gap-5 justify-center items-center'>
                 {listMenu.map((menu, index) => (
