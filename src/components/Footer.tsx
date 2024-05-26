@@ -6,7 +6,7 @@ function Footer(props: Props) {
     const {} = props
 
     return (
-        <div className="bg-footer w-full flex justify-between px-[10%] py-10 text-white">
+        <div className="bg-footer w-full flex justify-between px-[10%] py-10 text-white flex-col gap-4 md:flex-row">
             <div className="max-w-56">
                 <div className="text-2xl font-semibold">Why People Like us!</div>
                 <div className="text-[#a2aaa6]">typesetting, remaining essentially unchanged. It was popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</div>

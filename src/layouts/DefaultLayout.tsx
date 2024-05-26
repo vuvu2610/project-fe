@@ -9,10 +9,10 @@ interface DefaultLayoutProps {
 function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
     <>
-      <div className="h-24 fixed w-full z-10">
+      <div className="h-20 fixed w-full z-10">
         <Header />
       </div>
-      <div className="pt-24">
+      <div className="pt-20">
         {children}
       </div>
       <Footer />

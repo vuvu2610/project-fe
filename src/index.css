@@ -14,6 +14,11 @@
     src: url('./assets/fonts/Satoshi-Light.otf');
 }
 
+@font-face {
+    font-family: IntegralCf;
+    src: url(assets/fonts/Fontspring-DEMO-integralcf-heavy.otf);
+}
+
 html {
     font-family: 'SatoshiMedium';
 
