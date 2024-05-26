@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'SatoshiMedium';
+    font-weight: 700;
+    src: url('./assets/fonts/Satoshi-Medium.otf');
+}
+
+@font-face {
+    font-family: 'SatoshiLight';
+    font-weight: 500;
+    src: url('./assets/fonts/Satoshi-Light.otf');
+}
+
+html {
+    font-family: 'SatoshiMedium';
+
+}
