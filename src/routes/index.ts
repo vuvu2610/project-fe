@@ -1,6 +1,6 @@
 import config from "../config";
 import DefaultLayout from "../layouts/DefaultLayout";
-import Home from "../pages/Home";
+import Home from "../pages/Home/Home";
 import PageNotFound from "../pages/PageNotFound";
 import Product from "../pages/Product";
 import ProductDetail from "../pages/ProductDetail";

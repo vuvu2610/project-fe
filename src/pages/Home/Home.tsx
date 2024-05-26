@@ -1,6 +1,7 @@
-import React from 'react'
-import BannerImg from '../assets/images/banner.png'
-import start from '../assets/images/start.svg';
+import BannerImg from '../../assets/images/banner.png'
+import start from '../../assets/images/start.svg';
+import Arrivals from './Arrivals';
+import Brand from './Brand';
 interface Props { }
 
 function Home(props: Props) {
@@ -10,7 +11,7 @@ function Home(props: Props) {
         <div className="bg-[#F2F0F1] ">
             <div className="wrapper flex lg:flex-row flex-col">
                 <div className="lg:my-[100px] my-10 max-w-[577px] mx-auto px-4">
-                    <h3 className="lg:text-[64px] text-[32px] font-[IntegralCf] leading-[1] font-extrabold">
+                    <h3 className="lg:text-[64px] text-[32px] font-[IntegralCf] leading-[1] font-extrabold ">
                         FIND CLOTHES THAT MATCHES YOUR STYLE
                     </h3>
                     <p className="my-[32px]">
@@ -42,7 +43,10 @@ function Home(props: Props) {
                     <img src={BannerImg} alt="" className="w-full h-full object-cover" />
                     <img src={start} alt="" className="absolute top-10 right-0 lg:w-[100px] w-[50px]" />
                 </div>
+                
             </div>
+            <Brand />
+            <Arrivals />
         </div>
     )
 }
