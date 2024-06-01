@@ -8,7 +8,7 @@ import Gym from '../../assets/images/banner.png';
 function Browser() {
     return (
         <div className="wrapper">
-            <div className="bg-[red] rounded-[40px] px-4 lg:px-[64px]">
+            <div className="bg-[#F0F0F0] rounded-[40px] px-4 lg:px-[64px]">
                 <Title className="text-center text-[32px] lg:text-[40px] py-[64px]">BROWSE BY dress STYLE</Title>
 
                 <div>

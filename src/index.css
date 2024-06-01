@@ -19,6 +19,16 @@
     src: url(assets/fonts/Fontspring-DEMO-integralcf-heavy.otf);
 }
 
+.wrapper {
+    max-width: var(--width-page);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+:root {
+    --width-page: 1240px;
+}
+
 html {
     font-family: 'SatoshiMedium';
 
