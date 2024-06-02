@@ -15,8 +15,24 @@
 }
 
 @font-face {
+    font-family: 'VLBangers';
+    font-weight: 500;
+    src: url('./assets/fonts/VL-Bangers.otf');
+}
+
+@font-face {
     font-family: IntegralCf;
     src: url(assets/fonts/Fontspring-DEMO-integralcf-heavy.otf);
+}
+
+.wrapper {
+    max-width: var(--width-page);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+:root {
+    --width-page: 1240px;
 }
 
 html {

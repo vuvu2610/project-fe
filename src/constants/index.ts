@@ -1,8 +1,8 @@
-import gucci from '../assets/images/gucci.png';
-import versace from '../assets/images/versace.png';
-import zara from '../assets/images/zara.png';
-import prada from '../assets/images/prada.png';
-import calvinklein from '../assets/images/calvinklein.png';
+import gucci from '../assets/images/check.png';
+import versace from '../assets/images/check.png';
+import zara from '../assets/images/check.png';
+import prada from '../assets/images/check.png';
+import calvinklein from '../assets/images/check.png';
 
 const navItems = [
     { title: 'Home', to: '/' },
