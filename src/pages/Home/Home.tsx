@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import Reviews from '../../components/Reviews';
+import Reviews from './Reviews';
 import Arrivals from './Arrivals';
 import Banner from './Banner';
 import Brand from './Brand';

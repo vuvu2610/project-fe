@@ -7,7 +7,7 @@
 function FooterBottom() {
     return (
         <div className="mt-5 flex lg:flex-row flex-col text-center justify-between items-center gap-4">
-            <p>SEEDS © May 2024, All Rights Reserved</p>
+            <p>SEEDLING © May 2024, All Rights Reserved</p>
             <div className="flex">
                 {/* <img src={visa} alt="visa" />
                 <img src={apple} alt="apple" />
