@@ -245,9 +245,14 @@ function ProductDetail(_props: Props) {
       </div>
 
       {/* Top selling */}
-      {/* <div className="mt-[60px]">
-            <TopSelling data={productsSelling} />
-        </div> */}
+      <div className="mt-[60px]">
+      <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Top Selling</Title>
+      <ul className="flex-1 grid-cols-3 grid gap-10 auto-rows-max">
+          {products.map((product, index) => (
+            <CardProduct key={index} data={product} />
+          ))}
+        </ul>
+        </div>
     </div>
   );
 }
