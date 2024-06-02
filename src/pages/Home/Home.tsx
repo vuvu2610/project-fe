@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import Reviews from './Reviews';
 import Arrivals from './Arrivals';
 import Banner from './Banner';
-import Brand from './Brand';
 import Browser from './Browser';
 import TopSelling from './TopSelling';
 import products from '../../api/product.json';
@@ -20,7 +19,6 @@ const Home: React.FC = () => {
     return (
         <div className="mt-[100px] mb-[160px]">
             <Banner />
-            <Brand />
             <Arrivals data={productsArrivals} />
             <TopSelling data={productsSelling} />
             <Browser />
