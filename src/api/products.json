@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Test Product 1",
+        "price": 12.00,
+        "category": "Vegetables",
+        "rate": 4
+    },
+    {
+        "id": 2,
+        "name": "Test Product 2",
+        "price": 8.00,
+        "category": "Pumpkin",
+        "rate": 3.5
+    },
+    {
+        "id": 3,
+        "name": "Test Product 3",
+        "price": 20.45,
+        "category": "Apple",
+        "rate": 5
+    },
+    {
+        "id": 4,
+        "name": "Test Product 4",
+        "price": 100.00,
+        "category": "Banana",
+        "rate": 2
+    }
+]
