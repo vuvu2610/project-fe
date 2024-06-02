@@ -9,12 +9,12 @@ interface TopSellingProps {
 const TopSelling: React.FC<TopSellingProps> = ({ data }) => {
     return (
         <div className="wrapper">
-            <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Top Selling</Title>
+            <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Cây giống bán chạy</Title>
 
             <Products data={data} />
             <div className="text-center mt-[36px]">
                 <button className="font-[Satoshi] px-[54px] py-4 border rounded-[62px] w-full lg:w-auto  mb-[64px]">
-                    View All
+                    Xem tất cả
                 </button>
             </div>
         </div>

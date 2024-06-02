@@ -68,7 +68,7 @@ const Navbar: FC = () => {
       <div className="wrapper">
         <div className="flex justify-between items-center gap-8">
           <Link to="/" className="font-[IntegralCf] text-[24px]">
-            SEEDS
+          SEEDLING
           </Link>
 
           <ul className="hidden lg:flex space-x-12">

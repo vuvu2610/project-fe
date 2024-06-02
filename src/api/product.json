@@ -1,1 +1,48 @@
-[]
+[
+    {
+      "id": 1,
+      "image": "https://example.com/image1.jpg",
+      "title": "Cây Cà Chua Cherry",
+      "rating": {
+        "rate": 4.5
+      },
+      "price": 5.99
+    },
+    {
+      "id": 2,
+      "image": "https://example.com/image2.jpg",
+      "title": "Cây Bơ Hass",
+      "rating": {
+        "rate": 4.8
+      },
+      "price": 12.99
+    },
+    {
+      "id": 3,
+      "image": "https://example.com/image3.jpg",
+      "title": "Cây Dưa Hấu Sugar Baby",
+      "rating": {
+        "rate": 4.7
+      },
+      "price": 8.99
+    },
+    {
+      "id": 4,
+      "image": "https://example.com/image4.jpg",
+      "title": "Cây Xoài Keo",
+      "rating": {
+        "rate": 4.6
+      },
+      "price": 9.99
+    },
+    {
+      "id": 5,
+      "image": "https://example.com/image5.jpg",
+      "title": "Cây Cam Sành",
+      "rating": {
+        "rate": 4.9
+      },
+      "price": 7.99
+    }
+  ]
+  
