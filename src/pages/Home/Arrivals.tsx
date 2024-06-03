@@ -13,7 +13,7 @@ const Arrivals: React.FC<ArrivalsProps> = ({ data }) => {
                 <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">sản phẩm mới</Title>
                 <Products data={data} />
                 <div className="text-center mt-[36px] pb-[64px] border-b">
-                    <button className="font-[Satoshi] px-[54px] py-4 border rounded-[62px] w-full lg:w-auto">
+                    <button className="px-[54px] py-4 border rounded-[62px] w-full lg:w-auto hover:scale-110 transition-all duration-300 hover:border-blue-400">
                         View All
                     </button>
                 </div>

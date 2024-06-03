@@ -1,12 +1,12 @@
-import BannerImg from "../../assets/images/check.png";
-import start from "../../assets/images/check.png";
+import BannerImg from "../../assets/images/bgg.jpg";
+// import start from "../../assets/images/start.svg";
 
 function Banner() {
   return (
-    <div className="bg-[#F2F0F1]">
-      <div className="wrapper flex lg:flex-row flex-col">
-        <div className="lg:my-[100px] my-10 max-w-[577px] mx-auto">
-          <h3 className="lg:text-[64px] text-[32px] font-[VLBangers] leading-[1]">
+    <div >
+      <div className="wrapper flex lg:flex-row flex-col bg-cover bg-no-repeat " style={{backgroundImage : `url(${BannerImg})`}} >
+        <div className="lg:my-[80px] my-10 max-w-[577px]">
+          <h3 className="lg:text-[64px] text-[32px] font-bold leading-[1]">
             Tìm kiếm cây giống cho bạn
           </h3>
           <p className="my-[32px]">
@@ -33,15 +33,6 @@ function Banner() {
               <p>Khách hàng</p>
             </div>
           </div>
-        </div>
-
-        <div className="relative -z-0">
-          <img src={BannerImg} alt="" className="w-full h-full object-cover" />
-          <img
-            src={start}
-            alt=""
-            className="absolute top-10 right-0 lg:w-[100px] w-[50px]"
-          />
         </div>
       </div>
     </div>
