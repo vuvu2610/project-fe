@@ -3,6 +3,7 @@ const routes = {
   login: "/login",
   signup: "/signup",
   product: "/products",
+  contact: "/contact",
   'produc-detail': "/products/:id",
   "page-not-found": "*",
 };
