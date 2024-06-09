@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import products from "../api/products.json";
 import CardProduct from "../components/CardProduct";
 import routes from "../config/routes";
@@ -91,10 +91,10 @@ function ProductDetail(_props: Props) {
                 })}
               <span>{data && data.rate}/ 5</span>
             </div>
-            <span className="my-3 block font-[Satoshi] text-[32px]">
+            <span className="my-3 block  text-[32px]">
               ${data?.price}
             </span>
-            <span className="my-3 block font-[Satoshi] text-base capitalize">
+            <span className="my-3 block  text-base capitalize">
               Category: {data?.category}
             </span>
             <p className="pb-4 border-b">{data?.name}</p>
@@ -195,7 +195,7 @@ function ProductDetail(_props: Props) {
         <div className="py-8 border-t">
           <div className="flex justify-between items-center pb-8">
             <div className="flex gap-1 items-center">
-              <h3 className="font-[Satoshi] text-xl">All Reviews</h3>
+              <h3 className=" text-xl">All Reviews</h3>
               <span>(5)</span>
             </div>
             <button className="block py-3 px-5 bg-black text-white rounded-[62px]">
@@ -233,7 +233,7 @@ function ProductDetail(_props: Props) {
                     <span>{data && data.rate}/ 5</span>
                   </div>
                   <div className="flex my-5 items-center gap-2">
-                    <span className="font-[Satoshi]">{review?.name}</span>
+                    <span className="">{review?.name}</span>
                     <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="" className="w-6 h-6 object-cover" />
                   </div>
                   <p className="line-clamp-4">{review?.review}</p>
@@ -243,7 +243,7 @@ function ProductDetail(_props: Props) {
           </Swiper>
         </div>
       </div>
-
+          
       {/* Top selling */}
       <div className="mt-[60px]">
       <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Top Selling</Title>

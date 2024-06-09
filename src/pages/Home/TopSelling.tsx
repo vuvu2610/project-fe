@@ -13,7 +13,7 @@ const TopSelling: React.FC<TopSellingProps> = ({ data }) => {
 
             <Products data={data} />
             <div className="text-center mt-[36px]">
-                <button className="font-[Satoshi] px-[54px] py-4 border rounded-[62px] w-full lg:w-auto  mb-[64px]">
+                <button className=" px-[54px] py-4 border rounded-[62px] w-full lg:w-auto  mb-[64px]">
                     Xem tất cả
                 </button>
             </div>

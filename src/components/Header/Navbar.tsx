@@ -37,8 +37,8 @@ const Navbar: FC = () => {
 
   const activeNavLink = ({ isActive }: { isActive: boolean }) => {
     return isActive
-      ? "text-base font-[Satoshi] underline"
-      : "text-base font-[Satoshi]";
+      ? "text-base  underline"
+      : "text-base ";
   };
 
   const handleLogout = () => {
@@ -166,7 +166,7 @@ const Navbar: FC = () => {
                   </Menu>
                 </>
               ) : (
-                <Link to="/login" className="hidden lg:block font-[Satoshi]">
+                <Link to="/login" className="hidden lg:block ">
                   Login <AiOutlineLogin className="w-6 h-6 inline-block" />
                 </Link>
               )}
@@ -198,7 +198,7 @@ const Navbar: FC = () => {
           >
             FE.SHOPIFY
           </Link>
-          <ul className="space-y-2 border-b font-[Satoshi]">
+          <ul className="space-y-2 border-b ">
             {navItems.map(({ title, to }) => (
               <Link to={to} key={to}>
                 <li className="py-3 px-4 hover:bg-[#484a4b]">{title}</li>
@@ -274,7 +274,7 @@ const Navbar: FC = () => {
               </Menu>
             </>
           ) : (
-            <Link to="/login" className="block p-4 font-[Satoshi]">
+            <Link to="/login" className="block p-4 ">
               Login <AiOutlineLogin className="w-6 h-6 inline-block" />
             </Link>
           )}

@@ -21,7 +21,7 @@ function FooterContent() {
 
             <div className="flex-1 grid lg:grid-cols-4 grid-cols-2 text-left gap-6">
                 <div className="space-y-4">
-                    <h2 className="tracking-widest uppercase font-[Satoshi]">Công ty</h2>
+                    <h2 className="tracking-widest uppercase ">Công ty</h2>
                     <p>Về chúng tôi</p>
                     <p>Features</p>
                     <p>Tính năng</p>
@@ -29,7 +29,7 @@ function FooterContent() {
                 </div>
 
                 <div className="space-y-4">
-                    <h2 className="tracking-widest uppercase font-[Satoshi]">Hỗ trợ</h2>
+                    <h2 className="tracking-widest uppercase ">Hỗ trợ</h2>
                     <p>Hỗ trợ khách hàng</p>
                     <p>Chi tiết giao hàng</p>
                     <p>Điều khoản sử dụng</p>
@@ -37,7 +37,7 @@ function FooterContent() {
                 </div>
 
                 <div className="space-y-4">
-                    <h2 className="tracking-widest uppercase font-[Satoshi]">Hỏi và trả lời</h2>
+                    <h2 className="tracking-widest uppercase ">Hỏi và trả lời</h2>
                     <p>Tài khoản</p>
                     <p>Quản lý việc giao hàng</p>
                     <p>Đặt hàng</p>
@@ -45,7 +45,7 @@ function FooterContent() {
                 </div>
 
                 <div className="space-y-4">
-                    <h2 className="tracking-widest uppercase font-[Satoshi]">Nhân lực</h2>
+                    <h2 className="tracking-widest uppercase ">Nhân lực</h2>
                     <p>Hướng dẫn</p>
                     <p>Blog</p>
                     <p>Youtube</p>

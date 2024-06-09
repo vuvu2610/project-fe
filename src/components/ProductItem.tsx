@@ -18,15 +18,15 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
             </Link>
 
             <div className="mt-4 space-y-2">
-                <h3 className="font-[Satoshi] capitalize line-clamp-1">{product?.title}</h3>
+                <h3 className=" capitalize line-clamp-1">{product?.title}</h3>
                 <div className="flex gap-2">
                     <StarRating rating={product?.rating?.rate} />
-                    <span className="font-[Satoshi]">
+                    <span className="">
                         {product?.rating?.rate}/ <span className="text-[rgba(0, 0, 0, 0.60)]">5</span>{' '}
                     </span>
                 </div>
                 <div>
-                    <span className="font-[Satoshi] text-xl font-semibold">${product?.price}</span>
+                    <span className=" text-xl font-semibold">${product?.price}</span>
                 </div>
             </div>
         </div>

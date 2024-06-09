@@ -32,7 +32,6 @@ function Header() {
                 </div>
             </header>
             <Outlet />
-            <Footer />
         </>
     );
 }

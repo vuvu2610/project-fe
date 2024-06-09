@@ -12,7 +12,7 @@ function FooterTop() {
                 <span className="absolute top-0 left-[14px] py-2">
                     <RiMailSendLine className="w-6 h-7 text-gray-400" />
                 </span>
-                <button className="w-full bg-white text-black mt-3 rounded-[20px] py-3 font-[Satoshi]">
+                <button className="w-full bg-white text-black mt-3 rounded-[20px] py-3 ">
                     Đăng ký để nhận ưu đãi mới
                 </button>
             </div>
