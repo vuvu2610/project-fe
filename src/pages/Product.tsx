@@ -2,22 +2,22 @@ import { useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import ReactSelect from "react-select";
 import listProduct from "../api/product.json";
-import CardProduct from "../components/CardProduct";
+import ProductItem from "../components/ProductItem";
+import { Product} from "../types/types";
 
 interface Props {}
 
-function Product(props: Props) {
+function ProductPage(props: Props) {
   const {} = props;
 
-  const [products, setProducts] = useState(listProduct);
-
+  const [prods, setProds] = useState<Product[]>(listProduct);
 
   const [sortOption] = useState([
-    { value: 0, label: "Default" },
-    { value: 1, label: "Price: Low to High" },
-    { value: 2, label: "Price: High to Low" },
-    { value: 3, label: "Name: A to Z" },
-    { value: 4, label: "Name: Z to A" },
+    { value: 0, label: "Mặc định" },
+    { value: 1, label: "Giá: thấp tới cao" },
+    { value: 2, label: "Giá: cao tới thấp" },
+    { value: 3, label: "Tên: A to Z" },
+    { value: 4, label: "Tên: Z to A" },
   ]);
 
 
@@ -25,23 +25,23 @@ function Product(props: Props) {
   const handleSort = (value: number) => {
     switch (value) {
       case 1:
-        setProducts((prev) => [...prev.sort((a, b) => a.price - b.price)]);
+        setProds((prev) => [...prev.sort((a, b) => a.price - b.price)]);
         break;
       case 2:
-        setProducts((prev) => [...prev.sort((a, b) => b.price - a.price)]);
+        setProds((prev) => [...prev.sort((a, b) => b.price - a.price)]);
         break;
       case 3:
-        setProducts((prev) => [
+        setProds((prev) => [
           ...prev.sort((a, b) => a.title.localeCompare(b.title)),
         ]);
         break;
       case 4:
-        setProducts((prev) => [
+        setProds((prev) => [
           ...prev.sort((a, b) => b.title.localeCompare(a.title)),
         ]);
         break;
       default:
-        setProducts((prev) => [...prev.sort((a, b) => 0)]);
+        setProds((prev) => [...prev.sort((a, b) => 0)]);
         break;
     }
   };
@@ -56,7 +56,7 @@ function Product(props: Props) {
         <div className="w-[247px] border-gray-300 border border-solid rounded-[20px] h-fit ">
         
           <h3 className="px-4 py-3 pt-6 text-xl cursor-default ">
-            Sort by
+          Sắp xếp theo
           </h3>
           <ReactSelect
             className="p-4"
@@ -66,8 +66,8 @@ function Product(props: Props) {
           ></ReactSelect>
         </div>
         <ul className="flex-1 grid-cols-3 grid gap-10 auto-rows-max">
-          {products.map((product, index) => (
-            <CardProduct key={index} data={product} />
+          {prods.map((prod, index) => (
+            <ProductItem product={prod} key={index} />
           ))}
         </ul>
       </div>
@@ -75,4 +75,4 @@ function Product(props: Props) {
   );
 }
 
-export default Product;
+export default ProductPage;
