@@ -67,10 +67,9 @@ function Contact() {
         <div className="wrapper">
             <div className="my-[140px] grid md:grid-cols-2 gap-16 items-center relative overflow-hidden p-10 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-3xl bg-white text-black before:absolute before:right-0 before:w-[300px] before:bg-blue-400 before:h-full max-md:before:hidden">
                 <div>
-                    <h2 className="text-3xl font-extrabold">Get In Touch</h2>
+                    <h2 className="text-3xl font-extrabold">Liên hệ với chúng tôi</h2>
                     <p className="text-sm text-gray-400 mt-3">
-                        Have a specific inquiry or looking to explore new opportunities? Our experienced team is ready
-                        to engage with you.
+                    Bạn có câu hỏi cụ thể hoặc muốn khám phá những cơ hội mới? Đội ngũ giàu kinh nghiệm của chúng tôi sẵn sàng hợp tác với bạn.
                     </p>
                     <form onSubmit={handleSubmit}>
                         <div className="space-y-4 mt-8">
@@ -79,7 +78,7 @@ function Contact() {
                                 name="fullName"
                                 value={formValues.fullName}
                                 onChange={handleChange}
-                                placeholder="Full Name"
+                                placeholder="Họ và tên"
                                 className={`px-2 py-3 bg-white w-full text-sm border-b-2 ${
                                     errors.fullName ? 'border-red-500' : 'border-gray-300'
                                 } focus:border-[#333] outline-none`}
@@ -91,7 +90,7 @@ function Contact() {
                                 name="street"
                                 value={formValues.street}
                                 onChange={handleChange}
-                                placeholder="Street"
+                                placeholder="Địa chỉ"
                                 className={`px-2 py-3 bg-white w-full text-sm border-b-2 ${
                                     errors.street ? 'border-red-500' : 'border-gray-300'
                                 } focus:border-[#333] outline-none`}
@@ -103,7 +102,7 @@ function Contact() {
                                 name="phoneNo"
                                 value={formValues.phoneNo}
                                 onChange={handleChange}
-                                placeholder="Phone No."
+                                placeholder="Số điện thoại"
                                 className={`px-2 py-3 bg-white text-black w-full text-sm border-b-2 ${
                                     errors.phoneNo ? 'border-red-500' : 'border-gray-300'
                                 } focus:border-[#333] outline-none`}
@@ -126,7 +125,7 @@ function Contact() {
                                 name="message"
                                 value={formValues.message}
                                 onChange={handleChange}
-                                placeholder="Write Message"
+                                placeholder="Nội dung tin nhắn"
                                 className={`px-2 pt-3 bg-white text-black w-full text-sm border-b-2 ${
                                     errors.message ? 'border-red-500' : 'border-gray-300'
                                 } focus:border-[#333] outline-none`}
@@ -137,20 +136,20 @@ function Contact() {
                             type="submit"
                             className="mt-8 flex items-center justify-center text-sm w-full rounded px-4 py-2.5 font-semibold bg-[#333] text-white hover:bg-[#222]"
                         >
-                            Send Message
+                            Gửi
                         </button>
                     </form>
                     <ul className="mt-4 flex justify-center lg:space-x-6 max-lg:flex-col max-lg:items-center max-lg:space-y-2 ">
                         <li className="flex items-center hover:text-blue-500">
                             <MdOutlineEmail className="w-6 h-6 text-gray-500" />
                             <a href="mailto:dinhphong.work@gmail.com" className="text-current text-sm ml-3">
-                                <strong>dinhphong.work@gmail.com</strong>
+                                <strong>seedling.work@gmail.com</strong>
                             </a>
                         </li>
                         <li className="flex items-center text-current hover:text-blue-500">
                             <FaPhone className="w-4 h-4 text-gray-500" />
                             <a href="tel:0981972202" className="text-current text-sm ml-3">
-                                <strong>098 197 2202</strong>
+                                <strong>0329028367</strong>
                             </a>
                         </li>
                     </ul>
