@@ -3,14 +3,14 @@ import { useEffect } from 'react';
 import Reviews from './Reviews';
 import Arrivals from './Arrivals';
 import Banner from './Banner';
-import Browser from './Browser';
+import Browser from './SeedlingType';
 import TopSelling from './TopSelling';
 import products from '../../api/product.json';
 import { Product } from '../../types/types'; // import Product from types.ts
 
 const Home: React.FC = () => {
-    const productsArrivals: Product[] = products.slice(0, 10);
-    const productsSelling: Product[] = products.slice(10);
+    const productsArrivals: Product[] = products.slice(0, 5);
+    const productsSelling: Product[] = products.slice(5);
 
     useEffect(() => {
         window.scrollTo(0, 0);

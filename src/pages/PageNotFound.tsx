@@ -8,8 +8,8 @@ function PageNotFound(props: Props) {
   const {} = props;
 
   return (
-    <div className="flex items-center flex-col justify-center lg:flex-row py-28 px-6 md:px-24 md:py-20 lg:py-32 gap-16 lg:gap-28">
-      <div className="w-full lg:w-1/2">
+    <div className="flex items-center flex-col justify-center py-28 px-6 md:px-24 md:py-20 lg:py-32 gap-16 lg:gap-28 mx-auto">
+      <div className="w-full">
         <img
           className="hidden lg:block"
           src="https://i.ibb.co/v30JLYr/Group-192-2.png"
@@ -26,7 +26,7 @@ function PageNotFound(props: Props) {
           alt=""
         />
       </div>
-      <div className="w-full lg:w-1/2">
+      <div className="w-full">
         <h1 className="py-4 text-3xl lg:text-4xl font-extrabold text-gray-800">
           Looks like you've found the doorway to the great nothing
         </h1>

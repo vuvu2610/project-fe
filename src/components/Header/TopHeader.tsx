@@ -4,8 +4,8 @@ function TopHeader() {
             <div className="bg-black text-white py-[9px]">
                 <div className="wrapper flex justify-center items-center">
                     <div className="text-xs lg:text-sm">
-                        Sign up and get 20% off to your first order.{' '}
-                        <span className="underline cursor-pointer font-semibold">Shopping Now</span>
+                        Đăng ký và được giảm giá 20% cho đơn hàng đầu tiên của bạn.
+                        <span className="underline cursor-pointer font-semibold">Mua ngay</span>
                     </div>
                 </div>
             </div>
