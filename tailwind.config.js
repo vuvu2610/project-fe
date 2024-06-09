@@ -9,6 +9,7 @@ module.exports = {
         'primary': '#81c408',
         'footer': '#45595b'
       },
+      
     },
   },
   plugins: [],
