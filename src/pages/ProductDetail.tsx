@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import products from "../api/products.json";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import products from "../api/product.json";
 import CardProduct from "../components/CardProduct";
 import routes from "../config/routes";
 import Title from "../components/Title";
@@ -46,11 +46,13 @@ function ProductDetail(_props: Props) {
   function handleAddToCart(
     data:
       | {
-          id: number;
-          name: string;
-          price: number;
-          category: string;
+        id: number;
+        title: string;
+        image: string;
+        rating: {
           rate: number;
+        }
+        price: number;
         }
       | undefined
   ): void {
@@ -63,9 +65,9 @@ function ProductDetail(_props: Props) {
         {/* <Breadcrumb className="capitalize">{data?.category}</Breadcrumb> */}
 
         <div className="flex flex-col lg:flex-row gap-14 mt-9 pb-8">
-          <div className="lg:w-[450px] w-[300px] mx-auto">
+          <div className="lg:w-[450px] w-[300px] mx-auto grid place-items-center">
             <img
-              src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+              src={data?.image}
               alt=""
               className="w-full rounded-[20px]"
             />
@@ -74,7 +76,7 @@ function ProductDetail(_props: Props) {
           <div className="flex-1">
             {/* Details */}
             <Title className="text-[40px] mb-3 line-clamp-2">
-              {data?.name}
+              {data?.title}
             </Title>
             <div className="flex gap-x-2 items-center mt-2">
               {Array(5)
@@ -84,20 +86,18 @@ function ProductDetail(_props: Props) {
                     <FaStar
                       key={index}
                       color={
-                        data && index + 1 <= data.rate ? "#ffc633" : undefined
+                        data && index + 1 <= data.rating.rate ? "#ffc633" : undefined
                       }
                     ></FaStar>
                   );
                 })}
-              <span>{data && data.rate}/ 5</span>
+              <span>{data && data.rating.rate}/ 5</span>
             </div>
-            <span className="my-3 block font-[Satoshi] text-[32px]">
+            <span className="my-3 block  text-[32px]">
               ${data?.price}
             </span>
-            <span className="my-3 block font-[Satoshi] text-base capitalize">
-              Category: {data?.category}
-            </span>
-            <p className="pb-4 border-b">{data?.name}</p>
+     
+            <p className="pb-4 border-b">{data?.title}</p>
 
             {/* Choose Color */}
             <div className="py-4 border-b">
@@ -195,7 +195,7 @@ function ProductDetail(_props: Props) {
         <div className="py-8 border-t">
           <div className="flex justify-between items-center pb-8">
             <div className="flex gap-1 items-center">
-              <h3 className="font-[Satoshi] text-xl">All Reviews</h3>
+              <h3 className=" text-xl">All Reviews</h3>
               <span>(5)</span>
             </div>
             <button className="block py-3 px-5 bg-black text-white rounded-[62px]">
@@ -225,15 +225,15 @@ function ProductDetail(_props: Props) {
                           <FaStar
                             key={index}
                             color={
-                              data && index + 1 <= data.rate ? "#ffc633" : undefined
+                              data && index + 1 <= data.rating.rate ? "#ffc633" : undefined
                             }
                           ></FaStar>
                         );
                       })}
-                    <span>{data && data.rate}/ 5</span>
+                    <span>{data && data.rating.rate}/ 5</span>
                   </div>
                   <div className="flex my-5 items-center gap-2">
-                    <span className="font-[Satoshi]">{review?.name}</span>
+                    <span className="">{review?.name}</span>
                     <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="" className="w-6 h-6 object-cover" />
                   </div>
                   <p className="line-clamp-4">{review?.review}</p>
@@ -243,7 +243,7 @@ function ProductDetail(_props: Props) {
           </Swiper>
         </div>
       </div>
-
+          
       {/* Top selling */}
       <div className="mt-[60px]">
       <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Top Selling</Title>

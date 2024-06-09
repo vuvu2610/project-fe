@@ -21,15 +21,15 @@ function Banner() {
 
           <div className="flex items-center flex-wrap text-center">
             <div className="border-r border-[rgba(0, 0, 0, 0.10)] px-2">
-              <span className="font-[Satoshi] text-3xl">200+</span>
+              <span className=" text-3xl">200+</span>
               <p>Sản phẩm</p>
             </div>
             <div className="border-r border-[rgba(0, 0, 0, 0.10)] px-2">
-              <span className="font-[Satoshi] text-3xl">2,000+</span>
+              <span className=" text-3xl">2,000+</span>
               <p>Chất lượng cao</p>
             </div>
             <div className="px-2">
-              <span className="font-[Satoshi] text-3xl">30,000+</span>
+              <span className=" text-3xl">30,000+</span>
               <p>Khách hàng</p>
             </div>
           </div>

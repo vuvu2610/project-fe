@@ -19,7 +19,7 @@ function Browser() {
                                 alt="Casual"
                                 className="w-full h-[190px] lg:h-[289px] object-cover hover:scale-[1.1] ease-in-out duration-300"
                             />
-                            <span className="absolute top-5 left-5 text-[30px] font-[Satoshi] ">Casual</span>
+                            <span className="absolute top-5 left-5 text-[30px]  ">Casual</span>
                         </div>
                         <div className="lg:w-2/3 w-full rounded-[20px] overflow-hidden relative">
                             <img
@@ -27,7 +27,7 @@ function Browser() {
                                 alt="Formal"
                                 className="w-full h-[190px] lg:h-[289px] object-cover hover:scale-[1.1] ease-in-out duration-300"
                             />
-                            <span className="absolute top-5 left-5 text-[30px] font-[Satoshi] ">Formal</span>
+                            <span className="absolute top-5 left-5 text-[30px]  ">Formal</span>
                         </div>
                     </div>
                     <div className="flex gap-5 flex-col md:flex-row pb-[64px]">
@@ -37,7 +37,7 @@ function Browser() {
                                 alt="Party"
                                 className="w-full h-[190px] lg:h-[289px] object-cover hover:scale-[1.1] ease-in-out duration-300"
                             />
-                            <span className="absolute top-5 left-5 text-[30px] font-[Satoshi] ">Party</span>
+                            <span className="absolute top-5 left-5 text-[30px]  ">Party</span>
                         </div>
                         <div className="w-full lg:w-1/3 rounded-[20px] overflow-hidden relative">
                             <img
@@ -45,7 +45,7 @@ function Browser() {
                                 alt="Gym"
                                 className="w-full h-[190px] lg:h-[289px] object-cover hover:scale-[1.1] ease-in-out duration-300"
                             />
-                            <span className="absolute top-5 left-5 text-[30px] font-[Satoshi] ">Gym</span>
+                            <span className="absolute top-5 left-5 text-[30px]  ">Gym</span>
                         </div>
                     </div>
                 </div>

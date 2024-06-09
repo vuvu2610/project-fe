@@ -1,6 +1,6 @@
 [
     { "title": "Trang chủ", "to": "/" },
-    { "title": "Shop", "to": "/shop" },
+    { "title": "Sản phẩm", "to": "/products" },
     { "title": "Liên hệ", "to": "/contact" },
     { "title": "Về chúng tôi", "to": "/about" }
 ]
