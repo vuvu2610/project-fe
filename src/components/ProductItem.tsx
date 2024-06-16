@@ -9,7 +9,7 @@ interface ProductItemProps {
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     return (
         <div className="cursor-pointer overflow-hidden shadow p-4 rounded-[20px]">
-            <Link to={'/shop/' + product?.id} className="overflow-hidden rounded-[20px]">
+            <Link to={"/products/" + product.id} className="overflow-hidden rounded-[20px]">
                 <img
                     src={product?.image}
                     alt=""
@@ -25,8 +25,9 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
                         {product?.rating}/ <span className="text-[rgba(0, 0, 0, 0.60)]">5</span>{' '}
                     </span>
                 </div>
-                <div>
+                <div className='flex justify-between'>
                     <span className=" text-xl font-semibold">${product?.price}</span>
+                    <span className=" font-semibold">Đã bán: {product?.purchase}</span>
                 </div>
             </div>
         </div>

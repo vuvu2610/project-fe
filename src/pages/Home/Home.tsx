@@ -9,8 +9,8 @@ import products from '../../api/product.json';
 import { Product } from '../../types/types'; // import Product from types.ts
 
 const Home: React.FC = () => {
-    const productsArrivals: Product[] = products.slice(0, 5);
-    const productsSelling: Product[] = products.slice(5);
+    const productsArrivals: Product[] = products.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5);
+    const productsSelling: Product[] = products.sort((a, b) => b.purchase - a.purchase).slice(0, 5);
 
     useEffect(() => {
         window.scrollTo(0, 0);

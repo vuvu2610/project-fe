@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import ReactSelect from "react-select";
 import listProduct from "../api/product.json";
@@ -19,6 +19,10 @@ function ProductPage(props: Props) {
     { value: 3, label: "Tên: A to Z" },
     { value: 4, label: "Tên: Z to A" },
   ]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
 
 
