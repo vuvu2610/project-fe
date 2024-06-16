@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import StarRating from './StarRating';
 import { Product } from '../types/types';
+import routes from '../config/routes';
 
 interface ProductItemProps {
     product: Product;
@@ -9,7 +10,7 @@ interface ProductItemProps {
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     return (
         <div className="cursor-pointer overflow-hidden shadow p-4 rounded-[20px]">
-            <Link to={'/shop/' + product?.id} className="overflow-hidden rounded-[20px]">
+            <Link to={`${routes.product}/${product?.id}`} className="overflow-hidden rounded-[20px]">
                 <img
                     src={product?.image}
                     alt=""
