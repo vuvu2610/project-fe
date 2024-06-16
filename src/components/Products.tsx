@@ -22,10 +22,10 @@ const Products: React.FC<ProductsProps> = ({ data }) => {
                 }}
                 navigation={true}
                 modules={[Autoplay, Pagination, Navigation]}
-                className="py-3"
+                className="!py-6 "
             >
                 {data?.map((product) => (
-                    <SwiperSlide key={product?.id} className=" min-w-[270px]">
+                    <SwiperSlide key={product?.id} className=" min-w-[270px] ">
                         <ProductItem product={product} />
                     </SwiperSlide>
                 ))}

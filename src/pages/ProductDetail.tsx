@@ -49,9 +49,7 @@ function ProductDetail(_props: Props) {
         id: number;
         title: string;
         image: string;
-        rating: {
-          rate: number;
-        }
+        rating: number;
         price: number;
         }
       | undefined
@@ -86,12 +84,12 @@ function ProductDetail(_props: Props) {
                     <FaStar
                       key={index}
                       color={
-                        data && index + 1 <= data.rating.rate ? "#ffc633" : undefined
+                        data && index + 1 <= data.rating ? "#ffc633" : undefined
                       }
                     ></FaStar>
                   );
                 })}
-              <span>{data && data.rating.rate}/ 5</span>
+              <span>{data && data.rating}/ 5</span>
             </div>
             <span className="my-3 block  text-[32px]">
               ${data?.price}
@@ -143,12 +141,12 @@ function ProductDetail(_props: Props) {
                           <FaStar
                             key={index}
                             color={
-                              data && index + 1 <= data.rating.rate ? "#ffc633" : undefined
+                              data && index + 1 <= data.rating ? "#ffc633" : undefined
                             }
                           ></FaStar>
                         );
                       })}
-                    <span>{data && data.rating.rate}/ 5</span>
+                    <span>{data && data.rating}/ 5</span>
                   </div>
                   <div className="flex my-5 items-center gap-2">
                     <span className="">{review?.name}</span>
