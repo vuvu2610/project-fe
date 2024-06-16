@@ -11,7 +11,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     return (
         <div className="cursor-pointer overflow-hidden shadow p-4 rounded-[20px]">
 
-            <Link to={"/products/" + product.id} className="overflow-hidden rounded-[20px]">
+            <Link to={`${routes.product}/${product?.id}`} className="overflow-hidden rounded-[20px]">
+
                 <img
                     src={product?.image}
                     alt=""
