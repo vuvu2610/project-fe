@@ -36,9 +36,7 @@ const Navbar: FC = () => {
   };
 
   const activeNavLink = ({ isActive }: { isActive: boolean }) => {
-    return isActive
-      ? "text-base  underline"
-      : "text-base ";
+    return isActive ? "text-base  underline" : "text-base ";
   };
 
   const handleLogout = () => {
@@ -68,7 +66,7 @@ const Navbar: FC = () => {
       <div className="wrapper">
         <div className="flex justify-between items-center gap-8">
           <Link to="/" className="font-[IntegralCf] text-[24px]">
-          SEEDLING
+            SEEDLING
           </Link>
 
           <ul className="hidden lg:flex space-x-12">
@@ -160,8 +158,6 @@ const Navbar: FC = () => {
                               </button>
                             )}
                           </Menu.Item>
-
-                          
                         </div>
                       </Menu.Items>
                     </Transition>
