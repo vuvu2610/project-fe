@@ -1,16 +1,7 @@
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import routes from "../config/routes";
-
-interface Product {
-  id: number;
-  title: string;
-  image: string;
-  rating: {
-    rate: number;
-  }
-  price: number;
-}
+import { Product } from "../types/types";
 
 interface Props {
   data: Product;
@@ -36,11 +27,11 @@ function CardProduct(props: Props) {
             return (
               <FaStar 
                 key={index}
-                color={index + 1 <= data.rating.rate ? "#ffc633" : undefined}
+                color={index + 1 <= data.rating ? "#ffc633" : undefined}
               ></FaStar>
             );
           })}
-        <span>{data.rating.rate}/ 5</span>
+        <span>{data.rating}/ 5</span>
       </div>
       <h4 className="text-2xl mt-2 p-4 pt-0">${data.price}</h4>
     </div>

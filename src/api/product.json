@@ -3,91 +3,101 @@
       "id": 1,
       "image": "https://lh3.googleusercontent.com/fife/ALs6j_EbQeMfhtGJMxXFrU62GZqUWgB_0hHJ5TxfTiQgB0OFK8rc0trbkXovXe9a4zhIcaa-5iKHcONPIu7fPnSEifVZ0MUXgeELcVAiifC91pUPG_6-z4gIfM_jYzQcAy8ilP4subgzwbW5SnDcriYUo4iLq0VWY-Robpz44-CsljSATB0i_NyR1eaVnTgz4sI2qBqGIJ4L_kOR0DA_Rp8JThIsH_tNZAk_T2vzh_lQtrQKNUEvwqi0IKbDNoOrP8Xew85wdAOiLp8WnyQ2o15dgHSkQV6qKlb5379Q25tXjmyjrFPIzhk2KiwmRADozAqAiRVyQE-XdWpDaGIlQgqqWMVcFN-8LhmdLTxEHtYosfZoKMV1zOMToYx1jZi5Vv_pU_2Pmx1TgABSG-p5HXIXZ3hClLOteYtugUdxB6EpqjTPheD_ZV_m3ExVDNVmV9cBNgVqp9BT_Jpcn5G09byY4L52KzbCAnW98KpMFBnCFqgEIYNZSiqDD1hsvDqhNsiVQiNx1u-gY7I1a3M4LkEZcvHMQsIY8io8nTDd63yifSkTYLa0na4bwj8inKriwrHdPqSejhw67FFEES10PQKYcc3r7TdskvpkEcAtpsCiMwUkRIeMqdUYVAXJYpHEZIUDMt3bZivV_In2vjZ_SDrJsEIhSIvjnCv6EYfOFGaEtJBWFY1GkmG0QWn5AbN1Fu8yu3Ck5Oni_LYYyXuVnGmx6Gn9P1MgmrnHB5PKp4eLIXzDTmo7xQdbVPfOyN_OLis4rYFmCwyUf4n8QqIEwiltF--bCDmA9D_iUXMeK40izpsVJe8_rq_FAsuGamVGzhC-kAFs0mZXBaBRUOPRrPYbEfaLVnL3KIVZGYMK6y6eXAtdEGNaGq2yCilxwZYkdQOjsJN91XDntb_yWTD0iBDB3WnW41ks9KHibdwbXqqwAsT4yBUq9pWyWsVGAkO9Sfg76AEf-3pwBMuFqrwi85Za98fWQ8bZB94w3zqMri1WJ1LUgm4CSMUGr0hlGR9pVN_y6U67yuIMKgVeaaQ-xwXVN3oiJfETD4fvm6ORjVURpOPtCXiCt14FBefNmQTqYuc2jgyeL16PKD5q9dR7qf2fIOFglCYlrktHB8BEBfcJkSbEdlzKhntwA9LWqUqcRh8wEnz4_wkEdH-EPAU8skBEvg39j2kTVkMCxV1RZYfn_cz4gFjLA51iwA7EdAKJcQOZdsssjKzSwEMY1rpbfiYRy-rE0rBq2mlyl4KeMqQhLpF7lFj8wmF4lcUOlKEu2_vBWGZPLhGro7MpBSgd1BaUNh2ZY5nI4FqhoVWknsZNhQEZ0zb6LblsE_1AVehE8dRbW-PiW7Ozu_adl3xEMyFfz1eeMyO98sUKbcwWG7c_XVKu2ofUxizPozNUPDtOeoksFGM-rXPktammIoriwo4HCSJDnz1__IuY_Pj8PJy09k8isRzrWQ1J1bjqNlZ9NhPLtNEdhS2JoJSYJJEKpjELJYOjo2GdEiHMD4DwRPPq47AHPzJ-Nyh2POZhSGG7OSmNPmXHS-mh2K9KRsy2tret05p-ALjuJP9jO3ISB5u4e_kZ26KP5QgakfuHwwipaHpMvSfx0osvLmsylLNi0235U4yrncY6BRr_r13l_cqOyozre5qzkzhU7EM=w1920-h878",
       "title": "Cây Cà Chua Cherry",
-      "rating": {
-        "rate": 4.5
-      },
-      "price": 5.99
+      "rating": 4.5,
+      "price": 5.99,
+      "purchase": 1231,
+      "category": "caycanh",
+      "date": "2021-09-01"
     },
     {
       "id": 2,
       "image": "https://lh3.googleusercontent.com/u/0/d/1TDVDJhBuCHMaLce2wn-2wSvC9oGyO4cq=w1920-h953-iv2",
       "title": "Cây Bơ Hass",
-      "rating": {
-        "rate": 4.8
-      },
-      "price": 12.99
+      "rating": 4.8,
+      "price": 12.99,
+      "purchase": 1523,
+      "category": "caycanh",
+      "date": "2021-09-02"
     },
     {
       "id": 3,
       "image": "https://lh3.googleusercontent.com/u/0/d/1TDVDJhBuCHMaLce2wn-2wSvC9oGyO4cq=w1920-h953-iv2",
       "title": "Cây Dưa Hấu Sugar Baby",
-      "rating": {
-        "rate": 4.7
-      },
-      "price": 8.99
+      "rating": 5 ,
+      "price": 8.99,
+      "purchase": 5123,
+      "category": "caycanh",
+      "date": "2021-09-03"
     },
     {
       "id": 4,
       "image": "https://lh3.googleusercontent.com/u/0/d/1EH8G7ZJg7LY9CFUfzXXUTwNfwtAA_9Rj=w742-h953-iv2",
       "title": "Cây Xoài Keo",
-      "rating": {
-        "rate": 4.6
-      },
-      "price": 9.99
+      "rating": 3.9,
+      "price": 9.99,
+      "purchase": 1123,
+      "category": "caycanh",
+      "date": "2021-09-04"
     },
     {
       "id": 5,
       "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
       "title": "Cây Cam Sành",
-      "rating": {
-        "rate": 4.9
-      },
-      "price": 7.99
+      "rating": 4.5,
+      "price": 7.99,
+      "purchase": 4123,
+      "category": "caycanh",
+      "date": "2021-09-05"
     },
     {
       "id": 6,
       "image": "https://lh3.googleusercontent.com/fife/ALs6j_EbQeMfhtGJMxXFrU62GZqUWgB_0hHJ5TxfTiQgB0OFK8rc0trbkXovXe9a4zhIcaa-5iKHcONPIu7fPnSEifVZ0MUXgeELcVAiifC91pUPG_6-z4gIfM_jYzQcAy8ilP4subgzwbW5SnDcriYUo4iLq0VWY-Robpz44-CsljSATB0i_NyR1eaVnTgz4sI2qBqGIJ4L_kOR0DA_Rp8JThIsH_tNZAk_T2vzh_lQtrQKNUEvwqi0IKbDNoOrP8Xew85wdAOiLp8WnyQ2o15dgHSkQV6qKlb5379Q25tXjmyjrFPIzhk2KiwmRADozAqAiRVyQE-XdWpDaGIlQgqqWMVcFN-8LhmdLTxEHtYosfZoKMV1zOMToYx1jZi5Vv_pU_2Pmx1TgABSG-p5HXIXZ3hClLOteYtugUdxB6EpqjTPheD_ZV_m3ExVDNVmV9cBNgVqp9BT_Jpcn5G09byY4L52KzbCAnW98KpMFBnCFqgEIYNZSiqDD1hsvDqhNsiVQiNx1u-gY7I1a3M4LkEZcvHMQsIY8io8nTDd63yifSkTYLa0na4bwj8inKriwrHdPqSejhw67FFEES10PQKYcc3r7TdskvpkEcAtpsCiMwUkRIeMqdUYVAXJYpHEZIUDMt3bZivV_In2vjZ_SDrJsEIhSIvjnCv6EYfOFGaEtJBWFY1GkmG0QWn5AbN1Fu8yu3Ck5Oni_LYYyXuVnGmx6Gn9P1MgmrnHB5PKp4eLIXzDTmo7xQdbVPfOyN_OLis4rYFmCwyUf4n8QqIEwiltF--bCDmA9D_iUXMeK40izpsVJe8_rq_FAsuGamVGzhC-kAFs0mZXBaBRUOPRrPYbEfaLVnL3KIVZGYMK6y6eXAtdEGNaGq2yCilxwZYkdQOjsJN91XDntb_yWTD0iBDB3WnW41ks9KHibdwbXqqwAsT4yBUq9pWyWsVGAkO9Sfg76AEf-3pwBMuFqrwi85Za98fWQ8bZB94w3zqMri1WJ1LUgm4CSMUGr0hlGR9pVN_y6U67yuIMKgVeaaQ-xwXVN3oiJfETD4fvm6ORjVURpOPtCXiCt14FBefNmQTqYuc2jgyeL16PKD5q9dR7qf2fIOFglCYlrktHB8BEBfcJkSbEdlzKhntwA9LWqUqcRh8wEnz4_wkEdH-EPAU8skBEvg39j2kTVkMCxV1RZYfn_cz4gFjLA51iwA7EdAKJcQOZdsssjKzSwEMY1rpbfiYRy-rE0rBq2mlyl4KeMqQhLpF7lFj8wmF4lcUOlKEu2_vBWGZPLhGro7MpBSgd1BaUNh2ZY5nI4FqhoVWknsZNhQEZ0zb6LblsE_1AVehE8dRbW-PiW7Ozu_adl3xEMyFfz1eeMyO98sUKbcwWG7c_XVKu2ofUxizPozNUPDtOeoksFGM-rXPktammIoriwo4HCSJDnz1__IuY_Pj8PJy09k8isRzrWQ1J1bjqNlZ9NhPLtNEdhS2JoJSYJJEKpjELJYOjo2GdEiHMD4DwRPPq47AHPzJ-Nyh2POZhSGG7OSmNPmXHS-mh2K9KRsy2tret05p-ALjuJP9jO3ISB5u4e_kZ26KP5QgakfuHwwipaHpMvSfx0osvLmsylLNi0235U4yrncY6BRr_r13l_cqOyozre5qzkzhU7EM=w1920-h878",
       "title": "Cây Cà Chua Cherry",
-      "rating": {
-        "rate": 4.5
-      },
-      "price": 5.99
+      "rating": 5,
+      "price": 5.99,
+      "purchase": 1423,
+      "category": "caycanh",
+      "date": "2021-09-06"
     },
     {
       "id": 7,
       "image": "https://lh3.googleusercontent.com/u/0/d/1TDVDJhBuCHMaLce2wn-2wSvC9oGyO4cq=w1920-h953-iv2",
       "title": "Cây Bơ Hass",
-      "rating": {
-        "rate": 4.8
-      },
-      "price": 12.99
+      "rating": 4.3,
+      "price": 12.99,
+      "purchase": 123,
+      "category": "caycanh",
+      "date": "2021-09-07"
     },
     {
       "id": 8,
       "image": "https://lh3.googleusercontent.com/u/0/d/1TDVDJhBuCHMaLce2wn-2wSvC9oGyO4cq=w1920-h953-iv2",
       "title": "Cây Dưa Hấu Sugar Baby",
-      "rating": {
-        "rate": 4.7
-      },
-      "price": 8.99
+      "rating": 4.1,
+      "price": 8.99,
+      "purchase": 12113,
+      "category": "caycanh",
+      "date": "2021-09-08"
     },
     {
       "id": 9,
       "image": "https://lh3.googleusercontent.com/u/0/d/1EH8G7ZJg7LY9CFUfzXXUTwNfwtAA_9Rj=w742-h953-iv2",
       "title": "Cây Xoài Keo",
-      "rating": {
-        "rate": 4.6
-      },
-      "price": 9.99
+      "rating": 4.6,
+      "price": 9.99,
+      "purchase": 12345,
+      "category": "caycanh",
+      "date": "2021-09-09"
     },
     {
       "id": 10,
       "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
       "title": "Cây Cam Sành",
-      "rating": {
-        "rate": 4.9
-      },
-      "price": 7.99
+      "rating": 4.9,
+      "price": 7.99,
+      "purchase": 12124,
+      "category": "caycanh",
+      "date": "2021-09-10"
     }
   ]
   
