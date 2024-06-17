@@ -63,7 +63,7 @@ function ProductDetail(_props: Props) {
         {/* <Breadcrumb className="capitalize">{data?.category}</Breadcrumb> */}
 
         <div className="flex flex-col lg:flex-row gap-14 mt-9 pb-8">
-          <div className="lg:w-[450px] w-[300px] mx-auto grid place-items-center">
+          <div className=" w-[300px] mx-auto grid place-items-center">
             <img
               src={data?.image}
               alt=""
@@ -97,89 +97,7 @@ function ProductDetail(_props: Props) {
      
             <p className="pb-4 border-b">{data?.title}</p>
 
-            {/* Choose Color */}
-            <div className="py-4 border-b">
-              <p className="mb-2">Select Colors</p>
-              <div className="flex items-center gap-4">
-                <div
-                  className={`w-[37px] h-[37px] cursor-pointer rounded-full bg-[#4F4631] ${
-                    selectedColor === "#4F4631"
-                      ? "text-white"
-                      : "text-transparent"
-                  }`}
-                  onClick={() => handleColorClick("#4F4631")}
-                >
-                  <FaCheck className="w-[20px] mx-auto h-[37px]" />
-                </div>
-                <div
-                  className={`w-[37px] h-[37px] cursor-pointer rounded-full bg-[#314F4A] ${
-                    selectedColor === "#314F4A"
-                      ? "text-white"
-                      : "text-transparent"
-                  }`}
-                  onClick={() => handleColorClick("#314F4A")}
-                >
-                  <FaCheck className="w-[20px] mx-auto h-[37px]" />
-                </div>
-                <div
-                  className={`w-[37px] h-[37px] cursor-pointer rounded-full bg-[#31344F] ${
-                    selectedColor === "#31344F"
-                      ? "text-white"
-                      : "text-transparent"
-                  }`}
-                  onClick={() => handleColorClick("#31344F")}
-                >
-                  <FaCheck className="w-[20px] mx-auto h-[37px]" />
-                </div>
-              </div>
-            </div>
-
-            {/* Choose Size */}
-            <div className="py-4 border-b">
-              <p className="mb-2">Choose Size</p>
-              <div className="flex items-center gap-4 flex-wrap">
-                <span
-                  className={`block cursor-pointer px-6 py-3 rounded-[62px] font-semibold ${
-                    selectedSize === "Small"
-                      ? "bg-black text-white"
-                      : "bg-[#F0F0F0] text-black"
-                  }`}
-                  onClick={() => handleSizeClick("Small")}
-                >
-                  Small
-                </span>
-                <span
-                  className={`block cursor-pointer px-6 py-3 rounded-[62px] font-semibold ${
-                    selectedSize === "Medium"
-                      ? "bg-black text-white"
-                      : "bg-[#F0F0F0] text-black"
-                  }`}
-                  onClick={() => handleSizeClick("Medium")}
-                >
-                  Medium
-                </span>
-                <span
-                  className={`block cursor-pointer px-6 py-3 rounded-[62px] font-semibold ${
-                    selectedSize === "Large"
-                      ? "bg-black text-white"
-                      : "bg-[#F0F0F0] text-black"
-                  }`}
-                  onClick={() => handleSizeClick("Large")}
-                >
-                  Large
-                </span>
-                <span
-                  className={`block cursor-pointer px-6 py-3 rounded-[62px] font-semibold ${
-                    selectedSize === "X-Large"
-                      ? "bg-black text-white"
-                      : "bg-[#F0F0F0] text-black"
-                  }`}
-                  onClick={() => handleSizeClick("X-Large")}
-                >
-                  X-Large
-                </span>
-              </div>
-            </div>
+           
             <button
               onClick={() => handleAddToCart(data)}
               className="px-[70px] py-4 bg-black text-white rounded-[62px] mt-4"
@@ -243,9 +161,9 @@ function ProductDetail(_props: Props) {
       </div>
           
       {/* Top selling */}
-      <div className="mt-[60px]">
+      <div className="mt-[60px] wrapper">
       <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Top Selling</Title>
-      <ul className="flex-1 grid-cols-3 grid gap-10 auto-rows-max">
+      <ul className="flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
           {products.map((product, index) => (
             <CardProduct key={index} data={product} />
           ))}

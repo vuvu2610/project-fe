@@ -56,7 +56,7 @@ function ProductPage(props: Props) {
         <span className="text-gray-400">Home</span> <FaChevronRight size={12} />{" "}
         Shop
       </div>
-      <div className="flex gap-x-10">
+      <div className="flex gap-x-10 flex-col xl:flex-row gap-y-5">
         <div className="w-[247px] border-gray-300 border border-solid rounded-[20px] h-fit ">
         
           <h3 className="px-4 py-3 pt-6 text-xl cursor-default ">
@@ -69,7 +69,7 @@ function ProductPage(props: Props) {
             onChange={(option) => option && handleSort(option.value)}
           ></ReactSelect>
         </div>
-        <ul className="flex-1 grid-cols-3 grid gap-10 auto-rows-max">
+        <ul className="flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
           {prods.map((prod, index) => (
             <ProductItem product={prod} key={index} />
           ))}
