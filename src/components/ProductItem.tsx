@@ -29,7 +29,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
                     </span>
                 </div>
                 <div className='flex justify-between'>
-                    <span className=" text-xl font-semibold">${product?.price}</span>
+                    <span className=" font-semibold">{product?.price} VND</span>
                     <span className=" font-semibold">Đã bán: {product?.purchase}</span>
                 </div>
             </div>
