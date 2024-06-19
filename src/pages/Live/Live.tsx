@@ -1,93 +1,47 @@
-import React, { useRef, useEffect, useState } from "react";
-import SimplePeer from "simple-peer";
-import Chat from "./Chat";
+import React, { useState } from "react";
+import { authToken, createMeeting } from "../../api/live";
+import { MeetingConsumer, MeetingProvider } from "@videosdk.live/react-sdk";
+import JoinScreen from "./JoinScreen";
+import Container from "./Container";
 
-const Live: React.FC = () => {
-  const localVideoRef = useRef<HTMLVideoElement | null>(null);
-  const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
-  const ws = useRef<WebSocket | null>(null);
-  const peerRef = useRef<SimplePeer.Instance | null>(null);
+// Define an interface for the component props
+interface Props {}
 
-  useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:8080/video-chat");
+const Live: React.FC<Props> = () => {
+  const [meetingId, setMeetingId] = useState<string | null>(null);
+  const [mode, setMode] = useState<string>("CONFERENCE");
 
-    ws.current.onmessage = (message) => {
-      try {
-        const signal = JSON.parse(message.data);
-        console.log(signal);
+  const getMeetingAndToken = async (id: string | null) => {
+    const meetingId = id == null ? await createMeeting({ token: authToken }) : id;
+    setMeetingId(meetingId);
+  };
 
-        if (
-          signal.type === "offer" ||
-          signal.type === "answer" ||
-          signal.type === "candidate"
-        ) {
-          if (peerRef.current) {
-            peerRef.current.signal(signal);
-          }
-        } else if (signal.CHAT) {
-          // Handle chat message if needed
+  const onMeetingLeave = () => {
+    setMeetingId(null);
+  };
+
+  return authToken && meetingId ? (
+    <MeetingProvider
+      config={{
+        meetingId,
+        micEnabled: true,
+        webcamEnabled: true,
+        name: "C.V. Raman",
+        mode: mode as 'CONFERENCE' | 'VIEWER',
+        debugMode: true
+      }}
+      token={authToken}
+    >
+      <MeetingConsumer>
+        {() =>
+          
+          <Container meetingId={meetingId} onMeetingLeave={onMeetingLeave} />
+          
         }
-      } catch (e) {
-        console.error("Error parsing JSON:", e);
-      }
-    };
-
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((stream) => {
-        if (localVideoRef.current) {
-          localVideoRef.current.srcObject = stream;
-        }
-
-        const peer = new SimplePeer({
-          initiator: window.location.hash === "#init",
-          trickle: false,
-          stream: stream,
-        });
-
-        peer.on("signal", (data) => {
-          if (ws.current) {
-            ws.current.send(JSON.stringify(data));
-          }
-        });
-
-        peer.on("stream", (stream) => {
-          if (remoteVideoRef.current) {
-            remoteVideoRef.current.srcObject = stream;
-          }
-        });
-
-        peerRef.current = peer;
-      });
-
-    // Clean up WebSocket connection and peer on unmount
-    return () => {
-      if (ws.current) {
-        ws.current.close();
-      }
-      if (peerRef.current) {
-        peerRef.current.destroy();
-      }
-    };
-  }, []);
-
-  return (
-    <div className="flex flex-col h-screen">
-      <div className="flex flex-1 justify-around items-center p-4">
-        <video
-          ref={localVideoRef}
-          autoPlay
-          muted
-          className="w-1/2 border-2 border-black rounded"
-        />
-        <video
-          ref={remoteVideoRef}
-          autoPlay
-          className="w-1/2 border-2 border-black rounded"
-        />
-      </div>
-      <Chat ws={ws} />
-    </div>
+      </MeetingConsumer>
+    </MeetingProvider>
+  ) : (
+    <JoinScreen getMeetingAndToken={getMeetingAndToken} setMode={setMode} />
   );
 };
 
