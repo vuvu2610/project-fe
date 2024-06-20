@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import products from "../api/product.json";
-import CardProduct from "../components/CardProduct";
 import routes from "../config/routes";
 import Title from "../components/Title";
-import { FaCheck, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { reviews } from "../constants";
+import { Product } from "../types/types";
+import ProductItem from "../components/ProductItem";
 
 interface Props {}
 
@@ -17,23 +18,23 @@ function ProductDetail(_props: Props) {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [data] = useState(
-    products.find((product) => {
-      const parsId = id && parseInt(id);
-      return product.id === parsId;
-    })
-  );
-
-  const isValidId =
-    id &&
-    !isNaN(parseInt(id)) &&
-    products.some((product) => product.id === parseInt(id));
+  const [data, setData] = useState<Product>();
 
   useEffect(() => {
     if (!isValidId) {
       navigate(routes["page-not-found"]);
     }
-  }, []);
+    setData(products.find((product) => {
+      const parsId = id && parseInt(id);
+      return product.id === parsId;
+    }));
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  const isValidId =
+    id &&
+    !isNaN(parseInt(id)) &&
+    products.some((product) => product.id === parseInt(id));
 
   function handleColorClick(color: string) {
     setSelectedColor(color);
@@ -92,7 +93,7 @@ function ProductDetail(_props: Props) {
               <span>{data && data.rating}/ 5</span>
             </div>
             <span className="my-3 block  text-[32px]">
-              ${data?.price}
+              {data?.price} VND
             </span>
      
             <p className="pb-4 border-b">{data?.title}</p>
@@ -165,7 +166,7 @@ function ProductDetail(_props: Props) {
       <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Top Selling</Title>
       <ul className="flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
           {products.map((product, index) => (
-            <CardProduct key={index} data={product} />
+            <ProductItem product={product} key={index}/>
           ))}
         </ul>
         </div>
