@@ -1,10 +1,14 @@
-import React, { useMemo } from "react";
-import { useMeeting, Constants } from "@videosdk.live/react-sdk";
+import React, { useMemo, useRef } from "react";
+import { useMeeting, Constants, usePubSub } from "@videosdk.live/react-sdk";
 import Controls from "./Controls";
 import ParticipantView from "./ParticipantView";
+import Chat from "./Chat";
 
 const SpeakerView: React.FC = () => {
   const { participants, hlsState } = useMeeting();
+
+
+  const ulList = useRef();
 
   const speakers = useMemo(() => {
     const speakerParticipants = Array.from(participants.values()).filter(
@@ -23,6 +27,8 @@ const SpeakerView: React.FC = () => {
       {speakers.map((participant) => (
         <ParticipantView participantId={participant.id} key={participant.id} />
       ))}
+
+      <Chat />
     </div>
   );
 };

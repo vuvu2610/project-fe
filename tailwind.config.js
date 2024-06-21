@@ -9,6 +9,9 @@ module.exports = {
         'primary': '#81c408',
         'footer': '#45595b'
       },
+      maxWidth:{
+        'width-page': '1240px',
+      }
       
     },
   },

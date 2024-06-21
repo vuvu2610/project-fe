@@ -4,7 +4,6 @@ import { MeetingConsumer, MeetingProvider } from "@videosdk.live/react-sdk";
 import JoinScreen from "./JoinScreen";
 import Container from "./Container";
 
-// Define an interface for the component props
 interface Props {}
 
 const Live: React.FC<Props> = () => {
@@ -12,7 +11,8 @@ const Live: React.FC<Props> = () => {
   const [mode, setMode] = useState<string>("CONFERENCE");
 
   const getMeetingAndToken = async (id: string | null) => {
-    const meetingId = id == null ? await createMeeting({ token: authToken }) : id;
+    const meetingId =
+      id == null ? await createMeeting() : id;
     setMeetingId(meetingId);
   };
 
@@ -20,28 +20,35 @@ const Live: React.FC<Props> = () => {
     setMeetingId(null);
   };
 
-  return authToken && meetingId ? (
-    <MeetingProvider
-      config={{
-        meetingId,
-        micEnabled: true,
-        webcamEnabled: true,
-        name: "C.V. Raman",
-        mode: mode as 'CONFERENCE' | 'VIEWER',
-        debugMode: true
-      }}
-      token={authToken}
-    >
-      <MeetingConsumer>
-        {() =>
+  return (
+    <div className="max-w-width-page mt-[160px] pb-40 mx-auto">
+      {authToken && meetingId ? (
+        <MeetingProvider
+          config={{
+            meetingId,
+            micEnabled: true,
+            webcamEnabled: true,
+            multiStream: true,
+            name: "C.V. Raman",
+            mode: mode as "CONFERENCE" | "VIEWER",
+            debugMode: true,
+          }}
+          token={authToken}
           
-          <Container meetingId={meetingId} onMeetingLeave={onMeetingLeave} />
-          
-        }
-      </MeetingConsumer>
-    </MeetingProvider>
-  ) : (
-    <JoinScreen getMeetingAndToken={getMeetingAndToken} setMode={setMode} />
+        >
+          <MeetingConsumer>
+            {() => (
+              <Container
+                meetingId={meetingId}
+                onMeetingLeave={onMeetingLeave}
+              />
+            )}
+          </MeetingConsumer>
+        </MeetingProvider>
+      ) : (
+        <JoinScreen getMeetingAndToken={getMeetingAndToken} setMode={setMode} />
+      )}
+    </div>
   );
 };
 

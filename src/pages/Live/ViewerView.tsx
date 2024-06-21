@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import Hls from "hls.js";
 import { useMeeting } from "@videosdk.live/react-sdk";
+import Chat from "./Chat";
 
 const ViewerView: React.FC = () => {
   const playerRef = useRef<HTMLVideoElement>(null);
@@ -70,9 +71,11 @@ const ViewerView: React.FC = () => {
                 console.log(err, "hls video error");
               }}
             />
+            <Chat />
           </div>
         )
       )}
+      
     </div>
   );
 };
