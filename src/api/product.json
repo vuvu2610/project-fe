@@ -1398,5 +1398,506 @@
     "purchase": 12124,
     "category": "caycanh",
     "date": "2021-09-10"
+  },
+
+  {
+    "id": 141,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Bưởi",
+    "rating": 4.8,
+    "price": 9.99,
+    "purchase": 10000,
+    "category": "caycanh",
+    "date": "2021-10-01"
+  },
+  {
+    "id": 142,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Chanh",
+    "rating": 4.7,
+    "price": 6.99,
+    "purchase": 8500,
+    "category": "caycanh",
+    "date": "2021-08-15"
+  },
+  {
+    "id": 143,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Quất",
+    "rating": 4.6,
+    "price": 5.99,
+    "purchase": 9000,
+    "category": "caycanh",
+    "date": "2021-11-20"
+  },
+  {
+    "id": 144,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Xoài",
+    "rating": 4.5,
+    "price": 12.99,
+    "purchase": 11000,
+    "category": "caycanh",
+    "date": "2021-12-05"
+  },
+  {
+    "id": 145,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Mận",
+    "rating": 4.9,
+    "price": 7.49,
+    "purchase": 10200,
+    "category": "caycanh",
+    "date": "2021-07-30"
+  },
+  {
+    "id": 146,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Đào",
+    "rating": 4.4,
+    "price": 8.99,
+    "purchase": 9500,
+    "category": "caycanh",
+    "date": "2021-06-25"
+  },
+  {
+    "id": 147,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Ổi",
+    "rating": 4.3,
+    "price": 6.49,
+    "purchase": 7200,
+    "category": "caycanh",
+    "date": "2021-05-10"
+  },
+  {
+    "id": 148,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Vải",
+    "rating": 4.2,
+    "price": 10.99,
+    "purchase": 8700,
+    "category": "caycanh",
+    "date": "2021-04-15"
+  },
+  {
+    "id": 149,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Mít",
+    "rating": 4.1,
+    "price": 15.99,
+    "purchase": 9500,
+    "category": "caycanh",
+    "date": "2021-03-20"
+  },
+  {
+    "id": 150,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Bơ",
+    "rating": 4.0,
+    "price": 9.49,
+    "purchase": 8000,
+    "category": "caycanh",
+    "date": "2021-02-25"
+  },
+  {
+    "id": 151,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Nhãn",
+    "rating": 4.9,
+    "price": 11.49,
+    "purchase": 10000,
+    "category": "caycanh",
+    "date": "2021-01-30"
+  },
+  {
+    "id": 152,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Sầu Riêng",
+    "rating": 4.8,
+    "price": 19.99,
+    "purchase": 5000,
+    "category": "caycanh",
+    "date": "2021-12-15"
+  },
+  {
+    "id": 153,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Dừa",
+    "rating": 4.7,
+    "price": 13.99,
+    "purchase": 7700,
+    "category": "caycanh",
+    "date": "2021-11-10"
+  },
+  {
+    "id": 154,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Mãng Cầu",
+    "rating": 4.6,
+    "price": 7.99,
+    "purchase": 12200,
+    "category": "caycanh",
+    "date": "2021-10-05"
+  },
+  {
+    "id": 155,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Chôm Chôm",
+    "rating": 4.5,
+    "price": 10.49,
+    "purchase": 8700,
+    "category": "caycanh",
+    "date": "2021-09-30"
+  },
+  {
+    "id": 156,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Hồng Xiêm",
+    "rating": 4.4,
+    "price": 8.99,
+    "purchase": 7600,
+    "category": "caycanh",
+    "date": "2021-08-25"
+  },
+  {
+    "id": 157,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Mít Thái",
+    "rating": 4.3,
+    "price": 14.49,
+    "purchase": 10200,
+    "category": "caycanh",
+    "date": "2021-07-20"
+  },
+  {
+    "id": 158,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Lê",
+    "rating": 4.2,
+    "price": 7.99,
+    "purchase": 8100,
+    "category": "caycanh",
+    "date": "2021-06-15"
+  },
+  {
+    "id": 159,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Lựu",
+    "rating": 4.1,
+    "price": 9.49,
+    "purchase": 9200,
+    "category": "caycanh",
+    "date": "2021-05-10"
+  },
+  {
+    "id": 160,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Sơ Ri",
+    "rating": 4.0,
+    "price": 8.49,
+    "purchase": 7500,
+    "category": "caycanh",
+    "date": "2021-04-05"
+  },
+  {
+    "id": 161,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Sung",
+    "rating": 4.9,
+    "price": 10.99,
+    "purchase": 8700,
+    "category": "caycanh",
+    "date": "2021-03-01"
+  },
+  {
+    "id": 162,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Đu Đủ",
+    "rating": 4.8,
+    "price": 6.99,
+    "purchase": 11200,
+    "category": "caycanh",
+    "date": "2021-02-25"
+  },
+  {
+    "id": 163,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Na",
+    "rating": 4.7,
+    "price": 8.49,
+    "purchase": 8500,
+    "category": "caycanh",
+    "date": "2021-01-20"
+  },
+  {
+    "id": 164,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Nhót",
+    "rating": 4.6,
+    "price": 11.99,
+    "purchase": 9600,
+    "category": "caycanh",
+    "date": "2020-12-15"
+  },
+  {
+    "id": 165,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Chanh Leo",
+    "rating": 4.5,
+    "price": 7.49,
+    "purchase": 7400,
+    "category": "caycanh",
+    "date": "2020-11-10"
+  },
+  {
+    "id": 166,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Táo",
+    "rating": 4.4,
+    "price": 9.99,
+    "purchase": 6700,
+    "category": "caycanh",
+    "date": "2020-10-05"
+  },
+  {
+    "id": 167,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Mơ",
+    "rating": 4.3,
+    "price": 5.99,
+    "purchase": 9500,
+    "category": "caycanh",
+    "date": "2020-09-01"
+  },
+  {
+    "id": 168,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Khế",
+    "rating": 4.2,
+    "price": 12.49,
+    "purchase": 8700,
+    "category": "caycanh",
+    "date": "2020-08-25"
+  },
+  {
+    "id": 169,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Đậu Bắp",
+    "rating": 4.1,
+    "price": 4.99,
+    "purchase": 7400,
+    "category": "caycanh",
+    "date": "2020-07-20"
+  },
+  {
+    "id": 170,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Cà Chua",
+    "rating": 4.0,
+    "price": 6.49,
+    "purchase": 6600,
+    "category": "caycanh",
+    "date": "2020-06-15"
+  },
+  {
+    "id": 171,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Cà Rốt",
+    "rating": 4.9,
+    "price": 3.49,
+    "purchase": 9900,
+    "category": "caycanh",
+    "date": "2020-05-10"
+  },
+  {
+    "id": 172,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Cải Thìa",
+    "rating": 4.8,
+    "price": 2.99,
+    "purchase": 8100,
+    "category": "caycanh",
+    "date": "2020-04-05"
+  },
+  {
+    "id": 173,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Cải Bắp",
+    "rating": 4.7,
+    "price": 3.99,
+    "purchase": 8600,
+    "category": "caycanh",
+    "date": "2020-03-01"
+  },
+  {
+    "id": 174,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Su Hào",
+    "rating": 4.6,
+    "price": 4.49,
+    "purchase": 7100,
+    "category": "caycanh",
+    "date": "2020-02-25"
+  },
+  {
+    "id": 175,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Su Su",
+    "rating": 4.5,
+    "price": 3.49,
+    "purchase": 6300,
+    "category": "caycanh",
+    "date": "2020-01-20"
+  },
+  {
+    "id": 176,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Mồng Tơi",
+    "rating": 4.4,
+    "price": 2.49,
+    "purchase": 5200,
+    "category": "caycanh",
+    "date": "2019-12-15"
+  },
+  {
+    "id": 177,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Rau Muống",
+    "rating": 4.3,
+    "price": 2.99,
+    "purchase": 7400,
+    "category": "caycanh",
+    "date": "2019-11-10"
+  },
+  {
+    "id": 178,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Rau Cải",
+    "rating": 4.2,
+    "price": 1.99,
+    "purchase": 8100,
+    "category": "caycanh",
+    "date": "2019-10-05"
+  },
+  {
+    "id": 179,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Cải Ngọt",
+    "rating": 4.1,
+    "price": 2.49,
+    "purchase": 6700,
+    "category": "caycanh",
+    "date": "2019-09-01"
+  },
+  {
+    "id": 180,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Bí Ngô",
+    "rating": 4.0,
+    "price": 4.99,
+    "purchase": 7400,
+    "category": "caycanh",
+    "date": "2019-08-25"
+  },
+  {
+    "id": 181,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Bí Đao",
+    "rating": 4.9,
+    "price": 3.99,
+    "purchase": 8700,
+    "category": "caycanh",
+    "date": "2019-07-20"
+  },
+  {
+    "id": 182,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Bắp Cải",
+    "rating": 4.8,
+    "price": 3.49,
+    "purchase": 7600,
+    "category": "caycanh",
+    "date": "2019-06-15"
+  },
+  {
+    "id": 183,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Đậu Hà Lan",
+    "rating": 4.7,
+    "price": 5.49,
+    "purchase": 6100,
+    "category": "caycanh",
+    "date": "2019-05-10"
+  },
+  {
+    "id": 184,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Đậu Phộng",
+    "rating": 4.6,
+    "price": 4.99,
+    "purchase": 6700,
+    "category": "caycanh",
+    "date": "2019-04-05"
+  },
+  {
+    "id": 185,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Đậu Đũa",
+    "rating": 4.5,
+    "price": 3.49,
+    "purchase": 8200,
+    "category": "caycanh",
+    "date": "2019-03-01"
+  },
+  {
+    "id": 186,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Dưa Leo",
+    "rating": 4.4,
+    "price": 2.99,
+    "purchase": 5400,
+    "category": "caycanh",
+    "date": "2019-02-25"
+  },
+  {
+    "id": 187,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Dưa Hấu",
+    "rating": 4.3,
+    "price": 3.99,
+    "purchase": 6300,
+    "category": "caycanh",
+    "date": "2019-01-20"
+  },
+  {
+    "id": 188,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Cà Tím",
+    "rating": 4.2,
+    "price": 2.49,
+    "purchase": 7200,
+    "category": "caycanh",
+    "date": "2018-12-15"
+  },
+  {
+    "id": 189,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Khoai Tây",
+    "rating": 4.1,
+    "price": 3.99,
+    "purchase": 8100,
+    "category": "caycanh",
+    "date": "2018-11-10"
+  },
+  {
+    "id": 190,
+    "image": "https://lh3.googleusercontent.com/u/0/d/1QNmWo9a_lAhyY8fJGsj5XEFDayMoIG4E=w742-h953-iv2",
+    "title": "Cây Khoai Lang",
+    "rating": 4.0,
+    "price": 2.49,
+    "purchase": 9600,
+    "category": "caycanh",
+    "date": "2018-10-05"
   }
 ]
