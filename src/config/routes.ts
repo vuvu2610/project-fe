@@ -5,6 +5,7 @@ const routes = {
   product: "/products",
   contact: "/contact",
   live: "/live",
+  stream: "/live/stream",
   'produc-detail': "/products/:id",
   "page-not-found": "*",
 };

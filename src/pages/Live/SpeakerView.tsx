@@ -7,9 +7,6 @@ import Chat from "./Chat";
 const SpeakerView: React.FC = () => {
   const { participants, hlsState } = useMeeting();
 
-
-  const ulList = useRef();
-
   const speakers = useMemo(() => {
     const speakerParticipants = Array.from(participants.values()).filter(
       (participant) => {
@@ -22,7 +19,7 @@ const SpeakerView: React.FC = () => {
 
   return (
     <div>
-      <p>Current HLS State: {hlsState}</p>
+      <p className="mb-2">Trạng thái hiện tại của phiên live: {hlsState}</p>
       <Controls />
       {speakers.map((participant) => (
         <ParticipantView participantId={participant.id} key={participant.id} />

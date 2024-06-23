@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { MeetingData } from "../../types/types";
-import { authToken, getMeetings } from "../../api/live";
-import { MeetingConsumer, MeetingProvider } from "@videosdk.live/react-sdk";
-import Container from "./Container";
+import { useEffect, useState } from "react";
 
 type GetMeetingAndToken = (meetingId: string | null) => Promise<void>;
 type SetMode = (mode: "CONFERENCE" | "VIEWER") => void;
@@ -16,20 +12,16 @@ function JoinScreen({
 }) {
   const [meetingId, setMeetingId] = useState<string | null>(null);
 
-  const [meetings, setMeetings] = useState<Array<MeetingData>>([]);
-
   const onClick = async (mode: "CONFERENCE" | "VIEWER") => {
     setMode(mode);
     await getMeetingAndToken(meetingId);
   };
 
-  useEffect(() => {
-    getMeetings().then((ms) => setMeetings(ms));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="container">
-      <button onClick={() => onClick("CONFERENCE")}>Create Meeting</button>
+      {/* <button onClick={() => onClick("CONFERENCE")}>Create Meeting</button>
       <br />
       <br />
       {" or "}
@@ -46,31 +38,17 @@ function JoinScreen({
       <br />
       <button onClick={() => onClick("CONFERENCE")}>Join as Host</button>
       {" | "}
-      <button onClick={() => onClick("VIEWER")}>Join as Viewer</button>
-      <ul>
-        {meetings.map((meet, index) => (
-          <li key={index}>
-          <MeetingProvider
-          config={{
-            meetingId: meet.data.meetingId,
-            micEnabled: true,
-            webcamEnabled: true,
-            multiStream: true,
-            name: "C.V. Raman",
-            mode:  "VIEWER",
-            debugMode: true,
-          }}
-          token={authToken}
+      <button onClick={() => onClick("VIEWER")}>Join as Viewer</button> */}
+
+      <div className="flex flex-col items-center gap-y-3">
+        <h1 className="text-2xl">Chào mứng bạn quay trở lại !!!</h1>
+        <button
+          onClick={() => onClick("CONFERENCE")}
+          className="p-3 rounded-xl bg-gray-300 hover:text-white hover:bg-primary transition-all duration-300 "
         >
-          <MeetingConsumer>
-            {() => (
-              <p>haha</p>
-            )}
-          </MeetingConsumer>
-        </MeetingProvider>
-          </li>
-        ))}
-      </ul>
+          Phát trực tiếp
+        </button>
+      </div>
     </div>
   );
 }

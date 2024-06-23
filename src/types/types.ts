@@ -48,3 +48,20 @@ export interface Room {
     get_session: string;
   };
 }
+
+export interface Meta {
+  createdAt: string;
+  width: number;
+  height: number;
+  format: string;
+}
+
+export interface ThumbnailResponse {
+  message: string;
+  roomId: string;
+  meta: Meta;
+  filePath: string;
+  fileSize: number;
+  fileName: string;
+}
+

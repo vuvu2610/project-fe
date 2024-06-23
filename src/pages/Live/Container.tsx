@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMeeting, Constants } from "@videosdk.live/react-sdk";
 import SpeakerView from "./SpeakerView";
 import ViewerView from "./ViewerView";
@@ -30,10 +30,19 @@ const Container: React.FC<ContainerProps> = (props) => {
     join();
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      joinMeeting();
+    }, 10);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
-    
     <div className="container">
-      <h3>Meeting Id: {props.meetingId}</h3>
+      <h3 className="mb-2">Id của phiên live: {props.meetingId}</h3>
       {joined && joined === "JOINED" ? (
         mMeeting.localParticipant?.mode === Constants.modes.CONFERENCE ? (
           <SpeakerView />
@@ -41,7 +50,7 @@ const Container: React.FC<ContainerProps> = (props) => {
           <ViewerView />
         ) : null
       ) : joined && joined === "JOINING" ? (
-        <p>Joining the meeting...</p>
+        <p>Đang tạo phiên live, vui lòng đợi một lát ....</p>
       ) : (
         <button onClick={joinMeeting}>Join</button>
       )}

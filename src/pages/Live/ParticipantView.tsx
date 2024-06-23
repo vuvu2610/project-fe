@@ -38,10 +38,11 @@ const ParticipantView: React.FC<ParticipantViewProps> = ({ participantId }) => {
   }, [micStream, micOn]);
 
   return (
-    <div>
-      <p>
-        Participant: {displayName} | Webcam: {webcamOn ? "ON" : "OFF"} | Mic:{" "}
-        {micOn ? "ON" : "OFF"}
+    <div className="mb-6">
+      <p className="mb-3">
+        Participant: {displayName} | Webcam:{" "}
+        {webcamOn ? "Đang bật" : "Đang tắt"} | Mic:{" "}
+        {micOn ? "Đang bật" : "Đang tắt"}
       </p>
       <audio ref={micRef} autoPlay playsInline muted={isLocal} />
       {webcamOn && videoStream && (
@@ -54,8 +55,8 @@ const ParticipantView: React.FC<ParticipantViewProps> = ({ participantId }) => {
           playing={true}
           url={videoStream}
           style={{ transform: "scale(-1, 1)" }}
-          height={"300px"}
-          width={"300px"}
+          height={"400px"}
+          width={"100%"}
           onError={(err) => {
             console.log(err, "participant video error");
           }}

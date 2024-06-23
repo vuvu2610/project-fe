@@ -1,10 +1,8 @@
-import { MeetingData, Room, RoomData } from "../types/types";
+import { MeetingData, Room, RoomData, ThumbnailResponse } from "../types/types";
 
-// Define authToken type
 export const authToken: string =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiIyNzEwNzY2My0yYjhhLTQyNDAtYTIwOC01OGRhNWExYjlhMWYiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcxODgwNjA5MywiZXhwIjoxNzI2NTgyMDkzfQ.PCuCU2tnlqVW4898XGv0vCNRM8ccC3tQESBVr2oTN1I";
 
-// Function to create a meeting room
 export const createMeeting = async (): Promise<string> => {
   try {
     const res = await fetch(`https://api.videosdk.live/v2/rooms`, {
@@ -20,11 +18,10 @@ export const createMeeting = async (): Promise<string> => {
     return roomId;
   } catch (error) {
     console.error("Error creating meeting:", error);
-    throw error; // Re-throw or handle the error as needed
+    throw error;
   }
 };
 
-// Function to get active meetings
 export const getMeetings = async (
   page: number = 1,
   perPage: number = 20
@@ -44,7 +41,6 @@ export const getMeetings = async (
 
     const roomData: RoomData = await roomResponse.json();
 
-    // Fetch HLS status for each room concurrently
     const rooms: MeetingData[] = await Promise.all(
       roomData.data.map(async (room: Room) => {
         const hlsResponse = await fetch(
@@ -62,16 +58,34 @@ export const getMeetings = async (
       })
     );
 
-    console.log(rooms);
-    
-
-
-    // Filter active rooms based on HLS status code
-    const activeRooms: MeetingData[] = rooms.filter((room) => room.code === 200);
+    const activeRooms: MeetingData[] = rooms.filter(
+      (room) => room.code === 200
+    );
 
     return activeRooms;
   } catch (error) {
     console.error("Error getting meetings:", error);
-    throw error; // Re-throw or handle the error as needed
+    throw error;
+  }
+};
+
+export const getHlsThumbnail = async (roomId: string): Promise<ThumbnailResponse> => {
+  try {
+    const res = await fetch("https://api.videosdk.live/v2/hls/capture", {
+      method: "POST",
+      headers: {
+        Authorization: authToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        roomId: roomId,
+        format: "png",
+      }),
+    });
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error creating meeting:", error);
+    throw error;
   }
 };
