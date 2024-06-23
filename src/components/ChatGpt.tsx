@@ -12,11 +12,25 @@ function ChatGpt() {
         setIsChatContentVisible(!isChatContentVisible);
     };
 
-    return (
-        <div className="fixed bottom-10 right-28 rounded-full bg-slate-100">
-            <div ref={chatRef} className="w-20 h-20 flex items-center justify-center cursor-pointer select-none" onClick={toggleChatContent}>
-                <IoChatbubblesSharp size={34}/>
+    const ChatMessage = ({ isUser }: { isUser: boolean }) => (
+        <div className="flex items-start gap-2.5">
+            {!isUser && <img className="w-8 h-8" src={ChatGptImg} alt="gpt" />}
+            <div className="flex flex-col w-full max-w-[320px] leading-1.5">
+                <div className="flex items-center space-x-2">
+                    <span className="text-sm font-semibold">{isUser ? "User" : "Chat GPT"}</span>
+                    <span className="text-sm font-normal text-gray-500">11:46</span>
                 </div>
+                <p className="text-sm font-normal py-2 text-gray-900 dark:text-white">That's awesome. I think our users will really appreciate the improvements.</p>
+            </div>
+            {isUser && <FaUserAlt size={30} />}
+        </div>
+    );
+
+    return (
+        <div className="fixed bottom-10 right-28 rounded-full bg-slate-100 z-10">
+            <div ref={chatRef} className="w-20 h-20 flex items-center justify-center cursor-pointer select-none" onClick={toggleChatContent}>
+                <IoChatbubblesSharp size={34} />
+            </div>
             <div
                 ref={chatContentRef}
                 className={`w-80 h-96 border bg-slate-200 rounded-md shadow-sm absolute bottom-28 -right-20 ${isChatContentVisible ? "opacity-100" : "opacity-0"}
@@ -27,46 +41,10 @@ function ChatGpt() {
                 }}
             >
                 <div className="flex-1 border-b border-gray-400 p-4 overflow-auto gap-4 flex flex-col">
-                    <div className="flex items-start gap-2.5">
-                        <img className="w-8 h-8" src={ChatGptImg} alt="gpt" />
-                        <div className="flex flex-col w-full max-w-[320px] leading-1.5">
-                            <div className="flex items-center space-x-2">
-                                <span className="text-sm font-semibold">Chat GPT</span>
-                                <span className="text-sm font-normal">11:46</span>
-                            </div>
-                            <p className="text-sm font-normal py-2 text-gray-900 dark:text-white"> That's awesome. I think our users will really appreciate the improvements.</p>
-                        </div>
-                    </div>
-                    <div className="flex items-start gap-2.5">
-                        <div className="flex flex-col w-full max-w-[320px] leading-1.5">
-                            <div className="flex items-center space-x-2">
-                                <span className="text-sm font-semibold text-gray-900">Chat GPT</span>
-                                <span className="text-sm font-normal text-gray-500 ">11:46</span>
-                            </div>
-                            <p className="text-sm font-normal py-2 text-gray-900 dark:text-white"> That's awesome. I think our users will really appreciate the improvements.</p>
-                        </div>
-                        <FaUserAlt size={30}/>
-                    </div>
-                    <div className="flex items-start gap-2.5">
-                        <img className="w-8 h-8" src={ChatGptImg} alt="gpt" />
-                        <div className="flex flex-col w-full max-w-[320px] leading-1.5">
-                            <div className="flex items-center space-x-2">
-                                <span className="text-sm font-semibold">Chat GPT</span>
-                                <span className="text-sm font-normal">11:46</span>
-                            </div>
-                            <p className="text-sm font-normal py-2 text-gray-900 dark:text-white"> That's awesome. I think our users will really appreciate the improvements.</p>
-                        </div>
-                    </div>
-                    <div className="flex items-start gap-2.5">
-                        <div className="flex flex-col w-full max-w-[320px] leading-1.5">
-                            <div className="flex items-center space-x-2">
-                                <span className="text-sm font-semibold text-gray-900">Chat GPT</span>
-                                <span className="text-sm font-normal text-gray-500 ">11:46</span>
-                            </div>
-                            <p className="text-sm font-normal py-2 text-gray-900 dark:text-white"> That's awesome. I think our users will really appreciate the improvements.</p>
-                        </div>
-                        <FaUserAlt size={30}/>
-                    </div>
+                    <ChatMessage isUser={false} />
+                    <ChatMessage isUser={true} />
+                    <ChatMessage isUser={false} />
+                    <ChatMessage isUser={true} />
                 </div>
                 <div className="p-2 flex gap-2">
                     <input type="text" className="w-3/4 px-2" />
