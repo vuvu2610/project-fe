@@ -20,13 +20,14 @@ const Container: React.FC<ContainerProps> = (props) => {
     onMeetingLeft: () => {
       props.onMeetingLeave();
     },
-    onError: (error: any) => {
-      alert(error.message);
+    onError: (e) => {
+      console.log("error", e.message);
     },
   });
 
   const joinMeeting = () => {
     setJoined("JOINING");
+
     join();
   };
 
@@ -50,7 +51,7 @@ const Container: React.FC<ContainerProps> = (props) => {
           <ViewerView />
         ) : null
       ) : joined && joined === "JOINING" ? (
-        <p>Đang tạo phiên live, vui lòng đợi một lát ....</p>
+        <p>Đang chuẩn bị phiên live, vui lòng đợi một lát ....</p>
       ) : (
         <button onClick={joinMeeting}>Join</button>
       )}

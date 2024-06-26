@@ -3,10 +3,17 @@ import React, { useEffect, useRef } from "react";
 import Hls from "hls.js";
 import { useMeeting } from "@videosdk.live/react-sdk";
 import Chat from "./Chat";
+import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const ViewerView: React.FC = () => {
   const playerRef = useRef<HTMLVideoElement>(null);
   const { hlsUrls, hlsState } = useMeeting();
+  const navigate = useNavigate();
+
+  const back = () => {
+    navigate(-1);
+  };
 
   useEffect(() => {
     if (hlsUrls.playbackHlsUrl && hlsState === "HLS_PLAYABLE") {
@@ -52,13 +59,19 @@ const ViewerView: React.FC = () => {
 
   return (
     <div>
+      <button
+        onClick={back}
+        className="flex items-center justify-center gap-x-2 py-2 px-4 bg-gray-300 rounded-md  hover:bg-primary mb-4 hover:text-white transition-all duration-300"
+      >
+        <FaArrowLeft /> Quay trở lại
+      </button>
       {hlsState !== "HLS_PLAYABLE" ? (
         <div>
-          <p>HLS has not started yet or is stopped</p>
+          <p className="mb-4">Phiên live chưa bắt đầu hoặc đang tạm dừng !!!</p>
         </div>
       ) : (
         hlsState === "HLS_PLAYABLE" && (
-          <div>
+          <div className="flex flex-col gap-y-4">
             <video
               ref={playerRef}
               id="hlsPlayer"
@@ -70,12 +83,12 @@ const ViewerView: React.FC = () => {
               onError={(err) => {
                 console.log(err, "hls video error");
               }}
+              className="rounded-lg"
             />
             <Chat />
           </div>
         )
       )}
-      
     </div>
   );
 };

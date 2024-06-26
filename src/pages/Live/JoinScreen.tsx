@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 type GetMeetingAndToken = (meetingId: string | null) => Promise<void>;
 type SetMode = (mode: "CONFERENCE" | "VIEWER") => void;
@@ -10,36 +11,28 @@ function JoinScreen({
   getMeetingAndToken: GetMeetingAndToken;
   setMode: SetMode;
 }) {
-  const [meetingId, setMeetingId] = useState<string | null>(null);
+  const location = useLocation();
+
+  const [meetingId, setMeetingId] = useState<string | null>(
+    location.state ? location.state : null
+  );
 
   const onClick = async (mode: "CONFERENCE" | "VIEWER") => {
     setMode(mode);
+
     await getMeetingAndToken(meetingId);
   };
+
+  useEffect(() => {
+    if (location.state) {
+      onClick("VIEWER");
+    }
+  }, []);
 
   useEffect(() => {}, []);
 
   return (
     <div className="container">
-      {/* <button onClick={() => onClick("CONFERENCE")}>Create Meeting</button>
-      <br />
-      <br />
-      {" or "}
-      <br />
-      <br />
-      <input
-        type="text"
-        placeholder="Enter Meeting Id"
-        onChange={(e) => {
-          setMeetingId(e.target.value);
-        }}
-      />
-      <br />
-      <br />
-      <button onClick={() => onClick("CONFERENCE")}>Join as Host</button>
-      {" | "}
-      <button onClick={() => onClick("VIEWER")}>Join as Viewer</button> */}
-
       <div className="flex flex-col items-center gap-y-3">
         <h1 className="text-2xl">Chào mứng bạn quay trở lại !!!</h1>
         <button

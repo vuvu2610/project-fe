@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Sidebar from "./Sidebar";
 import { MeetingData, ThumbnailResponse } from "../../types/types";
-import { getHlsThumbnail, getMeetings } from "../../api/live";
-import { FaVideoSlash } from "react-icons/fa";
+import { checkARoom, getHlsThumbnail, getMeetings } from "../../api/live";
+import { FaJoint, FaVideoSlash } from "react-icons/fa";
 import ReactPlayer from "react-player";
 import { useNavigate } from "react-router-dom";
 import routes from "../../config/routes";
+import { IoPersonAdd } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 interface Props {}
 
@@ -13,6 +15,7 @@ function Watch(props: Props) {
   const {} = props;
   const [meetings, setMeetings] = useState<Array<ThumbnailResponse>>();
   const navigate = useNavigate();
+  const roomInput = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,28 +24,54 @@ function Watch(props: Props) {
       const data = await Promise.all(
         ms.map(async (meet) => {
           const thumbnail = await getHlsThumbnail(meet.data.meetingId);
-          return { ...thumbnail };
           
+          return { ...thumbnail };
         })
       );
 
       setMeetings(data);
     }
-    
+
     fetchData();
   }, []);
 
-  function handleClick(roomId: string): void {
-    navigate(routes.stream, {state: roomId})
+  async function handleClick(roomId: string): Promise<void> {
+    await checkARoom(roomId)
+      .then((isValidate) => {
+        if (isValidate) {
+          navigate(routes.stream, { state: roomId });
+        } else {
+          toast.error("Không tìm thấy phiên live !!!");
+        }
+      })
+      .catch(() => {
+        toast.error("Không tìm thấy phiên live !!!");
+      });
   }
 
   return (
-    <div className=" max-w-width-page mt-[160px] pb-40 mx-auto px-5 h-96 relative flex gap-x-8">
+    <div className=" max-w-width-page mt-[160px] mb-8 mx-auto px-5 h-96 relative flex gap-x-8">
       <Sidebar />
       <ul className="flex-1">
+        <div className="mb-7 flex justify-end">
+          <input
+            ref={roomInput}
+            type="text"
+            placeholder="Nhập id phiên live tại đây"
+            className="p-3 border border-gray-300 rounded-md  focus:outline-primary caret-primary"
+          />
+          <button
+            onClick={() =>
+              roomInput.current?.value && handleClick(roomInput.current?.value)
+            }
+            className="flex items-center justify-center gap-x-2 py-3 px-4 bg-gray-300 rounded-md ml-3 hover:bg-primary hover:text-white transition-all duration-300"
+          >
+            Tham gia <IoPersonAdd />{" "}
+          </button>
+        </div>
         {meetings && meetings.length > 0 ? (
           meetings?.map((meeting, index) => (
-            <li  key={index} onClick={() => handleClick(meeting.roomId)}>
+            <li key={index} onClick={() => handleClick(meeting.roomId)}>
               <img src={meeting.filePath} />
             </li>
           ))

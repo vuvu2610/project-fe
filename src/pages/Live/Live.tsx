@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { authToken, createMeeting } from "../../api/live";
 import { MeetingConsumer, MeetingProvider } from "@videosdk.live/react-sdk";
 import JoinScreen from "./JoinScreen";
@@ -16,12 +16,10 @@ const Live: React.FC<Props> = () => {
   const [micOn, setMicOn] = useState(true);
   const [camOn, setCamOn] = useState(true);
   const user = useSelector((state: RootState) => state.auth.currentUser);
-  const location = useLocation();
-  console.log(location.state);
-  
 
   const getMeetingAndToken = async (id: string | null) => {
     const meetingId = id == null ? await createMeeting() : id;
+
     setMeetingId(meetingId);
   };
 

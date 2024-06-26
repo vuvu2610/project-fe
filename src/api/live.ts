@@ -22,6 +22,23 @@ export const createMeeting = async (): Promise<string> => {
   }
 };
 
+export const checkARoom = async (roomId: string): Promise<boolean> => {
+  try {
+    const res = await fetch(`https://api.videosdk.live/v2/rooms/${roomId}`, {
+      method: "GET",
+      headers: {
+        authorization: authToken,
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(res.ok);
+
+    return res.ok;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const getMeetings = async (
   page: number = 1,
   perPage: number = 20
@@ -69,23 +86,25 @@ export const getMeetings = async (
   }
 };
 
-export const getHlsThumbnail = async (roomId: string): Promise<ThumbnailResponse> => {
+export const getHlsThumbnail = async (
+  roomId: string
+): Promise<ThumbnailResponse> => {
   try {
-    const res = await fetch("https://api.videosdk.live/v2/hls/capture", {
+    const response = await fetch(`https://api.videosdk.live/v2/hls/capture`, {
       method: "POST",
       headers: {
-        Authorization: authToken,
+        authorization: authToken,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        roomId: roomId,
-        format: "png",
-      }),
+      body: JSON.stringify({ roomId: roomId }),
     });
 
-    return await res.json();
+    const data = await response.json();
+    
+
+    return data;
   } catch (error) {
-    console.error("Error creating meeting:", error);
+    console.error("Error capturing HLS thumbnail:", error);
     throw error;
   }
 };
