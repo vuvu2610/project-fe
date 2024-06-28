@@ -8,3 +8,7 @@ export interface Product {
     category: string;
     date: string;
 }
+
+export interface ChatHistory {
+    role: string; content: string; 
+}
