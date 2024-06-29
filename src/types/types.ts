@@ -12,3 +12,8 @@ export interface Product {
 export interface ChatHistory {
     role: string; content: string; 
 }
+
+export interface CardInfo {
+    price: number;
+    quantity: number; 
+}
