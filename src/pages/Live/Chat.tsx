@@ -1,82 +1,104 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useMeeting, usePubSub } from "@videosdk.live/react-sdk";
+import { useEffect, useMemo, useRef } from "react";
+import { FaPaperPlane } from "react-icons/fa";
+import { FaMessage } from "react-icons/fa6";
+import { formatAMPM, nameTruncated } from "../../utils/helper";
+import { log } from "console";
 
-interface ChatProps {
-  ws: React.MutableRefObject<WebSocket | null>;
-}
+interface Props {}
 
-const Chat: React.FC<ChatProps> = ({ ws }) => {
-  const [messages, setMessages] = useState<string[]>([]);
-  const [input, setInput] = useState<string>("");
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+function Chat(props: Props) {
+  const { messages, publish } = usePubSub("CHAT");
+  const input = useRef<HTMLInputElement>(null);
+  const listMessage = useRef<HTMLUListElement>(null);
+  const meeting = useMeeting();
 
-  useEffect(() => {
-    if (ws.current) {
-      ws.current.onmessage = (message) => {
-        console.log(ws.current);
+  console.log(meeting.participants);
+  console.log(messages[0] && messages[0].senderId);
+  const owner = useMemo(() => {
+    const result = Array.from(meeting.participants.entries()).find(
+      ([id, participant]) => {
+        return participant.mode === "CONFERENCE";
+      }
+    );
+    return result;
+  }, []);
+  console.log(owner?.[0]);
 
-        try {
-          const payload = JSON.parse(message.data);
-          if (payload.CHAT) {
-            const chatMessage = payload.CHAT;
-            setMessages((prevMessages) => [...prevMessages, chatMessage]);
-          }
-        } catch (e) {
-          console.error("Error parsing JSON:", e);
-        }
-      };
-    }
-  }, [ws]);
-
-  const sendMessage = () => {
-    if (input.trim() !== "" && ws.current) {
-      const payload = { CHAT: input };
-      ws.current.send(JSON.stringify(payload));
-      setInput("");
+  const handleClick = () => {
+    if (input.current) {
+      const message = input.current.value;
+      if (message.trim() !== "") {
+        publish(message, { persist: true });
+        input.current.value = "";
+      }
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      sendMessage();
+  const scrollToBottom = () => {
+    if (listMessage.current) {
+      listMessage.current.scrollTop = listMessage.current.scrollHeight;
     }
   };
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    scrollToBottom();
   }, [messages]);
 
   return (
-    <div className="flex flex-col h-full w-full p-4 bg-gray-100">
-      <div className="flex-1 overflow-y-auto mb-4">
-        {messages.map((message, index) => (
-          <div key={index} className="p-2 my-1 bg-white rounded shadow">
-            {message}
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
+    <div className="border-solid border-2 border-gray-500 p-5 rounded-md">
+      <h1 className="text-lg uppercase">Phòng chat</h1>
+      <ul
+        ref={listMessage}
+        className="flex flex-col gap-y-4 my-4 text-sm max-h-80 overflow-y-auto scroll-smooth"
+      >
+        {messages.length > 0 ? (
+          messages.map((message, index) => (
+            <li key={index}>
+              <h1>
+                {nameTruncated(message.senderName, 15)}
+
+                {message.senderId == owner?.[0] && (
+                  <span className="bg-slate-400 p-1 px-2 ml-2 rounded-full text-[11px]">
+                    Chủ phiên live
+                  </span>
+                )}
+              </h1>
+              <p>{message.message}</p>
+              <h5 className="text-gray-400 text-sm">
+                {formatAMPM(new Date(message.timestamp))}
+              </h5>
+            </li>
+          ))
+        ) : (
+          <li className="text-gray-400 grid place-items-center p-10 gap-2">
+            <FaMessage className="text-gray-300" size={60} />
+            Hãy cùng nhau làm phiên live sôi động hơn nào !!!
+          </li>
+        )}
+      </ul>
+
       <div className="flex">
         <input
+          ref={input}
           type="text"
-          value={input}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-          className="flex-1 p-2 border border-gray-300 rounded mr-2"
-          placeholder="Type a message..."
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleClick();
+            }
+          }}
+          className="outline focus:outline-primary focus:outline-2 flex-1  p-2 outline-1 caret-primary rounded-lg outline-gray-400"
         />
         <button
-          onClick={sendMessage}
-          className="p-2 bg-blue-500 text-white rounded"
+          onClick={handleClick}
+          className=" flex items-center justify-center gap-x-2 py-2 px-4 bg-gray-300 rounded-md ml-3 hover:bg-primary hover:text-white transition-all duration-300"
         >
-          Send
+          Gửi
+          <FaPaperPlane />
         </button>
       </div>
     </div>
   );
-};
+}
 
 export default Chat;
