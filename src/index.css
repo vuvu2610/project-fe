@@ -37,13 +37,47 @@
   color: white;
 }
 
+@layer components {
+  @keyframes ping {
+    0% {
+      opacity: 1;
+      border-color: white;
+    }
+    100% {
+      transform: scale(1.7, 1.7);
+      opacity: 0;
+      border-color: white;
+    }
+  }
+
+  .ping {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    padding: 25px;
+    border-radius: 50%;
+    border: 1px solid white;
+    animation: ping 2s infinite;
+  }
+
+  .ping1 {
+    animation-delay: 0s;
+  }
+
+  .ping2 {
+    animation-delay: 0.25s;
+  }
+
+  .ping3 {
+    animation-delay: 0.5s;
+  }
+}
+
 .wrapper {
   max-width: var(--width-page);
   margin: 0 auto;
   padding: 0 20px;
 }
-
-
 
 html {
   font-family: "Poppins", sans-serif;
@@ -54,11 +88,9 @@ html *::-webkit-scrollbar {
   width: 8px;
 }
 
-
 html *::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.2);
-  
 }
 
 html *::-webkit-scrollbar-track {

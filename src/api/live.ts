@@ -31,7 +31,6 @@ export const checkARoom = async (roomId: string): Promise<boolean> => {
         "Content-Type": "application/json",
       },
     });
-    console.log(res.ok);
 
     return res.ok;
   } catch (error) {
@@ -44,7 +43,7 @@ export const getMeetings = async (
   perPage: number = 20
 ): Promise<MeetingData[]> => {
   try {
-    // Fetch list of rooms
+    
     const roomResponse = await fetch(
       `https://api.videosdk.live/v2/rooms?page=${page}&perPage=${perPage}`,
       {

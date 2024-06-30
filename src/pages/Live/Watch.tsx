@@ -13,7 +13,7 @@ interface Props {}
 
 function Watch(props: Props) {
   const {} = props;
-  const [meetings, setMeetings] = useState<Array<ThumbnailResponse>>();
+  const [meetings, setMeetings] = useState<Array<MeetingData>>();
   const navigate = useNavigate();
   const roomInput = useRef<HTMLInputElement>(null);
 
@@ -21,15 +21,15 @@ function Watch(props: Props) {
     async function fetchData() {
       const ms = await getMeetings();
 
-      const data = await Promise.all(
-        ms.map(async (meet) => {
-          const thumbnail = await getHlsThumbnail(meet.data.meetingId);
-          
-          return { ...thumbnail };
-        })
-      );
+      // const data = await Promise.all(
+      //   ms.map(async (meet) => {
+      //     const thumbnail = await getHlsThumbnail(meet.data.meetingId);
 
-      setMeetings(data);
+      //     return { ...thumbnail };
+      //   })
+      // );
+
+      setMeetings(ms);
     }
 
     fetchData();
@@ -50,7 +50,7 @@ function Watch(props: Props) {
   }
 
   return (
-    <div className=" max-w-width-page mt-[160px] mb-8 mx-auto px-5 h-96 relative flex gap-x-8">
+    <div className=" max-w-width-page mt-[160px] mb-32 mx-auto px-5 relative flex gap-x-8">
       <Sidebar />
       <ul className="flex-1">
         <div className="mb-7 flex justify-end">
@@ -70,11 +70,25 @@ function Watch(props: Props) {
           </button>
         </div>
         {meetings && meetings.length > 0 ? (
-          meetings?.map((meeting, index) => (
-            <li key={index} onClick={() => handleClick(meeting.roomId)}>
-              <img src={meeting.filePath} />
-            </li>
-          ))
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+            {meetings?.map((meeting, index) => (
+              <li
+                className=" cursor-pointer"
+                key={index}
+                onClick={() => handleClick(meeting.data.meetingId)}
+              >
+                <div className="flex items-center justify-center aspect-[2] bg-gray-400 rounded-lg ">
+                  <div className="relative mx-auto h-24 w-24 bg-gray-400 rounded-full flex justify-center items-center">
+                    <div className="ping ping1"></div>
+                    <div className="ping ping2"></div>
+                    <div className="ping ping3"></div>
+                    <span className="text-white">Live</span>
+                  </div>
+                </div>
+                <p className="mt-1 text-center">Id: {meeting.data.meetingId}</p>
+              </li>
+            ))}
+          </div>
         ) : (
           <li className="grid place-items-center gap-y-3 ">
             <FaVideoSlash
