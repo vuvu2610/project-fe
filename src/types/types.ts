@@ -66,18 +66,11 @@ export interface ThumbnailResponse {
   fileName: string;
 }
 
-
-    id: number;
-    image: string;
-    title: string;
-    rating: number;
-    price: number;
-    purchase: number;
-    category: string;
-    date: string;
-}
-
 export interface ChatHistory {
     role: string; content: string; 
 }
 
+export interface CardInfo {
+    price: number;
+    quantity: number; 
+}

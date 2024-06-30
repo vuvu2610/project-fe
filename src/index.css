@@ -74,9 +74,8 @@
 }
 
 .wrapper {
-  max-width: var(--width-page);
-  margin: 0 auto;
-  padding: 0 20px;
+    max-width: var(--width-page);
+    margin: 0 auto;
 }
 
 html {
