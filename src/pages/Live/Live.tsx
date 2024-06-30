@@ -1,92 +1,62 @@
-import React, { useRef, useEffect, useState } from "react";
-import SimplePeer from "simple-peer";
-import Chat from "./Chat";
+import React, { useEffect, useState } from "react";
+import { authToken, createMeeting } from "../../api/live";
+import { MeetingConsumer, MeetingProvider } from "@videosdk.live/react-sdk";
+import JoinScreen from "./JoinScreen";
+import Container from "./Container";
+import { useSelector } from "react-redux";
+import { AuthState, RootState } from "../../redux/state";
+import Sidebar from "./Sidebar";
+import { useLocation } from "react-router-dom";
 
-const Live: React.FC = () => {
-  const localVideoRef = useRef<HTMLVideoElement | null>(null);
-  const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
-  const ws = useRef<WebSocket | null>(null);
-  const peerRef = useRef<SimplePeer.Instance | null>(null);
+interface Props {}
 
-  useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:8080/video-chat");
+const Live: React.FC<Props> = () => {
+  const [meetingId, setMeetingId] = useState<string | null>(null);
+  const [mode, setMode] = useState<string>("CONFERENCE");
+  const [micOn, setMicOn] = useState(true);
+  const [camOn, setCamOn] = useState(true);
+  const user = useSelector((state: RootState) => state.auth.currentUser);
 
-    ws.current.onmessage = (message) => {
-      try {
-        const signal = JSON.parse(message.data);
-        console.log(signal);
+  const getMeetingAndToken = async (id: string | null) => {
+    const meetingId = id == null ? await createMeeting() : id;
 
-        if (
-          signal.type === "offer" ||
-          signal.type === "answer" ||
-          signal.type === "candidate"
-        ) {
-          if (peerRef.current) {
-            peerRef.current.signal(signal);
-          }
-        } else if (signal.CHAT) {
-          // Handle chat message if needed
-        }
-      } catch (e) {
-        console.error("Error parsing JSON:", e);
-      }
-    };
+    setMeetingId(meetingId);
+  };
 
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((stream) => {
-        if (localVideoRef.current) {
-          localVideoRef.current.srcObject = stream;
-        }
-
-        const peer = new SimplePeer({
-          initiator: window.location.hash === "#init",
-          trickle: false,
-          stream: stream,
-        });
-
-        peer.on("signal", (data) => {
-          if (ws.current) {
-            ws.current.send(JSON.stringify(data));
-          }
-        });
-
-        peer.on("stream", (stream) => {
-          if (remoteVideoRef.current) {
-            remoteVideoRef.current.srcObject = stream;
-          }
-        });
-
-        peerRef.current = peer;
-      });
-
-    // Clean up WebSocket connection and peer on unmount
-    return () => {
-      if (ws.current) {
-        ws.current.close();
-      }
-      if (peerRef.current) {
-        peerRef.current.destroy();
-      }
-    };
-  }, []);
+  const onMeetingLeave = () => {
+    setMeetingId(null);
+    setCamOn(false);
+    setMicOn(false);
+  };
 
   return (
-    <div className="flex flex-col h-screen">
-      <div className="flex flex-1 justify-around items-center p-4">
-        <video
-          ref={localVideoRef}
-          autoPlay
-          muted
-          className="w-1/2 border-2 border-black rounded"
-        />
-        <video
-          ref={remoteVideoRef}
-          autoPlay
-          className="w-1/2 border-2 border-black rounded"
-        />
-      </div>
-      <Chat ws={ws} />
+    <div className="flex gap-x-4 max-w-width-page mt-[160px] pb-40 mx-auto">
+      <Sidebar />
+      {authToken && meetingId ? (
+        <MeetingProvider
+          config={{
+            meetingId,
+            micEnabled: micOn,
+            webcamEnabled: camOn,
+            multiStream: false,
+            name: "C.V. Raman",
+            mode: mode as "CONFERENCE" | "VIEWER",
+            debugMode: true,
+          }}
+          token={authToken}
+        >
+          <MeetingConsumer>
+            {() => (
+              <Container
+                meetingId={meetingId}
+                onMeetingLeave={onMeetingLeave}
+              />
+            )}
+          </MeetingConsumer>
+        </MeetingProvider>
+      ) : (
+        <JoinScreen getMeetingAndToken={getMeetingAndToken} setMode={setMode} />
+      )}
     </div>
   );
 };
