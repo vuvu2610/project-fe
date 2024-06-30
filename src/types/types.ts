@@ -1,4 +1,5 @@
 export interface Product {
+
   id: number;
   image: string;
   title: string;
@@ -63,5 +64,20 @@ export interface ThumbnailResponse {
   filePath: string;
   fileSize: number;
   fileName: string;
+}
+
+
+    id: number;
+    image: string;
+    title: string;
+    rating: number;
+    price: number;
+    purchase: number;
+    category: string;
+    date: string;
+}
+
+export interface ChatHistory {
+    role: string; content: string; 
 }
 
