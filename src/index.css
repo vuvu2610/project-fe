@@ -37,6 +37,10 @@
   color: white;
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
 @layer components {
   @keyframes ping {
     0% {
@@ -74,8 +78,8 @@
 }
 
 .wrapper {
-    max-width: var(--width-page);
-    margin: 0 auto;
+  max-width: var(--width-page);
+  margin: 0 auto;
 }
 
 html {

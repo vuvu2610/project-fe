@@ -6,8 +6,8 @@ import Home from "../pages/Home/Home";
 import Live from "../pages/Live/Live";
 import Watch from "../pages/Live/Watch";
 import PageNotFound from "../pages/PageNotFound";
-import Product from "../pages/Product";
-import ProductDetail from "../pages/ProductDetail";
+import Product from "../pages/Product/Product";
+import ProductDetail from "../pages/Product/ProductDetail";
 
 const publicRoutes = [
   { path: config.routes.home, component: Home, layout: DefaultLayout },

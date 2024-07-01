@@ -69,7 +69,7 @@ function ChatGpt() {
     };
 
     return (
-        <div className="fixed bottom-10 right-28 rounded-full bg-slate-100 z-10">
+        <div className="fixed bottom-10 right-28 rounded-full bg-slate-200 z-10 shadow-lg">
             <div className="w-20 h-20 flex items-center justify-center cursor-pointer select-none" onClick={toggleChatContent}>
                 <IoChatbubblesSharp size={34} />
             </div>
