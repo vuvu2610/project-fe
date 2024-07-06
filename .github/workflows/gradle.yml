@@ -50,8 +50,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}  
   
     - name: Build Docker image  
-      run: docker build -t dyland0626/seedling:latest .  
-      working-directory: ./be   
+      run: docker build -t dyland0626/seedling:latest -f ./be/Dockerfile ./be
   
     - name: Push Docker image  
       run: docker push dyland0626/seedling:latest  
