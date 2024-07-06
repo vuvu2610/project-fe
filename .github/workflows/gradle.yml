@@ -5,33 +5,33 @@ on:
     branches: [ "main" ]  
   
 jobs:  
-  build:  
-    runs-on: ubuntu-latest  
-    permissions:  
-      contents: read  
+  # build:  
+  #   runs-on: ubuntu-latest  
+  #   permissions:  
+  #     contents: read  
   
-    steps:  
-    - uses: actions/checkout@v4  
-    - name: Set up JDK 17  
-      uses: actions/setup-java@v4  
-      with:  
-        java-version: '17'  
-        distribution: 'temurin'  
-    - name: Grant execute permission for gradlew  
-      run: chmod +x ./be/gradlew  
+  #   steps:  
+  #   - uses: actions/checkout@v4  
+  #   - name: Set up JDK 17  
+  #     uses: actions/setup-java@v4  
+  #     with:  
+  #       java-version: '17'  
+  #       distribution: 'temurin'  
+  #   - name: Grant execute permission for gradlew  
+  #     run: chmod +x ./be/gradlew  
   
-    - name: Build with Gradle Wrapper  
-      run: ./gradlew build  
-      working-directory: ./be  
+  #   - name: Build with Gradle Wrapper  
+  #     run: ./gradlew build  
+  #     working-directory: ./be  
       
-    - name: Archive build artifacts  
-      uses: actions/upload-artifact@v3  
-      with:  
-        name: build-artifact  
-        path: ./be/build/libs/*.jar  
+  #   - name: Archive build artifacts  
+  #     uses: actions/upload-artifact@v3  
+  #     with:  
+  #       name: build-artifact  
+  #       path: ./be/build/libs/*.jar  
   
   deploy:  
-    needs: build  
+    # needs: build  
     runs-on: ubuntu-latest  
   
     steps:  
