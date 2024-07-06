@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: "be"
+  datasource:
+    url: "jdbc:postgresql://dpg-cq4jo3eehbks73bcpv1g-a.singapore-postgres.render.com:5432/seedling"
+    username: "seedling"
+    password: "8gOJeGC71kiZqhNGmqwhZxCslVPXbuwQ"
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  servlet:
+    context-path: "/api/v1"
+  port: 8081
+
