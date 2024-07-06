@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Satoshi";
+  font-weight: 700;
+  src: url("./assets/fonts/Satoshi-Medium.otf");
+}
+
+@font-face {
+  font-family: "SatoshiLight";
+  font-weight: 500;
+  src: url("./assets/fonts/Satoshi-Light.otf");
+}
+
+@font-face {
+  font-family: "VLBangers";
+  font-weight: 500;
+  src: url("./assets/fonts/VL-Bangers.otf");
+}
+
+@font-face {
+  font-family: IntegralCf;
+  src: url(assets/fonts/Fontspring-DEMO-integralcf-heavy.otf);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --width-page: 1240px;
+  --primary-color: #81c408;
+}
+
+*::selection {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+@layer components {
+  @keyframes ping {
+    0% {
+      opacity: 1;
+      border-color: white;
+    }
+    100% {
+      transform: scale(1.7, 1.7);
+      opacity: 0;
+      border-color: white;
+    }
+  }
+
+  .ping {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    padding: 25px;
+    border-radius: 50%;
+    border: 1px solid white;
+    animation: ping 2s infinite;
+  }
+
+  .ping1 {
+    animation-delay: 0s;
+  }
+
+  .ping2 {
+    animation-delay: 0.25s;
+  }
+
+  .ping3 {
+    animation-delay: 0.5s;
+  }
+}
+
+.wrapper {
+    max-width: var(--width-page);
+    margin: 0 auto;
+}
+
+html {
+  font-family: "Poppins", sans-serif;
+}
+
+html *::-webkit-scrollbar {
+  border-radius: 0;
+  width: 8px;
+}
+
+html *::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+html *::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
