@@ -37,12 +37,6 @@ jobs:
     steps:  
     - uses: actions/checkout@v4  
   
-    - name: Download build artifacts  
-      uses: actions/download-artifact@v3  
-      with:  
-        name: build-artifact  
-        path: ./be/build/libs  
-  
     - name: Log in to Docker Hub  
       uses: docker/login-action@v1  
       with:  
