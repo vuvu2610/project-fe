@@ -14,9 +14,9 @@ jobs:
       contents: read    
   
     steps:    
-    - uses: actions/checkout@v2 
+    - uses: actions/checkout@v4
     - name: Set up JDK 17  
-      uses: actions/setup-java@v2   
+      uses: actions/setup-java@v4
       with:  
         java-version: '17'  
         distribution: 'temurin'  
@@ -28,7 +28,7 @@ jobs:
       working-directory: ./be  
   
     - name: Archive build artifacts    
-      uses: actions/upload-artifact@v2   
+      uses: actions/upload-artifact@v3
       with:    
         name: build-artifact  
         path: ./be/build/libs/*.jar  
