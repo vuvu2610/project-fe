@@ -32,7 +32,7 @@ jobs:
       with:    
         name: build-artifact  
         path: ./be/build/libs/*.jar  
-  
+
   deploy:  
     if: github.event_name == 'push'  
     runs-on: self-hosted   
