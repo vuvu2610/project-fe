@@ -1,5 +1,7 @@
 package matcha.banking.be.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import matcha.banking.be.dto.GetUserInfoDto;
 import matcha.banking.be.dto.LoginDto;
@@ -53,10 +55,17 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<Object> login(@RequestBody LoginDto loginDto, HttpServletResponse response) {
         Map<String, Object> responseBody = new HashMap<>();
         try {
             LoginReponseBodyDto token = authService.login(loginDto.getEmail(), loginDto.getPassword());
+
+            Cookie cookie = new Cookie("JWT", token.getToken());
+            cookie.setHttpOnly(true);
+            cookie.setSecure(false);
+            cookie.setPath("/");
+
+            response.addCookie(cookie);
             return ResponseEntity.ok(token);
         } catch (IllegalArgumentException ie) {
             responseBody.put("error", ie.getMessage());

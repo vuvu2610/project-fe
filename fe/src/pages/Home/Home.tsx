@@ -17,7 +17,7 @@ const Home: React.FC = () => {
     }, []);
 
     return (
-        <div className="mt-[100px] mb-[160px]">
+        <div className="mb-[160px]">
             <Banner />
             <Arrivals data={productsArrivals} />
             <TopSelling data={productsSelling} />

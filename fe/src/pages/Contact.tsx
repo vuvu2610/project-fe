@@ -65,7 +65,7 @@ function Contact() {
 
     return (
         <div className="wrapper">
-            <div className="my-[140px] grid md:grid-cols-2 gap-16 items-center relative overflow-hidden p-10 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-3xl bg-white text-black before:absolute before:right-0 before:w-[300px] before:bg-blue-400 before:h-full max-md:before:hidden">
+            <div className="mb-[140px] grid md:grid-cols-2 gap-16 items-center relative overflow-hidden p-10 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-3xl bg-white text-black before:absolute before:right-0 before:w-[300px] before:bg-blue-400 before:h-full max-md:before:hidden">
                 <div>
                     <h2 className="text-3xl font-extrabold">Liên hệ với chúng tôi</h2>
                     <p className="text-sm text-gray-400 mt-3">

@@ -50,7 +50,7 @@ function Watch(props: Props) {
   }
 
   return (
-    <div className=" max-w-width-page mt-[160px] mb-32 mx-auto px-5 relative flex gap-x-8">
+    <div className=" max-w-width-page mb-32 mx-auto px-5 relative flex gap-x-8">
       <Sidebar />
       <ul className="flex-1">
         <div className="mb-7 flex justify-end">

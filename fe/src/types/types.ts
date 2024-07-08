@@ -74,3 +74,8 @@ export interface CardInfo {
     price: number;
     quantity: number; 
 }
+
+export interface Login {
+  email: string;
+  password: string; 
+}

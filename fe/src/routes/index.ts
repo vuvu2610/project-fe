@@ -5,12 +5,14 @@ import Contact from "../pages/Contact";
 import Home from "../pages/Home/Home";
 import Live from "../pages/Live/Live";
 import Watch from "../pages/Live/Watch";
+import LoginPage from "../pages/LoginPage";
 import PageNotFound from "../pages/PageNotFound";
 import Product from "../pages/Product";
 import ProductDetail from "../pages/ProductDetail";
 
 const publicRoutes = [
   { path: config.routes.home, component: Home, layout: DefaultLayout },
+  { path: config.routes.login, component: LoginPage, layout: DefaultLayout },
   { path: config.routes.product, component: Product, layout: DefaultLayout},
   { path: config.routes.contact, component: Contact, layout: DefaultLayout},
   { path: config.routes.cart, component: CartPage, layout: DefaultLayout},
