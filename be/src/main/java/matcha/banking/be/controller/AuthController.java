@@ -67,6 +67,11 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/hello")
+    public ResponseEntity<Object> getCurrentUser(@RequestHeader(value = "Authorization", required = false) String token){
+        return ResponseEntity.ok("Hello from Server");
+    }
+
     @GetMapping("/current-user")
     public ResponseEntity<Object> getCurrentUser(@RequestHeader(value = "Authorization", required = false) String token){
         Map<String, Object> responseBody = new HashMap<>();
