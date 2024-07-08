@@ -60,4 +60,4 @@ jobs:
           fi  
     
       - name: Run Docker image  
-        run: docker run -d --name seedling_container -p 8080:8081 dyland0626/seedling:latest
+        run: docker run -d --name seedling_container -p 8080:8080 dyland0626/seedling:latest
