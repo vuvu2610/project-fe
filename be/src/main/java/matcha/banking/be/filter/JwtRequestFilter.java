@@ -2,6 +2,7 @@ package matcha.banking.be.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -28,19 +30,27 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         if (!request.getRequestURI().contains("/auth")) {
-            final String authorizationHeader = request.getHeader("Authorization");
+            Cookie[] cookies = request.getCookies();
+            String token = null;
             String email = null;
-            String jwt = null;
-            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-                jwt = authorizationHeader.substring(7);
-                email = jwtUtil.getEmailFromJwt(jwt);
-                jwtUtil.setJwt(jwt);
+
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (Objects.equals(cookie.getName(), "token")) {
+                        token = cookie.getValue();
+                    }
+                }
+            }
+
+            if (token != null) {
+                email = jwtUtil.getEmailFromJwt(token);
+                jwtUtil.setJwt(token);
             }
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserEntity userEntity = this.userService.getUserByEmail(email);
 
-                if (jwtUtil.validateToken(jwt, userEntity)) {
+                if (jwtUtil.validateToken(token, userEntity)) {
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                             userEntity, null, new ArrayList<>());
                     usernamePasswordAuthenticationToken
@@ -48,6 +58,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
             }
+
         }
         chain.doFilter(request, response);
     }

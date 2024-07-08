@@ -59,7 +59,7 @@ function ProductDetail(_props: Props) {
   }
 
   return (
-    <div className="my-[124px]">
+    <div className="mb-[124px]">
       <div className="wrapper">
         {/* <Breadcrumb className="capitalize">{data?.category}</Breadcrumb> */}
 

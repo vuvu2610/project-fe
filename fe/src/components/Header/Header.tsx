@@ -25,11 +25,9 @@ function Header() {
 
     return (
         <>
-            <header className="w-full shadow fixed top-0 left-0 right-0 z-20">
-                <div className={`${isSticky ? 'sticky top-0 left-0 right-0' : ''}`}>
-                    <TopHeader />
-                    <Navbar />
-                </div>
+            <header className={`${isSticky ? 'sticky top-0 left-0 right-0 z-20' : ''}`}>
+                <TopHeader />
+                <Navbar />
             </header>
             <Outlet />
         </>
