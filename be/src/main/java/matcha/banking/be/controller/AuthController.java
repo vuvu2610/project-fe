@@ -60,11 +60,13 @@ public class AuthController {
         try {
             LoginReponseBodyDto token = authService.login(loginDto.getEmail(), loginDto.getPassword());
 
-            Cookie cookie = new Cookie("JWT", token.getToken());
+            Cookie cookie = new Cookie("token", token.getToken());
             cookie.setHttpOnly(true);
             cookie.setSecure(false);
+            cookie.setMaxAge(60*60); // 10 năm
             cookie.setPath("/");
-
+            cookie.setAttribute("SameSite", "Strict");
+            System.out.println("token save: " + cookie.getValue());
             response.addCookie(cookie);
             return ResponseEntity.ok(token);
         } catch (IllegalArgumentException ie) {
@@ -94,4 +96,6 @@ public class AuthController {
             return ResponseEntity.badRequest().body(responseBody);
         }
     }
+
+
 }
