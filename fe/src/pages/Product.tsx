@@ -63,7 +63,7 @@ function ProductPage() {
   };
 
   return (
-    <div className="px-[10%] mb-20 pb-20 mt-[106px]">
+    <div className="px-[10%] mb-20 pb-20">
       <div className="flex items-center gap-x-4 py-10">
         <span className="text-gray-400">Home</span> <FaChevronRight size={12} />{" "}
         Shop

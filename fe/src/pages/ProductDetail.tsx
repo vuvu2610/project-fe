@@ -165,7 +165,7 @@ function ProductDetail(_props: Props) {
       <div className="mt-[60px] wrapper">
       <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Top Selling</Title>
       <ul className="flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
-          {products.map((product, index) => (
+          {products.slice(0,12).map((product, index) => (
             <ProductItem product={product} key={index}/>
           ))}
         </ul>
