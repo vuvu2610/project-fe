@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Product {
 
   id: number;
@@ -78,4 +80,17 @@ export interface CardInfo {
 export interface Login {
   email: string;
   password: string; 
+}
+
+export interface SignUpInfo {
+  name: string;
+  email: string; 
+  password: string; 
+}
+
+export interface InputFieldProps {
+  type: string;
+  label: string;
+  name: string;
+  children: ReactNode;
 }
