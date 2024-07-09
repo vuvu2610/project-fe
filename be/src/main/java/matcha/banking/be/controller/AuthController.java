@@ -7,7 +7,6 @@ import matcha.banking.be.dto.GetUserInfoDto;
 import matcha.banking.be.dto.LoginDto;
 import matcha.banking.be.dto.LoginReponseBodyDto;
 import matcha.banking.be.dto.RegisterDto;
-import matcha.banking.be.entity.EmailDetails;
 import matcha.banking.be.entity.UserEntity;
 import matcha.banking.be.mapper.UserMapper;
 import matcha.banking.be.service.AuthService;
@@ -63,10 +62,9 @@ public class AuthController {
             Cookie cookie = new Cookie("token", token.getToken());
             cookie.setHttpOnly(true);
             cookie.setSecure(false);
-            cookie.setMaxAge(60*60); // 10 năm
+            cookie.setMaxAge(24 * 60 * 60); // 1 day
             cookie.setPath("/");
             cookie.setAttribute("SameSite", "Strict");
-            System.out.println("token save: " + cookie.getValue());
             response.addCookie(cookie);
             return ResponseEntity.ok(token);
         } catch (IllegalArgumentException ie) {
@@ -79,7 +77,7 @@ public class AuthController {
     }
 
     @GetMapping("/current-user")
-    public ResponseEntity<Object> getCurrentUser(@RequestHeader(value = "Authorization", required = false) String token){
+    public ResponseEntity<Object> getCurrentUser(@RequestHeader(value = "Authorization", required = false) String token) {
         Map<String, Object> responseBody = new HashMap<>();
         try {
             UserEntity userEntity = userService.getUserByEmail(userService.getEmailfromToken(token.substring(7)));
@@ -96,6 +94,5 @@ public class AuthController {
             return ResponseEntity.badRequest().body(responseBody);
         }
     }
-
 
 }
