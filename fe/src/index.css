@@ -31,6 +31,9 @@
   --width-page: 1240px;
   --primary-color: #81c408;
 }
+* {
+  scroll-behavior: smooth;
+}
 
 *::selection {
   background-color: var(--primary-color);

@@ -1,16 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import ReactSelect from "react-select";
 import listProduct from "../api/product.json";
+import Pagianate from "../components/PagianateNavBar/Paginate";
 import ProductItem from "../components/ProductItem";
-import { Product} from "../types/types";
+import { Product } from "../types/types";
 
-interface Props {}
+function ProductPage() {
+  const [page, setPage] = useState(0);
+  const numItemsOfPage = 12;
 
-function ProductPage(props: Props) {
-  const {} = props;
+  const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
 
-  const [prods, setProds] = useState<Product[]>(listProduct);
+  const filterCurrentProducts = useMemo(() => {
+    return listProduct.filter((_, index) => {
+      return (
+        index >= page * numItemsOfPage && index < (page + 1) * numItemsOfPage
+      );
+    });
+  }, [currentProducts]);
 
   const [sortOption] = useState([
     { value: 0, label: "Mặc định" },
@@ -22,30 +30,34 @@ function ProductPage(props: Props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
 
-
+    setCurrentProducts(filterCurrentProducts);
+  }, [page]);
 
   const handleSort = (value: number) => {
     switch (value) {
       case 1:
-        setProds((prev) => [...prev.sort((a, b) => a.price - b.price)]);
+        setCurrentProducts((prev) => [
+          ...prev.sort((a, b) => a.price - b.price),
+        ]);
         break;
       case 2:
-        setProds((prev) => [...prev.sort((a, b) => b.price - a.price)]);
+        setCurrentProducts((prev) => [
+          ...prev.sort((a, b) => b.price - a.price),
+        ]);
         break;
       case 3:
-        setProds((prev) => [
+        setCurrentProducts((prev) => [
           ...prev.sort((a, b) => a.title.localeCompare(b.title)),
         ]);
         break;
       case 4:
-        setProds((prev) => [
+        setCurrentProducts((prev) => [
           ...prev.sort((a, b) => b.title.localeCompare(a.title)),
         ]);
         break;
       default:
-        setProds((prev) => [...prev.sort((a, b) => 0)]);
+        setCurrentProducts((prev) => [...prev.sort((a, b) => 0)]);
         break;
     }
   };
@@ -58,9 +70,8 @@ function ProductPage(props: Props) {
       </div>
       <div className="flex gap-x-10 flex-col xl:flex-row gap-y-5">
         <div className="w-[247px] border-gray-300 border border-solid rounded-[20px] h-fit ">
-        
           <h3 className="px-4 py-3 pt-6 text-xl cursor-default ">
-          Sắp xếp theo
+            Sắp xếp theo
           </h3>
           <ReactSelect
             className="p-4"
@@ -69,11 +80,19 @@ function ProductPage(props: Props) {
             onChange={(option) => option && handleSort(option.value)}
           ></ReactSelect>
         </div>
-        <ul className="flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
-          {prods.map((prod, index) => (
-            <ProductItem product={prod} key={index} />
-          ))}
-        </ul>
+
+        <div className="flex-1">
+          <ul className=" grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
+            {currentProducts.map((prod, index) => (
+              <ProductItem product={prod} key={index} />
+            ))}
+          </ul>
+          <Pagianate
+            onPageChange={(pageNumber) => setPage(pageNumber)}
+            numberItemOnPage={numItemsOfPage}
+            itemsLength={listProduct.length}
+          />
+        </div>
       </div>
     </div>
   );
