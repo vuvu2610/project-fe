@@ -12,7 +12,7 @@ interface Errors {
 }
 
 function LoginPage() {
-    const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
+    const [isShowPassword, setIsShowPassword] = useState<boolean>(true);
     const [formValues, setFormValues] = useState<Login>({
         email: '',
         password: '',
@@ -78,7 +78,7 @@ function LoginPage() {
                             {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
                             <div className="relative">
                                 <input
-                                    type={isShowPassword ? "text" : "password"}
+                                    type={!isShowPassword ? "text" : "password"}
                                     name="password"
                                     value={formValues.password}
                                     onChange={handleChange}

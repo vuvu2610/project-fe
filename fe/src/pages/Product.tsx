@@ -19,12 +19,24 @@ function ProductPage() {
   const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
 
   const filterCurrentProducts = useMemo(() => {
-    return listProduct.filter((_, index) => {
-      return (
-        index >= page * numItemsOfPage && index < (page + 1) * numItemsOfPage
-      );
-    });
-  }, [currentProducts]);
+    // return listProduct.filter((_, index) => {
+    //   return (
+    //     index >= page * numItemsOfPage && index < (page + 1) * numItemsOfPage
+    //   );
+    // });
+    const startIndex = page * numItemsOfPage;
+    const endIndex = (page + 1) * numItemsOfPage;
+    console.log("Page:", page);
+    console.log("Items per page:", numItemsOfPage);
+    console.log("Start Index:", startIndex);
+    console.log("End Index:", endIndex);
+    console.log("List Product Length:", listProduct.length);
+
+    const slicedProducts = listProduct.slice(startIndex, endIndex);
+    console.log("Sliced Products:", slicedProducts);
+
+    return slicedProducts;
+  }, [page]);
 
   const [sortOption] = useState([
     { value: 0, label: "Mặc định" },
@@ -99,7 +111,10 @@ function ProductPage() {
             ))}
           </ul>
           <Pagianate
-            onPageChange={(pageNumber) => setPage(pageNumber)}
+            onPageChange={(pageNumber) => {
+              setPage(pageNumber);
+              console.log(pageNumber);
+            }}
             numberItemOnPage={numItemsOfPage}
             itemsLength={listProduct.length}
           />

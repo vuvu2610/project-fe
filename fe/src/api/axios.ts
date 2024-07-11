@@ -7,6 +7,7 @@ const axiosInstance = axios.create({
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   },
+  withCredentials: true
 });
 
 const navigate = (path: string) => {
