@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer';
 
 function Header() {
     const [isSticky, setIsSticky] = useState(false);
+    const isLogin = localStorage.getItem('isLoggedIn');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -26,7 +27,7 @@ function Header() {
     return (
         <>
             <header className={`${isSticky ? 'sticky top-0 left-0 right-0 z-20' : ''}`}>
-                <TopHeader />
+                {!isLogin && <TopHeader />}
                 <Navbar />
             </header>
             <Outlet />

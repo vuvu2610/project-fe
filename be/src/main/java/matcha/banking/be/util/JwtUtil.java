@@ -20,7 +20,7 @@ public class JwtUtil {
     // Đoạn JWT_SECRET này là bí mật, chỉ có phía server biết
     private final String JWT_SECRET = "4509e1e738867146f0abda72624724a2dc84560753ffecfaf66bc35e50988f15";
     //Thời gian có hiệu lực của chuỗi jwt
-    private final long JWT_EXPIRATION = 31556926000L;
+    private final long JWT_EXPIRATION = 86400000L;
 
     @Setter
     @Getter

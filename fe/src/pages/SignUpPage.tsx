@@ -1,5 +1,5 @@
 import { registerNewUser } from "../api/axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Login, SignUpInfo } from "../types/types";
 import { toast } from "react-toastify";
@@ -10,6 +10,7 @@ interface Errors {
 }
 
 function SignUpPage() {
+    const navigate = useNavigate();
     const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
     const [formValues, setFormValues] = useState<SignUpInfo>({
         name: '',
@@ -28,6 +29,7 @@ function SignUpPage() {
 
     const validate = (): boolean => {
         let tempErrors: Errors = {};
+        tempErrors.name = formValues.name ? '' : 'Bạn cần nhập tên.';
         tempErrors.email = formValues.email ? '' : 'Bạn cần nhập email.';
         tempErrors.password = formValues.password ? '' : 'Bạn cần nhập mật khẩu.';
 
@@ -43,7 +45,10 @@ function SignUpPage() {
                 email: '',
                 password: '',
             });
-            // await registerNewUser(formValues)
+            await registerNewUser(formValues)
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);
             toast.success('Send Message successfully!');
         }
     };
@@ -60,9 +65,9 @@ function SignUpPage() {
         <div className="wrapper">
             <div className="select-none w-[70%] mx-auto mb-[140px] grid gap-16 items-center relative overflow-hidden p-10 rounded-3xl bg-white text-black">
                 <div>
-                    <h2 className="text-3xl font-extrabold">Đăng nhập</h2>
+                    <h2 className="text-3xl font-extrabold">Đăng ký</h2>
                     <p className="text-sm text-gray-400 mt-3">
-                        Đăng nhập để nhận ưu đãi và thông tin mới nhất từ chúng tôi.
+                        Đăng ký để nhận ưu đãi và thông tin mới nhất từ chúng tôi.
                     </p>
                     <form onSubmit={handleSubmit}>
                         <div className="space-y-4 mt-8">
@@ -75,7 +80,7 @@ function SignUpPage() {
                                 className={`px-3 py-4 bg-white text-black w-full text-sm border rounded-lg ${errors.name ? 'border-red-500' : 'border-gray-300'
                                     } focus:border-[#333] outline-none`}
                             />
-                            {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+                            {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
                             <input
                                 type="text"
                                 name="email"
@@ -103,16 +108,13 @@ function SignUpPage() {
 
                             {errors.password && <p className="text-red-500 text-xs">{errors.password}</p>}
                         </div>
-                        <div className="text-end mt-2">
-                            <button className="hover:text-primary">Quên mật khẩu ?</button>
-                        </div>
                         <button
                             type="submit"
                             className="mt-6 flex items-center justify-center text-sm w-full rounded-lg px-4 py-3 font-semibold bg-[#333] text-white hover:bg-[#222]"
                         >
                             Đăng nhập
                         </button>
-                        <p className='pt-4 text-center'>Bạn chưa có tài khoản? <Link to={"/signup"} className='text-primary hover:underline'>Đăng kí ngay</Link></p>
+                        <p className='pt-4 text-center'>Bạn đã có tài khoản? <Link to={"/login"} className='text-primary hover:underline'>Đăng nhập ngay</Link></p>
                     </form>
                 </div>
             </div>
