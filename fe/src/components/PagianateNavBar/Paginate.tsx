@@ -15,9 +15,9 @@ import {
   
     return (
       <ReactPaginate
-        containerClassName="flex gap-x-3 mt-12 justify-center w-fit mx-auto  py-4 px-6  shadow-custom"
+        containerClassName="flex gap-x-3 mt-12 justify-center w-full mx-auto  py-4 px-6  shadow-custom"
         pageLinkClassName="w-10 aspect-square grid place-items-center hover:bg-gray-300 transition-all duration-300 ease-in-out"
-        pageClassName="rounded-full overflow-hidden "
+        pageClassName="rounded-full overflow-hidden min-w-fit"
         activeClassName="bg-primary text-white"
         pageCount={Math.ceil(itemsLength / numberItemOnPage)}
         previousLabel={<MdKeyboardDoubleArrowLeft />}

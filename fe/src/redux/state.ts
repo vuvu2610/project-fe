@@ -1,5 +1,6 @@
 interface AuthState {
-    currentUser: {} | null;
+    currentUser: {} | null,
+    cart: {} | null,
 }
 
 interface RootState {

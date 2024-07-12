@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AuthState, RootState } from "./state";
+import { AuthState } from "./state";
 
 
 
 const initialState: AuthState = {
   currentUser: null,
+  cart: null
 };
 
 const authSlice = createSlice({

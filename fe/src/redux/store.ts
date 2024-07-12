@@ -1,22 +1,10 @@
-import {
-  combineReducers,
-  legacy_createStore as createStore,
-} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import appSlice from "./appSlice";
+import authSlice from "./authSlice";
 
-import { persistReducer, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import authReducer from "./authSlice";
-
-const authPersistConfig = {
-  key: "auth",
-  storage: storage,
-};
-
-const rootReducer = combineReducers({
-  auth: persistReducer(authPersistConfig, authReducer),
+export const store = configureStore({
+  reducer: { app: appSlice, auth: authSlice },
 });
 
-const store = createStore(rootReducer);
-const persistor = persistStore(store);
-
-export { persistor, store };
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

@@ -1,5 +1,4 @@
 export interface Product {
-
   id: number;
   image: string;
   title: string;
@@ -67,15 +66,27 @@ export interface ThumbnailResponse {
 }
 
 export interface ChatHistory {
-    role: string; content: string; 
+  role: string;
+  content: string;
 }
 
 export interface CardInfo {
-    price: number;
-    quantity: number; 
+  price: number;
+  quantity: number;
 }
 
 export interface Login {
   email: string;
-  password: string; 
+  password: string;
+}
+
+export interface CartItem {
+  id?: number;
+  productId: number;
+  quantity: number;
+}
+
+export interface Cart {
+  id: string;
+  listCartItem: Array<CartItem>;
 }
