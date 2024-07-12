@@ -30,7 +30,7 @@ const Live: React.FC<Props> = () => {
   };
 
   return (
-    <div className="flex gap-x-4 max-w-width-page mt-[160px] pb-40 mx-auto">
+    <div className="flex gap-x-4 max-w-width-page mt-[40px] pb-40 mx-auto">
       <Sidebar />
       {authToken && meetingId ? (
         <MeetingProvider

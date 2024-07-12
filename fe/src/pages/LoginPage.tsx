@@ -4,7 +4,7 @@ import { MdOutlineEmail } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { Login } from '../types/types';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import {loginUser} from '../api/axios'
+import {callApi, loginUser} from '../api/axios'
 
 
 interface Errors {
@@ -43,8 +43,7 @@ function LoginPage() {
                 email: '',
                 password: '',
             });
-            await loginUser(formValues)
-            toast.success('Send Message successfully!');
+            await callApi(() => loginUser(formValues))
         }
     };
 

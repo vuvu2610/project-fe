@@ -12,6 +12,8 @@ public class GetUserInfoDto implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    private Integer id;
+
     /** Name of user */
     private String name;
 

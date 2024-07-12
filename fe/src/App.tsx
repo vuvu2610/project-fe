@@ -5,11 +5,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Fragment } from "react/jsx-runtime";
 import PrivateRoute from "./components/PrivateRoute";
-import { RootState } from "./redux/state";
 import { privateRoutes, publicRoutes } from "./routes";
+import { RootState } from "./redux/store";
+import Loading from "./components/Loading/Loading";
 
 function App() {
   const user = useSelector((state: RootState) => state.auth.currentUser);
+  const loading = useSelector((state: RootState) => state.app.loading);
+  
   return (
     <Router>
       <Routes>
@@ -60,6 +63,7 @@ function App() {
         pauseOnHover
         theme="colored"
       />
+      {loading && <Loading />}
     </Router>
   );
 }

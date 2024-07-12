@@ -1,3 +1,5 @@
+import { store } from "../redux/store";
+
 export const nameTruncated = (
   name: string | null | undefined,
   truncatedLength: number
@@ -17,3 +19,5 @@ export function formatAMPM(date: Date): string {
   const minutesStr = minutes < 10 ? "0" + minutes : minutes.toString();
   return `${hours}:${minutesStr} ${ampm}`;
 }
+
+export const getDispatch = () => store.dispatch;
