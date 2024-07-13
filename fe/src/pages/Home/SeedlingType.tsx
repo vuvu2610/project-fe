@@ -1,10 +1,12 @@
+import { useTranslation } from 'react-i18next';
 import Title from '../../components/Title';
 
 function SeedlingType() {
+    const {t} = useTranslation();
     return (
         <div className="wrapper">
             <div className="bg-[#F0F0F0] rounded-[40px] px-4 lg:px-[64px]">
-                <Title className="text-center text-[32px] lg:text-[40px] py-[64px]">Loại cây giống</Title>
+                <Title className="text-center text-[32px] lg:text-[40px] py-[64px]">{t("title.type-seed")}</Title>
 
                 <div>
                     <div className="flex gap-5 flex-col md:flex-row mb-5">

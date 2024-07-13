@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Trang chủ",
+    "products": "Sản phẩm",
+    "contact": "Liên hệ",
+    "about-us": "Về chúng tôi",
+    "live": "Phát trực tiếp",
+    "login": "Đăng nhập"
+  },
+  "title": {
+    "new-product": "Sản phẩm mới",
+    "best-selling-seed": "Cây giống bán chạy",
+    "type-seed": "Các loại cây giống",
+    "comment": "Phản hồi của khách hàng"
+  },
+  "button": {
+    "buy": "Mua ngay",
+    "read-more": "Xem thêm"
+  }
+}

@@ -7,6 +7,7 @@ const routes = {
   live: "/live",
   cart: "/cart",
   stream: "/live/stream",
+  thank: "/thank",
   'produc-detail': "/products/:id",
   "page-not-found": "*",
 };

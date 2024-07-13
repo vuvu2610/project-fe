@@ -11,6 +11,7 @@ const baseAxios = axios.create({
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   },
+  withCredentials: true
 });
 
 export const loginUser = async (loginProp: Login) => {

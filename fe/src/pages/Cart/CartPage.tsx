@@ -4,11 +4,14 @@ import { CardInfo } from "../../types/types";
 import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
 import { useEffect, useState } from "react";
 import { callApi, getCart } from "../../api/axios";
+import { useNavigate } from "react-router-dom";
+import routes from "../../config/routes";
 function CartPage() {
   const [products, setProducts] = useState([]);
   const [totalCard, setTotalCard] = useState<number>(0);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isCheckedNew = e.target.checked;
@@ -16,6 +19,13 @@ function CartPage() {
     setIsChecked(isCheckedNew);
     emitter.emit("checkAll", isCheckedNew);
   };
+
+  const handleBuy = () => {
+    //validate data
+
+    //if valid redirect thank you page
+    navigate(routes.thank)
+  }
 
   useEffect(() => {
     callApi(() => {
@@ -25,6 +35,8 @@ function CartPage() {
       setTotalCard((prevQuantity) => prevQuantity + element.quantity);
       setTotalPrice((prevPrice) => prevPrice + element.price);
     };
+
+   
 
     const handleUnchecked = (element: CardInfo) => {
       setTotalCard((prevQuantity) => prevQuantity - element.quantity);
@@ -74,7 +86,7 @@ function CartPage() {
               Tổng thanh toán ({totalCard} Sản phẩm):{" "}
               <span className="text-[#EE4D2D]">đ{totalPrice}</span>
             </div>
-            <button className="bg-[#EE4D2D] text-white px-10 py-2 hover:opacity-80">
+            <button className="bg-[#EE4D2D] text-white px-10 py-2 hover:opacity-80" onClick={handleBuy}>
               Mua hàng
             </button>
           </div>

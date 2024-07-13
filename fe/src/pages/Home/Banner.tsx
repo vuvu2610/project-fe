@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import BannerImg from "../../assets/images/bgg.jpg";
 // import start from "../../assets/images/start.svg";
 
 function Banner() {
+  const {t} = useTranslation();
   return (
     <div >
       <div className="wrapper flex lg:flex-row flex-col bg-cover bg-no-repeat " style={{backgroundImage : `url(${BannerImg})`}} >
@@ -16,7 +18,7 @@ function Banner() {
           </p>
 
           <button className="mb-10 py-4 px-[54px] bg-black text-white rounded-[62px] w-full lg:w-auto">
-            Mua ngay
+           {t("button.buy")}
           </button>
 
           <div className="flex items-center flex-wrap text-center">
