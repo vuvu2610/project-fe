@@ -2,15 +2,13 @@ package matcha.banking.be.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "carts")
+@Table(name = "reviews")
 @Data
-public class CartEntity {
+public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -22,15 +20,11 @@ public class CartEntity {
     @Column(name = "product_id")
     private Integer productId;
 
-    @Column(name = "quantity")
-    private Integer quantity;
+    @Column(name = "rating")
+    private Double rating;
 
-    /**
-     * 0: Inactive
-     * 1: Active
-     */
-    @Column(name = "status_code")
-    private Integer statusCode;
+    @Column(name = "content")
+    private String content;
 
     @Column(name = "created_at")
     private LocalDateTime created;

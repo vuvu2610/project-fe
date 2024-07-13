@@ -1,16 +1,11 @@
-import {
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import {useEffect, useImperativeHandle, useMemo, useRef, useState} from "react";
 import { FaChevronRight } from "react-icons/fa";
 import ReactSelect, { SelectInstance } from "react-select";
-import listProduct from "../api/product.json";
+// import listProduct from "../api/product.json";
 import Pagianate from "../components/PagianateNavBar/Paginate";
 import ProductItem from "../components/ProductItem";
 import { Product } from "../types/types";
+import {callApi, getAllProduct} from '../api/axios'
 
 function ProductPage() {
   const [page, setPage] = useState(0);
@@ -26,13 +21,8 @@ function ProductPage() {
     // });
     const startIndex = page * numItemsOfPage;
     const endIndex = (page + 1) * numItemsOfPage;
-    console.log("Page:", page);
-    console.log("Items per page:", numItemsOfPage);
-    console.log("Start Index:", startIndex);
-    console.log("End Index:", endIndex);
-    console.log("List Product Length:", listProduct.length);
 
-    const slicedProducts = listProduct.slice(startIndex, endIndex);
+    const slicedProducts = currentProducts.slice(startIndex, endIndex);
     console.log("Sliced Products:", slicedProducts);
 
     return slicedProducts;
@@ -56,6 +46,12 @@ function ProductPage() {
     selectRef.current?.selectOption(sortOption[0]);
   }, [page]);
 
+  useEffect(() => {
+    callApi(() => getAllProduct()).then((res) => {
+      setCurrentProducts(res);
+    });
+  }, []);
+
   const handleSort = (value: number) => {
     switch (value) {
       case 1:
@@ -70,12 +66,12 @@ function ProductPage() {
         break;
       case 3:
         setCurrentProducts((prev) => [
-          ...prev.sort((a, b) => a.title.localeCompare(b.title)),
+          ...prev.sort((a, b) => a.name.localeCompare(b.name)),
         ]);
         break;
       case 4:
         setCurrentProducts((prev) => [
-          ...prev.sort((a, b) => b.title.localeCompare(a.title)),
+          ...prev.sort((a, b) => b.name.localeCompare(a.name)),
         ]);
         break;
       default:
@@ -116,7 +112,7 @@ function ProductPage() {
               console.log(pageNumber);
             }}
             numberItemOnPage={numItemsOfPage}
-            itemsLength={listProduct.length}
+            itemsLength={currentProducts.length}
           />
         </div>
       </div>

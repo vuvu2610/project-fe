@@ -1,19 +1,21 @@
 import { useState, useEffect, useRef, FC } from "react";
-import { FaAngleDown } from "react-icons/fa6";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { FaUserLarge } from "react-icons/fa6";
 import { FaXmark } from "react-icons/fa6";
-import { FaBars } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { AiOutlineLogin } from "react-icons/ai";
 import navItems from "../../api/navItems.json";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import {logoutUser} from "../../api/axios"
+import DynamicPlaceholder from "./DynamicPlaceholder";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import routes from "../../config/routes";
 import ReactSelect from "react-select";
 import { changeLang } from "../../redux/persistSlice";
+import { Menu, Transition } from "@headlessui/react";
+import { FaAngleDown } from "react-icons/fa6";
+import { Fragment } from "react";
+import { FaUserLarge } from "react-icons/fa6";
+import { FaBars } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 interface NavItem {
   title: string;
@@ -31,8 +33,10 @@ interface State {
 
 const Navbar: FC = () => {
   const user = useSelector((state: State) => state.auth.user);
+  const cartCount = useSelector((state: any) => state.app.cartCount); 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const isLogin = localStorage.getItem("user");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
@@ -47,10 +51,6 @@ const Navbar: FC = () => {
 
   const activeNavLink = ({ isActive }: { isActive: boolean }) => {
     return isActive ? "text-base  underline" : "text-base ";
-  };
-
-  const handleLogout = () => {
-    navigate("/login");
   };
 
   useEffect(() => {
@@ -78,6 +78,7 @@ const Navbar: FC = () => {
           <Link to="/" className="font-[IntegralCf] text-[24px]">
             SEEDLING
           </Link>
+          <DynamicPlaceholder />
 
           <ul className="hidden lg:flex space-x-12">
             <NavLink
@@ -105,14 +106,6 @@ const Navbar: FC = () => {
             </NavLink>
 
             <NavLink
-              to={routes["page-not-found"]}
-              className={activeNavLink}
-              key={routes["page-not-found"]}
-            >
-              {t("nav.about-us")}
-            </NavLink>
-
-            <NavLink
               to={routes.live}
               className={activeNavLink}
               key={routes.live}
@@ -124,95 +117,17 @@ const Navbar: FC = () => {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-[20px]">
               <div className="relative">
-                <Link to="/cart">
+                <Link to="/cart" className="relative">
                   <IoCartOutline className="w-7 h-7 mt-1" />
+                  <div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">{cartCount}</div>
                 </Link>
-                {/* {cartsValue.length > 0 ? (
-                  <span className="absolute top-[-6px] right-[-14px] bg-red-600 text-xs leading-5 text-white w-5 h-5 text-center rounded-full">
-                    {cartsValue.length}
-                  </span>
-                ) : (
-                  ""
-                )} */}
               </div>
-              {user ? (
-                <>
-                  <Menu
-                    as="div"
-                    className="relative hidden lg:inline-block text-left"
-                  >
-                    <div>
-                      <Menu.Button className="inline-flex items-center w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900">
-                        <FaUserLarge />
-                        <p>{user.username}</p>
-                        <FaAngleDown />
-                      </Menu.Button>
-                    </div>
-
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div className="py-1">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                to="/profile"
-                                className={`${
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700"
-                                } block px-4 py-2 text-sm`}
-                              >
-                                Profile
-                              </Link>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                to="/checkout"
-                                className={`${
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700"
-                                } block px-4 py-2 text-sm`}
-                              >
-                                Checkout order
-                              </Link>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                onClick={handleLogout}
-                                className={`${
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700"
-                                } block px-4 py-2 text-sm`}
-                              >
-                                Sign out
-                              </button>
-                            )}
-                          </Menu.Item>
-                        </div>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
-                </>
-              ) : (
-                <Link to="/login" className="hidden lg:block ">
-                  {t("nav.login")}{" "}
-                  <AiOutlineLogin className="w-6 h-6 inline-block" />
-                </Link>
-              )}
+              {isLogin ? (<button className="hidden lg:block" onClick={logoutUser}>
+                Logout <AiOutlineLogin className="w-6 h-6 inline-block" />
+              </button>
+              ) : (<Link to={"/login"} className="hidden lg:block" >
+                Login <AiOutlineLogin className="w-6 h-6 inline-block" />
+              </Link>)}
               <ReactSelect
                 options={langOptions}
                 isSearchable={false}
@@ -246,7 +161,7 @@ const Navbar: FC = () => {
             onClick={toggleMenu}
             className="font-[IntegralCf] block text-[24px] py-4 px-4"
           >
-            FE.SHOPIFY
+            SEEDLING
           </Link>
           <ul className="space-y-2 border-b ">
             {navItems.map(({ title, to }) => (
@@ -255,79 +170,6 @@ const Navbar: FC = () => {
               </Link>
             ))}
           </ul>
-          {user ? (
-            <>
-              <Menu as="div" className="relative inline-block text-left mt-3">
-                <div>
-                  <Menu.Button className="inline-flex  items-center w-full justify-center gap-x-1.5 rounded-md  px-3 py-2 text-sm font-semibold">
-                    <FaUserLarge />
-                    <p>{user.username}</p>
-                  </Menu.Button>
-                </div>
-
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="absolute left-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="py-1">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/profile"
-                            className={`${
-                              active
-                                ? "bg-gray-100 text-black"
-                                : "text-gray-700"
-                            } block px-4 py-2 text-sm`}
-                          >
-                            Profile
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/checkout"
-                            className={`${
-                              active
-                                ? "bg-gray-100 text-gray-900"
-                                : "text-gray-700"
-                            } block px-4 py-2 text-sm`}
-                          >
-                            Checkout order
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button
-                            onClick={handleLogout}
-                            className={`${
-                              active
-                                ? "bg-gray-100 text-gray-900"
-                                : "text-gray-700"
-                            } block w-full px-4 py-2 text-left text-sm`}
-                          >
-                            Sign out
-                          </button>
-                        )}
-                      </Menu.Item>
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            </>
-          ) : (
-            <Link to="/login" className="block p-4 ">
-              Login <AiOutlineLogin className="w-6 h-6 inline-block" />
-            </Link>
-          )}
         </div>
       </div>
     </nav>
