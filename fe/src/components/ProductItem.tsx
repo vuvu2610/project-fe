@@ -8,6 +8,7 @@ interface ProductItemProps {
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
+    
     return (
         <div className="cursor-pointer overflow-hidden shadow p-4 rounded-[20px]">
 
@@ -21,7 +22,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
             </Link>
 
             <div className="mt-4 space-y-2">
-                <h3 className=" capitalize line-clamp-1">{product?.title}</h3>
+                <h3 className=" capitalize line-clamp-1">{product?.name}</h3>
                 <div className="flex gap-2">
                     <StarRating rating={product?.rating} />
                     <span className="">
@@ -30,7 +31,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
                 </div>
                 <div className='flex justify-between'>
                     <span className=" font-semibold">{product?.price} VND</span>
-                    <span className=" font-semibold">Đã bán: {product?.purchase}</span>
+                    <span className=" font-semibold">Đã bán: {product?.quantitySold}</span>
                 </div>
             </div>
         </div>

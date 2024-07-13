@@ -1,61 +1,54 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import products from "../api/product.json";
 import routes from "../config/routes";
 import Title from "../components/Title";
 import { FaStar } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { reviews } from "../constants";
-import { Product } from "../types/types";
+import { GetUserInfoDto, Product } from "../types/types";
 import ProductItem from "../components/ProductItem";
+import {addToCart, callApi, getProduct, currentUser} from '../api/axios'
+import { toast } from "react-toastify";
+import { getBestSeller } from "../api/homeApi";
 
 interface Props {}
 
 function ProductDetail(_props: Props) {
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
 
+
   const [data, setData] = useState<Product>();
+  const [topSelling, setTopSelling] = useState<Product[]>([]);
 
   useEffect(() => {
-    if (!isValidId) {
-      navigate(routes["page-not-found"]);
-    }
-    setData(products.find((product) => {
-      const parsId = id && parseInt(id);
-      return product.id === parsId;
-    }));
-    window.scrollTo(0, 0);
+    const fetchProduct = async () => {
+      const product = await callApi(() => getProduct(Number(id)));
+      const topSellingProduct = await callApi(() => getBestSeller());
+      setData(product);
+      setTopSelling(topSellingProduct);
+      window.scrollTo(0, 0);
+    };
+  
+    fetchProduct();
   }, [id]);
 
-  const isValidId =
-    id &&
-    !isNaN(parseInt(id)) &&
-    products.some((product) => product.id === parseInt(id));
-
-  function handleColorClick(color: string) {
-    setSelectedColor(color);
-  }
-
-  const handleSizeClick = (size: string) => {
-    setSelectedSize(size);
-  };
-
-  function handleAddToCart(
-    data:
-      | {
-        id: number;
-        title: string;
-        image: string;
-        rating: number;
-        price: number;
+  function handleAddToCart(){
+    const addCart = async () => {
+      try {
+        console.log(id)
+        await callApi(() => addToCart({productId: Number(id), userId: currentUser?.id, quantity: 1}));
+        toast.success('Bạn đã thêm sản phẩm thành công!');
+      } catch (error: any) {
+        if (error.response.status === 403) {
+          toast.error('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!');
+        } else if (error.response.status === 409) {
+          toast.error('Sản phẩm đã có trong giỏ hàng!');
         }
-      | undefined
-  ): void {
-    throw new Error("Function not implemented.");
+      }
+    };
+    addCart();
   }
 
   return (
@@ -75,7 +68,7 @@ function ProductDetail(_props: Props) {
           <div className="flex-1">
             {/* Details */}
             <Title className="text-[40px] mb-3 line-clamp-2">
-              {data?.title}
+              {data?.name}
             </Title>
             <div className="flex gap-x-2 items-center mt-2">
               {Array(5)
@@ -96,11 +89,11 @@ function ProductDetail(_props: Props) {
               {data?.price} VND
             </span>
      
-            <p className="pb-4 border-b">{data?.title}</p>
+            <p className="pb-4 border-b">{data?.description}</p>
 
            
             <button
-              onClick={() => handleAddToCart(data)}
+              onClick={() => handleAddToCart()}
               className="px-[70px] py-4 bg-black text-white rounded-[62px] mt-4"
             >
               Add to card
@@ -165,7 +158,7 @@ function ProductDetail(_props: Props) {
       <div className="mt-[60px] wrapper">
       <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Top Selling</Title>
       <ul className="flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
-          {products.slice(0,12).map((product, index) => (
+          {topSelling.slice(0,12).map((product, index) => (
             <ProductItem product={product} key={index}/>
           ))}
         </ul>

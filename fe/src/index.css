@@ -99,3 +99,21 @@ html *::-webkit-scrollbar-track {
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot {
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) ;
+  margin: 0.625rem ;
+}

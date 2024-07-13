@@ -30,6 +30,8 @@ public class SecurityConfigurer {
                 .authorizeHttpRequests(
                         auth -> auth
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/home/**").permitAll()
+                                .requestMatchers("/products/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sess ->

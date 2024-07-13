@@ -1,45 +1,160 @@
 import axios from "axios";
-import { Login, SignUpInfo } from "../types/types";
-import { NavigateFunction } from "react-router-dom";
+import { getDispatch } from "../utils/helper";
+import { fetchEnd, fetchStart } from "../redux/appSlice";
 
-const axiosInstance = axios.create({
+import { Login, SignUpInfo, Cart, CartItem, CartRequestDto, GetUserInfoDto, CardInfo } from "../types/types";
+
+export const baseAxios = axios.create({
   baseURL: process.env.REACT_APP_API_URL || "http://localhost:8081/api/v1/",
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
   withCredentials: true
 });
 
-const navigate = (path: string) => {
-  window.location.href = path;
-};
+const dispatch = getDispatch();
 
 
-export const loginUser = async(loginProp: Login) => {
-    try {
-        const res = await axiosInstance.post('/auth/login', loginProp);
-        localStorage.setItem('isLoggedIn', 'true');  
-        navigate('/');
-    } catch (error) {
-        console.warn(error);
-    }
+
+const navigate = (href: string) => {
+  window.location.href = href;
 }
+
+export const currentUser: GetUserInfoDto = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : null;
+
+export const loginUser = async (loginProp: Login) => {
+  try {
+    const res = await baseAxios.post("auth/login", loginProp);
+    localStorage.setItem("user", JSON.stringify(res.data));
+    navigate("/");
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
 
 export const logoutUser = async () => {  
   try {  
-      await axiosInstance.post('/auth/logout');  
-      localStorage.removeItem('isLoggedIn');  
-      navigate('/login');
+      await baseAxios.post('/auth/logout');  
+      localStorage.removeItem('user');  
+      navigate("/login");
   } catch (error) {  
-      console.warn(error);  
+    return Promise.reject(error);
   }  
 };  
+
+export const getCart = async (userId: number): Promise<Cart> => {
+  try {
+    const res = await baseAxios.get(`carts/${userId}`);
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+    throw error;
+  }
+};
+
+export const addCartItem = async (cartId: number, cartItem: CartItem) => {
+  try {
+    const res = await baseAxios.post(`carts/${cartId}/items`, cartItem);
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const deleteCartItem = async (cartItemId: number) => {
+  try {
+    const res = await baseAxios.delete(`items/${cartItemId}`);
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const updateCartItem = async (
+  cartItemId: number,
+  cartItem: CartItem
+) => {
+  try {
+    const res = await baseAxios.post(`items/${cartItemId}`, cartItem);
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const getAllProduct = async () => {
+  try {
+    const res = await baseAxios.get("products");
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const getProduct = async (id : number) => {
+  try {
+    const res = await baseAxios.get(`products/${id}`);
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const addToCart = async (cartRequestDto: CartRequestDto) => {
+  try {
+    const res = await baseAxios.post("carts", cartRequestDto);
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const getCartByUser = async (id : number) => {
+  try {
+    const res = await baseAxios.get(`carts/user/${id}`);
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const deleteCart = async (ids : number[]) => {
+  try {
+    const res = await baseAxios.delete(`carts`, {data: ids});
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const payCart = async (cartList : CardInfo[]) => {
+  try {
+    const res = await baseAxios.post(`carts/pay`, cartList);
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+
+export const callApi = async (callBack: any) => {
+  try {
+    dispatch(fetchStart());
+    const res = await callBack();
+    dispatch(fetchEnd());
+    return res;
+  } catch (error) {
+    dispatch(fetchEnd());
+    return Promise.reject(error);
+  }
+};
 
 export const registerNewUser = async(user: SignUpInfo) => {
 
     try {
-        const res = await axiosInstance.post('/auth/register',user);
-        
+        const res = await baseAxios.post('/auth/register',user);
     } catch (error) {
         console.log(error);
     }

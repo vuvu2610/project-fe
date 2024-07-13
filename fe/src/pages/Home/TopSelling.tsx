@@ -3,12 +3,21 @@ import Products from '../../components/Products';
 import Title from '../../components/Title';
 import { Product } from '../../types/types'; // import Product from types.ts
 import config from '../../config';
+import { useEffect, useState } from 'react';
+import { callApi } from '../../api/axios';
+import { getBestSeller } from '../../api/homeApi';
 
-interface TopSellingProps {
-    data: Product[];
-}
-
-const TopSelling: React.FC<TopSellingProps> = ({ data }) => {
+const TopSelling: React.FC = () => {
+    const [data, setData] = useState<Product[]>([]);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            const result: Product[] = await callApi(() => getBestSeller());
+            setData(result);
+        };
+    
+        fetchData();
+    }, []);
     return (
         <div className="wrapper">
             <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Cây giống bán chạy</Title>

@@ -57,16 +57,16 @@ public class AuthController {
     public ResponseEntity<Object> login(@RequestBody LoginDto loginDto, HttpServletResponse response) {
         Map<String, Object> responseBody = new HashMap<>();
         try {
-            LoginReponseBodyDto token = authService.login(loginDto.getEmail(), loginDto.getPassword());
+            LoginReponseBodyDto loginReponseBodyDto = authService.login(loginDto.getEmail(), loginDto.getPassword());
 
-            Cookie cookie = new Cookie("token", token.getToken());
+            Cookie cookie = new Cookie("token", loginReponseBodyDto.getToken());
             cookie.setHttpOnly(true);
             cookie.setSecure(false);
             cookie.setMaxAge(24 * 60 * 60); // 1 day
             cookie.setPath("/");
             cookie.setAttribute("SameSite", "Strict");
             response.addCookie(cookie);
-            return ResponseEntity.ok(token);
+            return ResponseEntity.ok(loginReponseBodyDto.getUser());
         } catch (IllegalArgumentException ie) {
             responseBody.put("error", ie.getMessage());
             return ResponseEntity.badRequest().body(responseBody);

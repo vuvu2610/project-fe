@@ -7,25 +7,10 @@ import navItems from "../../api/navItems.json";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {logoutUser} from "../../api/axios"
 
-interface NavItem {
-  title: string;
-  to: string;
-}
-
-interface State {
-  auth: {
-    user: any;
-  };
-  allCart: {
-    cartsValue: any[];
-  };
-}
-
 const Navbar: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
-  const navigate = useNavigate();
-  const isLogin = localStorage.getItem("isLoggedIn");
+  const isLogin = localStorage.getItem("user");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -55,7 +40,7 @@ const Navbar: FC = () => {
 
   return (
     <nav className="py-4 bg-white">
-      <div className="wrapper">
+      <div className="wrapper px-6 xl:px-0">
         <div className="flex justify-between items-center gap-8">
           <Link to="/" className="font-[IntegralCf] text-[24px]">
             SEEDLING
@@ -101,18 +86,20 @@ const Navbar: FC = () => {
         {/* Menu mobile */}
         <div
           ref={menuRef}
-          className={`bg-black w-custom-width h-full text-white ${isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
-            }`}
+          className={`bg-black w-custom-width h-full text-white z-50 ${
+            isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
+          }`}
         >
           <Link
             to="/"
+            onClick={toggleMenu}
             className="font-[IntegralCf] block text-[24px] py-4 px-4"
           >
-            FE.SHOPIFY
+            SEEDLING
           </Link>
           <ul className="space-y-2 border-b ">
             {navItems.map(({ title, to }) => (
-              <Link to={to} key={to}>
+              <Link onClick={toggleMenu} to={to} key={to}>
                 <li className="py-3 px-4 hover:bg-[#484a4b]">{title}</li>
               </Link>
             ))}

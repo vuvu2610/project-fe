@@ -1,13 +1,14 @@
 import { ReactNode } from "react";
 
 export interface Product {
-
   id: number;
   image: string;
-  title: string;
+  description: string;
+  name: string;
   rating: number;
   price: number;
-  purchase: number;
+  quantitySold: number;
+  remainingQuantity: number;
   category: string;
   date: string;
 }
@@ -69,18 +70,48 @@ export interface ThumbnailResponse {
 }
 
 export interface ChatHistory {
-    role: string; content: string; 
+  role: string;
+  content: string;
 }
 
 export interface CardInfo {
-    price: number;
-    quantity: number; 
+  price: number;
+  quantity: number;
+  id: number;
+  productId: number;
 }
 
 export interface Login {
   email: string;
-  password: string; 
+  password: string;
 }
+
+export interface CartItem {
+  id?: number;
+  productId: number;
+  quantity: number;
+}
+
+export interface CartRequestDto {
+  userId: number;
+  productId?: number;
+  quantity: number;
+}
+
+export interface GetCartReponseDto {
+  cartId: number;
+  productImage: string;
+  price: number;
+  productName: string;
+  quantity: number;
+  productId: number;
+}
+
+export interface Cart {
+  id: string;
+  listCartItem: Array<CartItem>;
+}
+
 
 export interface SignUpInfo {
   name: string;
@@ -93,4 +124,10 @@ export interface InputFieldProps {
   label: string;
   name: string;
   children: ReactNode;
+}
+
+export interface GetUserInfoDto {
+  id: number;
+  name: string;
+  email: string;
 }

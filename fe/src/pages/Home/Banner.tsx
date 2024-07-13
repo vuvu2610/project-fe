@@ -5,7 +5,7 @@ function Banner() {
   return (
     <div >
       <div className="wrapper flex lg:flex-row flex-col bg-cover bg-no-repeat " style={{backgroundImage : `url(${BannerImg})`}} >
-        <div className="lg:my-[80px] my-10 max-w-[577px]">
+        <div className="lg:my-[80px] my-10 max-w-[577px] px-6">
           <h3 className="lg:text-[64px] text-[32px] font-bold leading-[1]">
             Tìm kiếm cây giống cho bạn
           </h3>

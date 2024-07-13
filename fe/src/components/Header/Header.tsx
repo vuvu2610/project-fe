@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer';
 
 function Header() {
     const [isSticky, setIsSticky] = useState(false);
-    const isLogin = localStorage.getItem('isLoggedIn');
+    const isLogin = localStorage.getItem('user');
 
     useEffect(() => {
         const handleScroll = () => {

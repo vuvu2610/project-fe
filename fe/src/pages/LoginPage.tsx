@@ -4,7 +4,7 @@ import { MdOutlineEmail } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { Login } from '../types/types';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { loginUser } from '../api/axios'
+import {callApi, loginUser} from '../api/axios'
 import { Link } from 'react-router-dom';
 
 
@@ -13,7 +13,7 @@ interface Errors {
 }
 
 function LoginPage() {
-    const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
+    const [isShowPassword, setIsShowPassword] = useState<boolean>(true);
     const [formValues, setFormValues] = useState<Login>({
         email: '',
         password: '',
@@ -44,8 +44,7 @@ function LoginPage() {
                 email: '',
                 password: '',
             });
-            await loginUser(formValues)
-            toast.success('Send Message successfully!');
+            await callApi(() => loginUser(formValues))
         }
     };
 
@@ -79,7 +78,7 @@ function LoginPage() {
                             {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
                             <div className="relative">
                                 <input
-                                    type={isShowPassword ? "text" : "password"}
+                                    type={!isShowPassword ? "text" : "password"}
                                     name="password"
                                     value={formValues.password}
                                     onChange={handleChange}

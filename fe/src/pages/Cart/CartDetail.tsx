@@ -1,23 +1,22 @@
 import { useEffect, useRef, useState } from "react";
-import { Product } from "../../types/types";
+import { GetCartReponseDto, Product } from "../../types/types";
 import products from "../../api/product.json";
 import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
+import {callApi, getCartByUser, currentUser, deleteCart} from '../../api/axios'
 
 interface CartDetailProps {
-  id: number;
+  getCardReponseDto: GetCartReponseDto;
   isChecked?: boolean;
 }
 
-const CartDetail = ({ id, isChecked = false }: CartDetailProps) => {
+const CartDetail = (props: CartDetailProps) => {
   const [quantity, setQuantity] = useState<number>(1);
-  const [checked, setChecked] = useState<boolean>(isChecked);
+  const [checked, setChecked] = useState<boolean>(false);
+
 
   const prevCheckedRef = useRef(checked);
   const prevQuantityRef = useRef(quantity);
 
-  const product: Product = products.find(
-    (product: Product) => product.id === id
-  ) as Product;
   const checkElement = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -40,15 +39,19 @@ const CartDetail = ({ id, isChecked = false }: CartDetailProps) => {
       // Checked state changed
       const event = checked ? "elementChecked" : "elementUnchecked";
       emitter.emit(event, {
-        price: product.price * quantity,
+        price: props.getCardReponseDto.price * quantity,
         quantity,
+        id: props.getCardReponseDto.cartId,
+        productId: props.getCardReponseDto.productId
       });
     } else if (quantity !== prevQuantity) {
         console.log("quantity changed" , quantity - prevQuantity);
       if (checked) {
         emitter.emit("elementChecked", {
-          price: (quantity - prevQuantity) * product.price,
+          price: (quantity - prevQuantity) * props.getCardReponseDto.price,
           quantity: quantity - prevQuantity,
+          id: props.getCardReponseDto.cartId,
+          productId: props.getCardReponseDto.productId
         });
       }
     }
@@ -78,6 +81,18 @@ const CartDetail = ({ id, isChecked = false }: CartDetailProps) => {
     setQuantity((prevQuantity) => Math.max(prevQuantity + adjustment, 1));  
   };  
 
+  const handleDelete = () => {
+    const deleteProduct = async () => {
+      try {
+        await callApi(() => deleteCart([props.getCardReponseDto.cartId]));
+        emitter.emit("deletedCard")
+      } catch (error) {
+        console.error('Failed to delete product');
+      }
+    };
+    deleteProduct();
+  }
+
   return (
     <div className="flex justify-between items-center px-8 py-4 bg-white gap-6 border-y">
       <div className="flex-1 flex">
@@ -89,10 +104,10 @@ const CartDetail = ({ id, isChecked = false }: CartDetailProps) => {
           checked={checked}
         />
         <div className="flex gap-4">
-          <img src={product.image} alt="" className="w-20 h-20" />
+          <img src={props.getCardReponseDto.productImage} alt="" className="w-20 h-20" />
           <div className="flex flex-col justify-around">
             <p className="break-all max-h-8 text-ellipsis text-sm leading-4 overflow-hidden line-clamp-2">
-              {product.title}
+              {props.getCardReponseDto.productName}
             </p>
             <p className="border border-[#EE4D2D] px-1 w-44 text-[#EE4D2D] text-sm">
               Đổi trả miễn phí 15 ngày
@@ -101,7 +116,7 @@ const CartDetail = ({ id, isChecked = false }: CartDetailProps) => {
         </div>
       </div>
       <div className="flex flex-1 justify-between items-center text-[#888888]">
-        <div className="flex-1 text-center">đ{product.price}</div>
+        <div className="flex-1 text-center">đ{props.getCardReponseDto.price}</div>
         <div className="items-center flex flex-1">
           <button
             className="rounded-l-lg border h-8 w-8"
@@ -123,9 +138,9 @@ const CartDetail = ({ id, isChecked = false }: CartDetailProps) => {
           </button>
         </div>
         <div className="text-primary flex-1 text-center">
-          đ{product.price * quantity}
+          đ{props.getCardReponseDto.price * quantity}
         </div>
-        <div className="text-[#EE4D2D] flex-1 text-end">Xoa</div>
+        <button className="text-[#EE4D2D] flex-1 text-end" onClick={handleDelete}>Xoa</button>
       </div>
     </div>
   );
