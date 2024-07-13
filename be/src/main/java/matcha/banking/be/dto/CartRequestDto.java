@@ -3,8 +3,8 @@ package matcha.banking.be.dto;
 import lombok.Data;
 
 @Data
-public class CartItemDto {
-    private Long id;
+public class CartRequestDto {
+    private Integer userId;
     private Integer productId;
     private Integer quantity;
 }

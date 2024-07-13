@@ -26,14 +26,16 @@ public class SecurityConfigurer {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         auth -> auth
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/home/**").permitAll()
+                                .requestMatchers("/products/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sess ->
                         sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .cors(Customizer.withDefaults())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

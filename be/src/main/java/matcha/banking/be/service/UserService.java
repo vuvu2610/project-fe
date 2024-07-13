@@ -7,6 +7,7 @@ import matcha.banking.be.entity.UserEntity;
 import matcha.banking.be.util.JwtUtil;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,10 @@ public class UserService {
 
     public UserEntity getUserByEmail(String email) {
         return userDao.findByEmail(email).orElse(null);
+    }
+
+    public UserEntity getUserById(Integer id) {
+        return userDao.findById(id).orElseThrow(() -> new EmptyResultDataAccessException("User not found", 1));
     }
 
     public String getEmailfromToken(String token) {
