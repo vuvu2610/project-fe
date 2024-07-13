@@ -105,6 +105,7 @@ export interface GetCartReponseDto {
   productName: string;
   quantity: number;
   productId: number;
+  remainingQuantity: number;
 }
 
 export interface Cart {

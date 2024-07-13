@@ -36,6 +36,7 @@ public class CartController {
                 GetCartReponseDto getCartReponseDto = cartMapper.dtoToEntity(productEntity, cartEntity.getQuantity());
                 getCartReponseDto.setCartId(cartEntity.getId());
                 getCartReponseDto.setProductId(productEntity.getId());
+                getCartReponseDto.setRemainingQuantity(productEntity.getRemainingQuantity());
                 return getCartReponseDto;
             }).toList();
             return ResponseEntity.ok(getCartReponseDtos);
@@ -72,6 +73,8 @@ public class CartController {
             return ResponseEntity.ok().build();
         } catch (EmptyResultDataAccessException exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", exception.getMessage()));
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.badRequest().body(Map.of("error", exception.getMessage()));
         }
     }
 

@@ -57,8 +57,9 @@ const Navbar: FC = () => {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-[20px]">
               <div className="relative">
-                <Link to="/cart">
+                <Link to="/cart" className="relative">
                   <IoCartOutline className="w-7 h-7 mt-1" />
+                  <div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">99</div>
                 </Link>
               </div>
               {isLogin ? (<button className="hidden lg:block" onClick={logoutUser}>

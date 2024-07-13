@@ -2,13 +2,15 @@ import { Link } from 'react-router-dom';
 import StarRating from './StarRating';
 import { Product } from '../types/types';
 import routes from '../config/routes';
+import { useState } from 'react';
 
 interface ProductItemProps {
     product: Product;
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
-    
+    const [loaded, setLoaded] = useState(false);
+
     return (
         <div className="cursor-pointer overflow-hidden shadow p-4 rounded-[20px]">
 
@@ -16,8 +18,10 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
 
                 <img
                     src={product?.image}
+                    loading="lazy"
                     alt=""
-                    className="rounded-[20px] w-full hover:scale-[1.1] ease-in-out duration-300 h-[287px] object-cover"
+                    onLoad={() => setLoaded(true)}
+                    className={`rounded-[20px] w-full h-[287px] object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
                 />
             </Link>
 

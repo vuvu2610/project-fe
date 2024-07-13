@@ -24,13 +24,8 @@ public class CartService {
     private final UserDao userDao;
 
     public CartEntity addToCart(CartRequestDto cartRequestDto) {
-        cartDao.findByUserIdAndProductId(cartRequestDto.getUserId(), cartRequestDto.getProductId()).forEach(
-                cart -> {
-                    if (cart.getStatusCode() == 0) {
-                        throw new DuplicateKeyException("Product already in cart");
-                    }
-                }
-        );
+        CartEntity cartEntity = cartDao.findByUserIdAndProductId(cartRequestDto.getUserId(), cartRequestDto.getProductId()).stream()
+                .filter(cartEntity1 -> cartEntity1.getStatusCode() == 0).findFirst().orElse(new CartEntity());
 
         String errorMessage = inputCheck(cartRequestDto);
 
@@ -38,23 +33,24 @@ public class CartService {
             throw new IllegalArgumentException(errorMessage);
         }
 
-        CartEntity cartEntity = new CartEntity();
-        cartEntity.setUserId(cartRequestDto.getUserId());
-        cartEntity.setProductId(cartRequestDto.getProductId());
-        cartEntity.setQuantity(cartRequestDto.getQuantity());
-        cartEntity.setStatusCode(0);
-        cartEntity.setCreated(LocalDateTime.now());
-        cartEntity.setUpdated(LocalDateTime.now());
-
+        if (cartEntity.getId() != null) {
+            cartEntity.setQuantity(cartEntity.getQuantity() + cartRequestDto.getQuantity());
+            cartEntity.setUpdated(LocalDateTime.now());
+        } else {
+            cartEntity.setUserId(cartRequestDto.getUserId());
+            cartEntity.setProductId(cartRequestDto.getProductId());
+            cartEntity.setQuantity(cartRequestDto.getQuantity());
+            cartEntity.setStatusCode(0);
+            cartEntity.setCreated(LocalDateTime.now());
+            cartEntity.setUpdated(LocalDateTime.now());
+        }
         cartDao.save(cartEntity);
         return cartEntity;
     }
 
     public void deleteFromCart(List<Long> ids) {
         for (Long id : ids) {
-            cartDao.findById(id).orElseThrow(
-                    () -> new EmptyResultDataAccessException("Cart not found", 1)
-            );
+            cartDao.findById(id).orElseThrow(() -> new EmptyResultDataAccessException("Cart not found", 1));
         }
         cartDao.deleteAllById(ids);
 
@@ -64,14 +60,10 @@ public class CartService {
         List<CartEntity> cartEntities = new ArrayList<>();
         List<ProductEntity> productEntities = new ArrayList<>();
         for (CartRequestPayDto cartRequestPayDto : cartRequestPayDtos) {
-            CartEntity cartEntity = cartDao.findById(cartRequestPayDto.getId()).orElseThrow(
-                    () -> new EmptyResultDataAccessException("Cart not found", 1)
-            );
+            CartEntity cartEntity = cartDao.findById(cartRequestPayDto.getId()).orElseThrow(() -> new EmptyResultDataAccessException("Cart not found", 1));
 
-            ProductEntity productEntity = productDao.findById(cartEntity.getProductId()).orElseThrow(
-                    () -> new EmptyResultDataAccessException("Product not found", 1)
-            );
-            if (productEntity.getRemainingQuantity() < cartEntity.getQuantity()) {
+            ProductEntity productEntity = productDao.findById(cartEntity.getProductId()).orElseThrow(() -> new EmptyResultDataAccessException("Product not found", 1));
+            if (productEntity.getRemainingQuantity() < cartRequestPayDto.getQuantity()) {
                 throw new IllegalArgumentException("Product out of stock");
             }
             productEntity.setRemainingQuantity(productEntity.getRemainingQuantity() - cartRequestPayDto.getQuantity());
@@ -79,6 +71,7 @@ public class CartService {
             productEntity.setUpdatedAt(LocalDateTime.now());
 
             cartEntity.setStatusCode(1);
+            cartEntity.setQuantity(cartRequestPayDto.getQuantity());
             cartEntity.setUpdated(LocalDateTime.now());
 
             cartEntities.add(cartEntity);
@@ -96,9 +89,7 @@ public class CartService {
     }
 
     public CartEntity getCartById(Long id) {
-        return cartDao.findById(id).orElseThrow(
-                () -> new EmptyResultDataAccessException("Cart not found", 1)
-        );
+        return cartDao.findById(id).orElseThrow(() -> new EmptyResultDataAccessException("Cart not found", 1));
     }
 
     public String inputCheck(CartRequestDto cartRequestDto) {

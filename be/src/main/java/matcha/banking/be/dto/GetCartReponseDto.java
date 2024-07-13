@@ -10,4 +10,5 @@ public class GetCartReponseDto {
     private String productName;
     private Integer productId;
     private Integer quantity;
+    private Integer remainingQuantity;
 }

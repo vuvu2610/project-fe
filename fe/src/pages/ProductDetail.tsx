@@ -1,22 +1,31 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
-import routes from "../config/routes";
+import { useParams } from "react-router-dom";
 import Title from "../components/Title";
-import { FaStar } from "react-icons/fa";
+import { FaShippingFast, FaStar } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { reviews } from "../constants";
-import { GetUserInfoDto, Product } from "../types/types";
+import { Product } from "../types/types";
 import ProductItem from "../components/ProductItem";
-import {addToCart, callApi, getProduct, currentUser} from '../api/axios'
+import { addToCart, callApi, getProduct, currentUser } from '../api/axios'
 import { toast } from "react-toastify";
 import { getBestSeller } from "../api/homeApi";
+import { CiViewList } from "react-icons/ci";
+import { AiTwotoneLike } from "react-icons/ai";
+import { BsClockHistory } from "react-icons/bs";
+import Button from "../components/Button";
+import ActiveQuantity from "../components/ActiveQuantity";
+import StarRating from "../components/StarRating";
 
-interface Props {}
+interface Props { }
 
 function ProductDetail(_props: Props) {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const [quantity, setQuantity] = useState<number>(1);
+
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+  };
 
 
   const [data, setData] = useState<Product>();
@@ -30,21 +39,19 @@ function ProductDetail(_props: Props) {
       setTopSelling(topSellingProduct);
       window.scrollTo(0, 0);
     };
-  
+
     fetchProduct();
   }, [id]);
 
-  function handleAddToCart(){
+  function handleAddToCart() {
     const addCart = async () => {
       try {
         console.log(id)
-        await callApi(() => addToCart({productId: Number(id), userId: currentUser?.id, quantity: 1}));
+        await callApi(() => addToCart({ productId: Number(id), userId: currentUser?.id, quantity: quantity }));
         toast.success('Bạn đã thêm sản phẩm thành công!');
       } catch (error: any) {
         if (error.response.status === 403) {
           toast.error('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!');
-        } else if (error.response.status === 409) {
-          toast.error('Sản phẩm đã có trong giỏ hàng!');
         }
       }
     };
@@ -71,33 +78,41 @@ function ProductDetail(_props: Props) {
               {data?.name}
             </Title>
             <div className="flex gap-x-2 items-center mt-2">
-              {Array(5)
-                .fill(null)
-                .map((_, index) => {
-                  return (
-                    <FaStar
-                      key={index}
-                      color={
-                        data && index + 1 <= data.rating ? "#ffc633" : undefined
-                      }
-                    ></FaStar>
-                  );
-                })}
-              <span>{data && data.rating}/ 5</span>
+            <StarRating rating={data?.rating} />
+              <span>{data?.rating ?? 0}/ 5</span>
             </div>
             <span className="my-3 block  text-[32px]">
               {data?.price} VND
             </span>
-     
+            <p className="text-[#003b31] font-semibold pb-4">Số lượng còn trong kho: <span className="font-normal">{data?.remainingQuantity}</span></p>
+ 
             <p className="pb-4 border-b">{data?.description}</p>
+            <div className="flex items-center gap-4 pt-4">
+              <ActiveQuantity className="" onQuantityChange={handleQuantityChange} quantity={quantity}></ActiveQuantity>
+              <Button onClick={handleAddToCart} className="">
+                <strong className="">Thêm vào giỏ hàng</strong>
+              </Button>
+            </div>
 
-           
-            <button
-              onClick={() => handleAddToCart()}
-              className="px-[70px] py-4 bg-black text-white rounded-[62px] mt-4"
-            >
-              Add to card
-            </button>
+          </div>
+          <div className="border w-64 rounded-md flex flex-col gap-3 p-2 text-sm">
+            <div className="uppercase text-[#003b31] text-lg text-center">Chăm sóc khách hàng</div>
+            <div className="flex border-t py-1 justify-center items-center gap-2">
+              <CiViewList size={60} color="#003b31" />
+              <p>Đảm bảo sản phẩm <span className="font-semibold">đạt chuẩn ATVSTP, tươi ngon</span></p>
+            </div>
+            <div className="flex border-t py-1 justify-center items-center gap-2">
+              <AiTwotoneLike size={60} color="#003b31" />
+              <p>Vị ngon tinh tế, mang đúng đặc trưng vùng miền</p>
+            </div>
+            <div className="flex border-t py-1 justify-center items-center gap-2">
+              <FaShippingFast size={60} color="#003b31" />
+              <p><span className="font-semibold">Miễn phí </span>vận chuyển cho đơn hàng từ 350.000đ</p>
+            </div>
+            <div className="flex border-t py-1 justify-center items-center gap-2">
+              <BsClockHistory size={40} color="#003b31" />
+              <p>Giao hàng nhanh gọn trong 3h</p>
+            </div>
           </div>
         </div>
 
@@ -108,9 +123,9 @@ function ProductDetail(_props: Props) {
               <h3 className=" text-xl">All Reviews</h3>
               <span>(5)</span>
             </div>
-            <button className="block py-3 px-5 bg-black text-white rounded-[62px]">
+            <Button>
               Write a Review
-            </button>
+            </Button>
           </div>
 
           <Swiper
@@ -153,16 +168,16 @@ function ProductDetail(_props: Props) {
           </Swiper>
         </div>
       </div>
-          
+
       {/* Top selling */}
       <div className="mt-[60px] wrapper">
-      <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Top Selling</Title>
-      <ul className="flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
-          {topSelling.slice(0,12).map((product, index) => (
-            <ProductItem product={product} key={index}/>
+        <Title className="text-center text-[32px] lg:text-[40px] mb-[64px] uppercase">Top Selling</Title>
+        <ul className="flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
+          {topSelling.slice(0, 12).map((product, index) => (
+            <ProductItem product={product} key={index} />
           ))}
         </ul>
-        </div>
+      </div>
     </div>
   );
 }
