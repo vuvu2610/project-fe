@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
+  cartCount: 0,
 };
 
 const appSlice = createSlice({
@@ -14,9 +15,12 @@ const appSlice = createSlice({
     fetchEnd: (state) => {
       state.loading = false;
     },
+    updateCartCount: (state, action) => {
+      state.cartCount = action.payload;
+    },
   },
 });
 
-export const { fetchStart, fetchEnd } = appSlice.actions;
+export const { fetchStart, fetchEnd, updateCartCount} = appSlice.actions;
 
 export default appSlice.reducer;

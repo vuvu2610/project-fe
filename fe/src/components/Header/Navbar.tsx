@@ -1,17 +1,49 @@
 import { useState, useEffect, useRef, FC } from "react";
 import { FaXmark } from "react-icons/fa6";
-import { FaBars } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { AiOutlineLogin } from "react-icons/ai";
 import navItems from "../../api/navItems.json";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {logoutUser} from "../../api/axios"
 import DynamicPlaceholder from "./DynamicPlaceholder";
+import { useDispatch, useSelector } from "react-redux";
+import routes from "../../config/routes";
+import ReactSelect from "react-select";
+import { changeLang } from "../../redux/persistSlice";
+import { Menu, Transition } from "@headlessui/react";
+import { FaAngleDown } from "react-icons/fa6";
+import { Fragment } from "react";
+import { FaUserLarge } from "react-icons/fa6";
+import { FaBars } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+
+interface NavItem {
+  title: string;
+  to: string;
+}
+
+interface State {
+  auth: {
+    user: any;
+  };
+  allCart: {
+    cartsValue: any[];
+  };
+}
 
 const Navbar: FC = () => {
+  const user = useSelector((state: State) => state.auth.user);
+  const cartCount = useSelector((state: any) => state.app.cartCount); 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const isLogin = localStorage.getItem("user");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+  const [langOptions] = useState([
+    { value: "vi", label: "Tiếng việt" },
+    { value: "en", label: "English" },
+  ]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -49,11 +81,37 @@ const Navbar: FC = () => {
           <DynamicPlaceholder />
 
           <ul className="hidden lg:flex space-x-12">
-            {navItems.map(({ title, to }) => (
-              <NavLink to={to} className={activeNavLink} key={to}>
-                {title}
-              </NavLink>
-            ))}
+            <NavLink
+              to={routes.home}
+              className={activeNavLink}
+              key={routes.home}
+            >
+              {t("nav.home")}
+            </NavLink>
+
+            <NavLink
+              to={routes.product}
+              className={activeNavLink}
+              key={routes.product}
+            >
+              {t("nav.products")}
+            </NavLink>
+
+            <NavLink
+              to={routes.contact}
+              className={activeNavLink}
+              key={routes.contact}
+            >
+              {t("nav.contact")}
+            </NavLink>
+
+            <NavLink
+              to={routes.live}
+              className={activeNavLink}
+              key={routes.live}
+            >
+              {t("nav.live")}
+            </NavLink>
           </ul>
 
           <div className="flex items-center gap-4">
@@ -61,7 +119,7 @@ const Navbar: FC = () => {
               <div className="relative">
                 <Link to="/cart" className="relative">
                   <IoCartOutline className="w-7 h-7 mt-1" />
-                  <div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">99</div>
+                  <div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">{cartCount}</div>
                 </Link>
               </div>
               {isLogin ? (<button className="hidden lg:block" onClick={logoutUser}>
@@ -69,8 +127,13 @@ const Navbar: FC = () => {
               </button>
               ) : (<Link to={"/login"} className="hidden lg:block" >
                 Login <AiOutlineLogin className="w-6 h-6 inline-block" />
-              </Link>
-              )}
+              </Link>)}
+              <ReactSelect
+                options={langOptions}
+                isSearchable={false}
+                defaultValue={langOptions.find(option => option.value === i18n.language)}
+                onChange={(option) => i18n.changeLanguage(option?.value)}
+              />
             </div>
 
             {/* Mobile menu */}

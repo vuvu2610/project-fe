@@ -7,6 +7,7 @@ import ActiveQuantity from "../../components/ActiveQuantity";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import routes from "../../config/routes";
+import Button from "../../components/Button";
 
 interface CartDetailProps {
   getCardReponseDto: GetCartReponseDto;

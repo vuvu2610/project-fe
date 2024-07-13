@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "contact": "Contact",
+    "about-us": "About us",
+    "live": "Live",
+    "login": "Login"
+  },
+  "title": {
+    "new-product": "New products",
+    "best-selling-seed": "Best selling seeds",
+    "type-seed": "Varieties of seedlings",
+    "comment": "Comments"
+  },
+  "button": {
+    "buy": "Buy now",
+    "read-more": "View more"
+  }
+}

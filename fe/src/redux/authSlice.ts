@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AuthState } from "./state";
 
-
-
 const initialState: AuthState = {
   currentUser: null,
   cart: null

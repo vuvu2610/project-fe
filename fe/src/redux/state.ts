@@ -7,4 +7,8 @@ interface RootState {
     auth: AuthState;
 }
 
-export type { RootState, AuthState};
+interface PersistState {
+    lang: "en"
+}
+
+export type { RootState, AuthState, PersistState};

@@ -1,10 +1,12 @@
-import Promotion from "../../assets/images/promotion.png";
 import CartDetail from "./CartDetail";
 import { CardInfo, GetCartReponseDto, GetUserInfoDto } from "../../types/types";
 import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
 import { useEffect, useState } from "react";
 import { callApi, getCart, getCartByUser, currentUser, payCart } from "../../api/axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button";
+import routes from "../../config/routes";
 function CartPage() {
   const [products, setProducts] = useState<GetCartReponseDto[]>([]);
   const [totalCard, setTotalCard] = useState<number>(0);
@@ -12,6 +14,7 @@ function CartPage() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isRerender, setIsRerender] = useState<boolean>(false);
   const [listCartPay, setListCartPay] = useState<CardInfo[]>([]);
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isCheckedNew = e.target.checked;
@@ -81,6 +84,7 @@ function CartPage() {
         setTotalCard(0);
         setTotalPrice(0);
         setIsChecked(false);
+        navigate(routes.thank);
       } catch (error) {
         toast.error("Số lượng mua vượt quá số lượng trong kho");
       }
@@ -124,9 +128,9 @@ function CartPage() {
               Tổng thanh toán ({totalCard} Sản phẩm):{" "}
               <span className="text-[#EE4D2D]">đ{totalPrice}</span>
             </div>
-            <button className={`bg-[#EE4D2D] text-white px-10 py-2  ${products.length !== 0 ? "hover:opacity-80" : "select-none opacity-30 cursor-not-allowed"}`} onClick={handleBuyProduct}>
+            <Button onClick={handleBuyProduct} className={`${products.length !== 0 ? "" : "select-none cursor-not-allowed"}`}>
               Mua hàng
-            </button>
+            </Button>
           </div>
         </div>
       </div>

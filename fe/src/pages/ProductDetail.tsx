@@ -7,7 +7,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { reviews } from "../constants";
 import { Product } from "../types/types";
 import ProductItem from "../components/ProductItem";
-import { addToCart, callApi, getProduct, currentUser } from '../api/axios'
+import { addToCart, callApi, getProduct, currentUser, getCartByUser } from '../api/axios'
 import { toast } from "react-toastify";
 import { getBestSeller } from "../api/homeApi";
 import { CiViewList } from "react-icons/ci";
@@ -16,12 +16,16 @@ import { BsClockHistory } from "react-icons/bs";
 import Button from "../components/Button";
 import ActiveQuantity from "../components/ActiveQuantity";
 import StarRating from "../components/StarRating";
+import { useDispatch } from "react-redux";
+import { updateCartCount } from '../redux/appSlice';
 
 interface Props { }
 
 function ProductDetail(_props: Props) {
   const { id } = useParams();
   const [quantity, setQuantity] = useState<number>(1);
+
+  const dispatch = useDispatch();
 
   const handleQuantityChange = (newQuantity: number) => {
     setQuantity(newQuantity);
@@ -48,6 +52,8 @@ function ProductDetail(_props: Props) {
       try {
         console.log(id)
         await callApi(() => addToCart({ productId: Number(id), userId: currentUser?.id, quantity: quantity }));
+        const number = await callApi(() => getCartByUser(currentUser?.id));
+        dispatch(updateCartCount(number.length));
         toast.success('Bạn đã thêm sản phẩm thành công!');
       } catch (error: any) {
         if (error.response.status === 403) {
