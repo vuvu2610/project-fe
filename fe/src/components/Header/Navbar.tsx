@@ -6,6 +6,7 @@ import { AiOutlineLogin } from "react-icons/ai";
 import navItems from "../../api/navItems.json";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {logoutUser} from "../../api/axios"
+import DynamicPlaceholder from "./DynamicPlaceholder";
 
 const Navbar: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,6 +46,7 @@ const Navbar: FC = () => {
           <Link to="/" className="font-[IntegralCf] text-[24px]">
             SEEDLING
           </Link>
+          <DynamicPlaceholder />
 
           <ul className="hidden lg:flex space-x-12">
             {navItems.map(({ title, to }) => (
