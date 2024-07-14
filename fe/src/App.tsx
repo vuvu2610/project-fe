@@ -13,7 +13,6 @@ function App() {
   const user = useSelector((state: RootState) => state.auth.currentUser);
   const loading = useSelector((state: RootState) => state.app.loading);
  
-  
   return (
     <Router>
       <Routes>

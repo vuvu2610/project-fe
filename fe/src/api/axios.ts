@@ -1,8 +1,11 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { getDispatch } from "../utils/helper";
 import { fetchEnd, fetchStart } from "../redux/appSlice";
 
-import { Login, SignUpInfo, Cart, CartItem, CartRequestDto, GetUserInfoDto, CardInfo } from "../types/types";
+import { Login, SignUpInfo, Cart, CartItem, ReviewRequestDto, CartRequestDto, GetUserInfoDto, CardInfo } from "../types/types";
+import { Dispatch } from "redux";
+import { logOutSuccess, loginSuccess } from "../redux/authSlice";
+import Swal from "sweetalert2";
 
 export const baseAxios = axios.create({
   baseURL: process.env.REACT_APP_API_URL || "http://localhost:8081/api/v1/",
@@ -25,10 +28,12 @@ export const currentUser: GetUserInfoDto = localStorage.getItem("user") ? JSON.p
 
 export const loginUser = async (loginProp: Login) => {
   try {
-    const res = await baseAxios.post("auth/login", loginProp);
-    localStorage.setItem("user", JSON.stringify(res.data));
+    const res: GetUserInfoDto = (await baseAxios.post("auth/login", loginProp)).data;
+    console.log(res);
+    localStorage.setItem("user", JSON.stringify(res));
+    dispatch(loginSuccess(res));
     navigate("/");
-    return res.data;
+    return res;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -38,11 +43,12 @@ export const logoutUser = async () => {
   try {  
       await baseAxios.post('/auth/logout');  
       localStorage.removeItem('user');  
+      dispatch(logOutSuccess());
       navigate("/login");
   } catch (error) {  
     return Promise.reject(error);
-  }  
-};  
+  }
+};
 
 export const getCart = async (userId: number): Promise<Cart> => {
   try {
@@ -50,7 +56,6 @@ export const getCart = async (userId: number): Promise<Cart> => {
     return res.data;
   } catch (error) {
     return Promise.reject(error);
-    throw error;
   }
 };
 
@@ -84,9 +89,9 @@ export const updateCartItem = async (
   }
 };
 
-export const getAllProduct = async () => {
+export const getAllProduct = async (name: string|null) => {
   try {
-    const res = await baseAxios.get("products");
+    const res = await baseAxios.get("products", {params: {name}});
     return res.data;
   } catch (error) {
     return Promise.reject(error);
@@ -102,6 +107,45 @@ export const getProduct = async (id : number) => {
   }
 };
 
+export const getReviewsByProductId = async (productId: number) => {
+    try {
+        const res = await baseAxios.get(`review/${productId}`);
+        return res.data;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+
+export const registerReview = async (review: ReviewRequestDto) => {
+    try {
+        const res = await baseAxios.post(`review`, review);
+        return res.data;
+    } catch (error:any) {
+        Swal.fire({
+            title: "Error",
+            text: error.response.data.error,
+            icon: "error",
+            confirmButtonText: "Okay",
+        })
+    }
+};
+
+export const editReview = async (review:any) => {
+    console.log(review);
+
+    try {
+        const res = await baseAxios.put(`review`, review);
+        return res.data;
+    } catch (error:any) {
+        Swal.fire({
+            title: "Error",
+            text: error.response.data.error,
+            icon: "error",
+            confirmButtonText: "Okay",
+        })
+    }
+};
+
 export const addToCart = async (cartRequestDto: CartRequestDto) => {
   try {
     const res = await baseAxios.post("carts", cartRequestDto);
@@ -111,7 +155,7 @@ export const addToCart = async (cartRequestDto: CartRequestDto) => {
   }
 };
 
-export const getCartByUser = async (id : number) => {
+export const getCartByUser = async (id? : number) => {
   try {
     const res = await baseAxios.get(`carts/user/${id}`);
     return res.data;
@@ -138,7 +182,6 @@ export const payCart = async (cartList : CardInfo[]) => {
   }
 };
 
-
 export const callApi = async (callBack: any) => {
   try {
     dispatch(fetchStart());
@@ -152,12 +195,9 @@ export const callApi = async (callBack: any) => {
 };
 
 export const registerNewUser = async(user: SignUpInfo) => {
-
     try {
         const res = await baseAxios.post('/auth/register',user);
     } catch (error) {
         console.log(error);
     }
-
-     
 }

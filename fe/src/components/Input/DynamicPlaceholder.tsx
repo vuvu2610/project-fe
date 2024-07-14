@@ -1,7 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import routes from "../../config/routes";
 
 const DynamicPlaceholder: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -10,9 +8,6 @@ const DynamicPlaceholder: React.FC = () => {
   const [isAdding, setIsAdding] = useState<boolean>(true);
   const [index, setIndex] = useState<number>(0);
   const checkInput = useRef<HTMLInputElement>(null);
-  const [inputValue, setInputValue] = useState<string>(""); 
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const updatePlaceholder = () => {
@@ -38,34 +33,26 @@ const DynamicPlaceholder: React.FC = () => {
     return () => clearInterval(intervalId);
   }, [index, isAdding, originPlaceHolder]);
 
-  const handleSearch = () => {
-    setInputValue(""); 
-    navigate(routes.product + "?name=" + inputRef.current?.value);
-  }
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {  
-    if (event.key === 'Enter') {  
-      handleSearch();  
-    }  
-  };
-
   return (
     <>
       <input ref={checkInput} hidden type="radio" id="search-check" />
-      <div className="flex-1 flex items-center bg-transparent transition-all duration-500 ease-in-out border-gray-200 border rounded-full p-3">
+      <div className="flex items-center bg-transparent transition-all duration-500 ease-in-out border-gray-200 border rounded-full p-3">
         <input
           ref={inputRef}
           placeholder={placeHolder}
-          onKeyPress={handleKeyPress} 
-          value={inputValue}  
-          onChange={(e) => setInputValue(e.target.value)} 
-          className="outline-none transition-all duration-500 ease-in-out px-2 flex-1"
+          className="outline-none transition-all duration-500 ease-in-out"
           type="text"
         />
         <label htmlFor="search-check" className="cursor-pointer">
           <FaSearch
             className=""
-            onClick={handleSearch}
+            onClick={() => {
+              setTimeout(() => {
+                if (inputRef.current) {
+                  inputRef.current.focus();
+                }
+              }, 10);
+            }}
           />
         </label>
       </div>

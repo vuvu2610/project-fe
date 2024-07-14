@@ -6,6 +6,7 @@ import matcha.banking.be.dao.ProductDao;
 import matcha.banking.be.dao.ReviewDao;
 import matcha.banking.be.dao.UserDao;
 import matcha.banking.be.dto.CartRequestDto;
+import matcha.banking.be.dto.EditReviewDto;
 import matcha.banking.be.dto.ReviewRequestDto;
 import matcha.banking.be.entity.CartEntity;
 import matcha.banking.be.entity.ReviewEntity;
@@ -26,8 +27,14 @@ public class ReviewService {
         return reviewDao.findAll();
     }
 
+    public List<ReviewEntity> getReviewsByProductId(Integer productId) {
+        return reviewDao.findByProductId(productId);
+    }
+
+
     public ReviewEntity registerReview(ReviewRequestDto reviewRequestDto) {
-        CartEntity cartEntity = cartService.getAllCartByUserId(reviewRequestDto.getUserId()).stream()
+
+        CartEntity cartEntity = cartService.getAllValidCartByUserId(reviewRequestDto.getUserId()).stream()
                 .filter(cart -> cart.getProductId().equals(reviewRequestDto.getProductId())).findFirst().orElseThrow(() -> new EmptyResultDataAccessException("You must buy it before review", 1));
 
         if (cartEntity.getStatusCode() == 0) {
@@ -43,6 +50,13 @@ public class ReviewService {
         reviewEntity.setContent(reviewRequestDto.getContent());
         reviewEntity.setCreated(LocalDateTime.now());
         reviewEntity.setUpdated(LocalDateTime.now());
+        return reviewDao.save(reviewEntity);
+    }
+
+    public ReviewEntity editReview(EditReviewDto editReviewDto) {
+        ReviewEntity reviewEntity = reviewDao.findById(editReviewDto.getId()).orElseThrow(() -> new EmptyResultDataAccessException("Review not found", 1));
+        reviewEntity.setContent(editReviewDto.getContent());
+        reviewEntity.setRating(editReviewDto.getRating());
         return reviewDao.save(reviewEntity);
     }
 }

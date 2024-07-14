@@ -1,6 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { AuthState } from "./state";
-
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { GetUserInfoDto } from "../types/types";
+interface AuthState {
+  currentUser: GetUserInfoDto | null;
+  cart: any;
+}
 const initialState: AuthState = {
   currentUser: null,
   cart: null
@@ -10,16 +13,15 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginSuccess: (state, action) => {
+    loginSuccess: (state, action: PayloadAction<GetUserInfoDto>) => {
       state.currentUser = {
-        ...action.payload.data,
-        token: action.payload.token,
+        ...action.payload
       };
     },
 
     registerSuccess: (state, action) => {},
 
-    logOutSuccess: (state, action) => {
+    logOutSuccess: (state) => {
       state.currentUser = null;
     },
 

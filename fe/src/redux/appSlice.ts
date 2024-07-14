@@ -1,9 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {CardInfo} from '../types/types'
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { CardInfo } from "../types/types";
 
 const initialState = {
   loading: false,
-  cartCount: 0,
+  cartNumber: 0,
   listCartPay: [{price: 0, quantity: 0, id: 1, productId: 0}]
 };
 
@@ -17,15 +17,15 @@ const appSlice = createSlice({
     fetchEnd: (state) => {
       state.loading = false;
     },
-    updateCartCount: (state, action) => {
-      state.cartCount = action.payload;
+    updateCartNumber: (state, action: PayloadAction<number>) => {
+      state.cartNumber = action.payload;
     },
     addListCartPay: (state, action: PayloadAction<CardInfo[]> ) => {
       state.listCartPay = action.payload;
-    },
+    }
   },
 });
 
-export const { fetchStart, fetchEnd, updateCartCount, addListCartPay} = appSlice.actions;
+export const { fetchStart, fetchEnd, updateCartNumber, addListCartPay} = appSlice.actions;
 
 export default appSlice.reducer;

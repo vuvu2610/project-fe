@@ -1,5 +1,4 @@
 import StarRating from './StarRating';
-import Check from '../assets/images/check.png';
 
 interface CardProps {
     review: {
@@ -16,7 +15,7 @@ function Card({ review }: CardProps) {
             <StarRating rating={review?.rating} />
             <div className="flex my-5 items-center gap-2">
                 <span>{review?.name}</span>
-                <img src={Check} alt="" className="w-6 h-6 object-cover" />
+                <img  alt="" className="w-6 h-6 object-cover" />
             </div>
             <p className="line-clamp-4">{review?.review}</p>
         </div>

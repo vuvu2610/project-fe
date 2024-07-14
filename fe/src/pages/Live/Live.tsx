@@ -4,9 +4,9 @@ import { MeetingConsumer, MeetingProvider } from "@videosdk.live/react-sdk";
 import JoinScreen from "./JoinScreen";
 import Container from "./Container";
 import { useSelector } from "react-redux";
-import { AuthState, RootState } from "../../redux/state";
 import Sidebar from "./Sidebar";
 import { useLocation } from "react-router-dom";
+import { RootState } from "../../redux/store";
 
 interface Props {}
 
