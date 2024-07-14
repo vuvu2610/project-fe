@@ -77,6 +77,7 @@ export interface ChatHistory {
 export interface CardInfo {
   price: number;
   quantity: number;
+  name: string
   id: number;
   productId: number;
 }

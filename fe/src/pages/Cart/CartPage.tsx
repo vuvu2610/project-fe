@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import routes from "../../config/routes";
+import { useDispatch } from "react-redux";
+import { addListCartPay } from "../../redux/appSlice";
 function CartPage() {
   const [products, setProducts] = useState<GetCartReponseDto[]>([]);
   const [totalCard, setTotalCard] = useState<number>(0);
@@ -15,6 +17,7 @@ function CartPage() {
   const [isRerender, setIsRerender] = useState<boolean>(false);
   const [listCartPay, setListCartPay] = useState<CardInfo[]>([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isCheckedNew = e.target.checked;
@@ -84,6 +87,8 @@ function CartPage() {
         setTotalCard(0);
         setTotalPrice(0);
         setIsChecked(false);
+        console.log(listCartPay)
+        dispatch(addListCartPay(listCartPay))
         navigate(routes.thank);
       } catch (error) {
         toast.error("Số lượng mua vượt quá số lượng trong kho");
