@@ -1,42 +1,24 @@
-import { useState, useEffect, useRef, FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { AiOutlineLogin } from "react-icons/ai";
+import { FaBars } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
-import { AiOutlineLogin } from "react-icons/ai";
-import navItems from "../../api/navItems.json";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import {logoutUser} from "../../api/axios"
-import DynamicPlaceholder from "./DynamicPlaceholder";
 import { useDispatch, useSelector } from "react-redux";
-import routes from "../../config/routes";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ReactSelect from "react-select";
-import { changeLang } from "../../redux/persistSlice";
-import { Menu, Transition } from "@headlessui/react";
-import { FaAngleDown } from "react-icons/fa6";
-import { Fragment } from "react";
-import { FaUserLarge } from "react-icons/fa6";
-import { FaBars } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
-
-interface NavItem {
-  title: string;
-  to: string;
-}
-
-interface State {
-  auth: {
-    user: any;
-  };
-  allCart: {
-    cartsValue: any[];
-  };
-}
+import { callApi, logoutUser } from "../../api/axios";
+import navItems from "../../api/navItems.json";
+import routes from "../../config/routes";
+import { RootState } from "../../redux/store";
+import DynamicPlaceholder from "./DynamicPlaceholder";
+import { logOutSuccess } from "../../redux/authSlice";
 
 const Navbar: FC = () => {
-  const user = useSelector((state: State) => state.auth.user);
-  const cartCount = useSelector((state: any) => state.app.cartCount); 
+  const user = useSelector((state: RootState) => state.auth.user);
+  const cartCount = useSelector((state: any) => state.app.cartCount);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
-  const isLogin = localStorage.getItem("user");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
@@ -52,6 +34,14 @@ const Navbar: FC = () => {
   const activeNavLink = ({ isActive }: { isActive: boolean }) => {
     return isActive ? "text-base  underline" : "text-base ";
   };
+
+  const handleLogOut = async() => {
+    await callApi(logoutUser).then(() => {
+      dispatch(logOutSuccess());
+      navigate(routes.home)
+    });
+    
+  }
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -119,19 +109,26 @@ const Navbar: FC = () => {
               <div className="relative">
                 <Link to="/cart" className="relative">
                   <IoCartOutline className="w-7 h-7 mt-1" />
-                  <div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">{cartCount}</div>
+                  <div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">
+                    {cartCount}
+                  </div>
                 </Link>
               </div>
-              {isLogin ? (<button className="hidden lg:block" onClick={logoutUser}>
-                Logout <AiOutlineLogin className="w-6 h-6 inline-block" />
-              </button>
-              ) : (<Link to={"/login"} className="hidden lg:block" >
-                Login <AiOutlineLogin className="w-6 h-6 inline-block" />
-              </Link>)}
+              {user ? (
+                <button className="hidden lg:block" onClick={() => handleLogOut()}>
+                  Logout <AiOutlineLogin className="w-6 h-6 inline-block" />
+                </button>
+              ) : (
+                <Link to={"/login"} className="hidden lg:block">
+                  Login <AiOutlineLogin className="w-6 h-6 inline-block" />
+                </Link>
+              )}
               <ReactSelect
                 options={langOptions}
                 isSearchable={false}
-                defaultValue={langOptions.find(option => option.value === i18n.language)}
+                defaultValue={langOptions.find(
+                  (option) => option.value === i18n.language
+                )}
                 onChange={(option) => i18n.changeLanguage(option?.value)}
               />
             </div>

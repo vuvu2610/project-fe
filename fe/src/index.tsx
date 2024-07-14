@@ -5,14 +5,18 @@ import "./index.css";
 import { persistor, store } from "./redux/store";
 import "./i18n";
 import { PersistGate } from "redux-persist/integration/react";
+import { Suspense } from "react";
+import Loading from "./components/Loading/Loading";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Provider store={store}>
-    {/* <PersistGate loading={null} persistor={persistor}> */}
-      <App />
-    {/* </PersistGate> */}
-  </Provider>
+  <Suspense fallback={<Loading />}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </Suspense>
 );

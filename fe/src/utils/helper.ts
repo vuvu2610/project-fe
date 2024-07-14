@@ -20,4 +20,10 @@ export function formatAMPM(date: Date): string {
   return `${hours}:${minutesStr} ${ampm}`;
 }
 
+export function convertLocalDateTimeToDate(updated: [number, number, number, number, number, number, number]): Date {
+  const [year, month, day, hours, minutes, seconds, milliseconds] = updated;
+  // Month in JavaScript Date object is 0-based, so subtract 1 from month
+  return new Date(year, month - 1, day, hours, minutes, seconds, milliseconds);
+}
+
 export const getDispatch = () => store.dispatch;

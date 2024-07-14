@@ -4,9 +4,9 @@ import { MeetingConsumer, MeetingProvider } from "@videosdk.live/react-sdk";
 import JoinScreen from "./JoinScreen";
 import Container from "./Container";
 import { useSelector } from "react-redux";
-import { AuthState, RootState } from "../../redux/state";
 import Sidebar from "./Sidebar";
 import { useLocation } from "react-router-dom";
+import { RootState } from "../../redux/store";
 
 interface Props {}
 
@@ -15,7 +15,7 @@ const Live: React.FC<Props> = () => {
   const [mode, setMode] = useState<string>("CONFERENCE");
   const [micOn, setMicOn] = useState(true);
   const [camOn, setCamOn] = useState(true);
-  const user = useSelector((state: RootState) => state.auth.currentUser);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const getMeetingAndToken = async (id: string | null) => {
     const meetingId = id == null ? await createMeeting() : id;

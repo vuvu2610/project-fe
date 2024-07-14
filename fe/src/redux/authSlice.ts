@@ -1,9 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AuthState } from "./state";
+import { GetUserInfoDto } from "../types/types";
+
+interface AuthState {
+  user: GetUserInfoDto | null;
+  cart: any;
+}
 
 const initialState: AuthState = {
-  currentUser: null,
-  cart: null
+  user: null,
+  cart: null,
 };
 
 const authSlice = createSlice({
@@ -11,21 +16,20 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
-      state.currentUser = {
-        ...action.payload.data,
-        token: action.payload.token,
+      state.user = {
+        ...action.payload,
       };
     },
 
     registerSuccess: (state, action) => {},
 
-    logOutSuccess: (state, action) => {
-      state.currentUser = null;
+    logOutSuccess: (state) => {
+      state.user = null;
     },
 
     updateUserSuccess: (state, action) => {
-      state.currentUser = {
-        ...state.currentUser,
+      state.user = {
+        ...state.user,
         ...action.payload,
       };
     },

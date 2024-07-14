@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import matcha.banking.be.filter.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -32,6 +33,7 @@ public class SecurityConfigurer {
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/home/**").permitAll()
                                 .requestMatchers("/products/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/review/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sess ->

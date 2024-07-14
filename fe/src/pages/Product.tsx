@@ -1,32 +1,45 @@
-import {useEffect, useImperativeHandle, useMemo, useRef, useState} from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from "react";
 import { FaChevronRight } from "react-icons/fa";
 import ReactSelect, { SelectInstance } from "react-select";
-// import listProduct from "../api/product.json";
-import Pagianate from "../components/PagianateNavBar/Paginate";
+import { callApi, getAllProduct } from "../api/axios";
+import Paginate from "../components/PagianateNavBar/Paginate";
 import ProductItem from "../components/ProductItem";
 import { Product } from "../types/types";
-import {callApi, getAllProduct} from '../api/axios'
 
 function ProductPage() {
   const [page, setPage] = useState(0);
   const numItemsOfPage = 12;
 
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
 
-  const filterCurrentProducts = useMemo(() => {
-    // return listProduct.filter((_, index) => {
-    //   return (
-    //     index >= page * numItemsOfPage && index < (page + 1) * numItemsOfPage
-    //   );
-    // });
+  const fetchAllProducts = useCallback(() => {
+    callApi(getAllProduct).then((res) => {
+      setAllProducts(res);
+    });
+  }, []);
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, [fetchAllProducts]);
+
+  const filterCurrentProducts = useCallback(() => {
     const startIndex = page * numItemsOfPage;
     const endIndex = (page + 1) * numItemsOfPage;
+    setCurrentProducts(allProducts.slice(startIndex, endIndex));
+  }, [page, allProducts]);
 
-    const slicedProducts = currentProducts.slice(startIndex, endIndex);
-    console.log("Sliced Products:", slicedProducts);
-
-    return slicedProducts;
-  }, [page]);
+  useEffect(() => {
+    if (allProducts.length > 0) {
+      filterCurrentProducts();
+      window.scrollTo(0, 0);
+    }
+  }, [page, allProducts, filterCurrentProducts]);
 
   const [sortOption] = useState([
     { value: 0, label: "Mặc định" },
@@ -35,49 +48,34 @@ function ProductPage() {
     { value: 3, label: "Tên: A to Z" },
     { value: 4, label: "Tên: Z to A" },
   ]);
+
   const selectRef = useRef<SelectInstance<any>>(null);
 
-  useImperativeHandle(selectRef, () => selectRef.current!, []);
-
   useEffect(() => {
-    window.scrollTo(0, 0);
-
-    setCurrentProducts(filterCurrentProducts);
     selectRef.current?.selectOption(sortOption[0]);
-  }, [page]);
-
-  useEffect(() => {
-    callApi(() => getAllProduct()).then((res) => {
-      setCurrentProducts(res);
-    });
   }, []);
 
   const handleSort = (value: number) => {
+    const sortedProducts = [...allProducts];
     switch (value) {
       case 1:
-        setCurrentProducts((prev) => [
-          ...prev.sort((a, b) => a.price - b.price),
-        ]);
+        sortedProducts.sort((a, b) => a.price - b.price);
         break;
       case 2:
-        setCurrentProducts((prev) => [
-          ...prev.sort((a, b) => b.price - a.price),
-        ]);
+        sortedProducts.sort((a, b) => b.price - a.price);
         break;
       case 3:
-        setCurrentProducts((prev) => [
-          ...prev.sort((a, b) => a.name.localeCompare(b.name)),
-        ]);
+        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
         break;
       case 4:
-        setCurrentProducts((prev) => [
-          ...prev.sort((a, b) => b.name.localeCompare(a.name)),
-        ]);
+        sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
         break;
       default:
-        setCurrentProducts((prev) => [...prev.sort((a, b) => 0)]);
+        // No sorting
         break;
     }
+    setAllProducts(sortedProducts);
+    setPage(0); // Reset to first page after sorting
   };
 
   return (
@@ -106,13 +104,12 @@ function ProductPage() {
               <ProductItem product={prod} key={index} />
             ))}
           </ul>
-          <Pagianate
+          <Paginate
             onPageChange={(pageNumber) => {
               setPage(pageNumber);
-              console.log(pageNumber);
             }}
             numberItemOnPage={numItemsOfPage}
-            itemsLength={currentProducts.length}
+            itemsLength={allProducts.length}
           />
         </div>
       </div>
