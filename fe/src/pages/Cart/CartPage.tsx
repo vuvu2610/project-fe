@@ -9,6 +9,8 @@ import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
 import { RootState } from "../../redux/store";
 import { CardInfo, GetCartReponseDto } from "../../types/types";
 import CartDetail from "./CartDetail";
+import { useDispatch } from "react-redux";
+import { addListCartPay } from "../../redux/appSlice";
 function CartPage() {
   const [products, setProducts] = useState<GetCartReponseDto[]>([]);
   const [totalCard, setTotalCard] = useState<number>(0);
@@ -18,6 +20,7 @@ function CartPage() {
   const [listCartPay, setListCartPay] = useState<CardInfo[]>([]);
   const user = useSelector((state: RootState) =>  state.auth.currentUser)
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isCheckedNew = e.target.checked;
@@ -85,6 +88,7 @@ function CartPage() {
         setTotalCard(0);
         setTotalPrice(0);
         setIsChecked(false);
+        dispatch(addListCartPay(listCartPay))
         navigate(routes.thank);
         emitter.emit("updateCartNumber");
       } catch (error) {
