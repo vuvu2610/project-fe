@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { getDispatch } from "../utils/helper";
 import { fetchEnd, fetchStart } from "../redux/appSlice";
 
+
 import {
   Login,
   SignUpInfo,
@@ -16,6 +17,7 @@ import Swal from "sweetalert2";
 
 export const baseURL =
   process.env.REACT_APP_API_URL || "http://localhost:8081/api/v1/";
+
 export const baseAxios = axios.create({
   baseURL: baseURL,
   headers: {
@@ -30,8 +32,10 @@ const dispatch = getDispatch();
 
 export const loginUser = async (loginProp: Login) => {
   try {
+
     const res = await baseAxios.post("auth/login", loginProp);
     return res.data;
+
   } catch (error) {
     return Promise.reject(error);
   }
@@ -42,6 +46,7 @@ export const logoutUser = async () => {
     await baseAxios.post("auth/logout");
    
   } catch (error) {
+
     return Promise.reject(error);
   }
 };
@@ -85,9 +90,9 @@ export const updateCartItem = async (
   }
 };
 
-export const getAllProduct = async () => {
+export const getAllProduct = async (name: string|null) => {
   try {
-    const res = await baseAxios.get("products");
+    const res = await baseAxios.get("products", {params: {name}});
     return res.data;
   } catch (error) {
     return Promise.reject(error);
@@ -152,6 +157,7 @@ export const addToCart = async (cartRequestDto: CartRequestDto) => {
 };
 
 export const getCartByUser = async (id: number) => {
+
   try {
     const res = await baseAxios.get(`carts/user/${id}`);
     return res.data;

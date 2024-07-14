@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
-  cartCount: 0,
+  cartNumber: 0
 };
 
 const appSlice = createSlice({
@@ -15,12 +15,12 @@ const appSlice = createSlice({
     fetchEnd: (state) => {
       state.loading = false;
     },
-    updateCartCount: (state, action) => {
-      state.cartCount = action.payload;
-    },
+    updateCartNumber: (state, action: PayloadAction<number>) => {
+      state.cartNumber = action.payload;
+    }
   },
 });
 
-export const { fetchStart, fetchEnd, updateCartCount} = appSlice.actions;
+export const { fetchStart, fetchEnd, updateCartNumber} = appSlice.actions;
 
 export default appSlice.reducer;
