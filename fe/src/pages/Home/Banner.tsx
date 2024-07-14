@@ -1,15 +1,15 @@
 import { useTranslation } from "react-i18next";
-import BannerImg from "../../assets/images/bgg.jpg";
+import BannerImg from "../../assets/images/bg.png";
 import Button from "../../components/Button";
-// import start from "../../assets/images/start.svg";
+import { FaStar } from "react-icons/fa";
 
 function Banner() {
   const {t} = useTranslation();
   return (
-    <div >
-      <div className="wrapper flex lg:flex-row flex-col bg-cover bg-no-repeat "  >
+    <div className="bg-slate-100" >
+      <div className="wrapper flex lg:flex-row flex-col bg-cover bg-no-repeat relative">
         <div className="lg:my-[80px] my-10 max-w-[577px] px-6">
-          <h3 className="lg:text-[64px] text-[32px] font-bold leading-[1]">
+          <h3 className="lg:text-[64px] text-[32px] font-semibold leading-[1]">
             Tìm kiếm cây giống cho bạn
           </h3>
           <p className="my-[32px]">
@@ -37,7 +37,12 @@ function Banner() {
             </div>
           </div>
         </div>
+        <img src={BannerImg} alt="" />
+        <FaStar size={28} className="absolute top-20 right-40 text-yellow-300 animate-bounce"/>
+        <FaStar size={28} className="absolute top-20 right-[500px] text-yellow-300 animate-bounce"/>
+        <FaStar size={28} className="absolute top-[200px] right-80 text-yellow-300 animate-bounce"/>
       </div>
+      
     </div>
   );
 }
