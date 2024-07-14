@@ -15,7 +15,7 @@ const Live: React.FC<Props> = () => {
   const [mode, setMode] = useState<string>("CONFERENCE");
   const [micOn, setMicOn] = useState(true);
   const [camOn, setCamOn] = useState(true);
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.currentUser);
 
   const getMeetingAndToken = async (id: string | null) => {
     const meetingId = id == null ? await createMeeting() : id;

@@ -16,7 +16,7 @@ function CartPage() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isRerender, setIsRerender] = useState<boolean>(false);
   const [listCartPay, setListCartPay] = useState<CardInfo[]>([]);
-  const user = useSelector((state: RootState) =>  state.auth.user)
+  const user = useSelector((state: RootState) =>  state.auth.currentUser)
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +86,7 @@ function CartPage() {
         setTotalPrice(0);
         setIsChecked(false);
         navigate(routes.thank);
+        emitter.emit("updateCartNumber");
       } catch (error) {
         toast.error("Số lượng mua vượt quá số lượng trong kho");
       }

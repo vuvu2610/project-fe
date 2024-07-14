@@ -10,7 +10,7 @@ import { RootState } from "./redux/store";
 import { privateRoutes, publicRoutes } from "./routes";
 
 function App() {
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.currentUser);
   const loading = useSelector((state: RootState) => state.app.loading);
  
   return (

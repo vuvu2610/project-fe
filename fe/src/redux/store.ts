@@ -8,25 +8,24 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./authSlice";
 import appReducer from "./appSlice";
 
-const authPersistConfig = {
+
+const authConfig = {
   key: "auth",
   storage: storage,
 };
 
-const appPersistConfig = {
+const appConfig = {
   key: "app",
   storage: storage,
 };
 
 const rootReducer = combineReducers({
-  auth: persistReducer(authPersistConfig, authReducer),
-  app: persistReducer(appPersistConfig, appReducer),
+  auth: persistReducer(authConfig, authReducer),
+  app: persistReducer(appConfig, appReducer)
 });
 
 const store = createStore(rootReducer);
 const persistor = persistStore(store);
 
-export { persistor, store };
-
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export { persistor, store };

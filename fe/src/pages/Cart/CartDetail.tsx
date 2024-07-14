@@ -76,6 +76,7 @@ const CartDetail = (props: CartDetailProps) => {
       try {
         await callApi(() => deleteCart([props.getCardReponseDto.cartId]));
         emitter.emit("deletedCard")
+        emitter.emit("updateCartNumber");
       } catch (error) {
         console.error('Failed to delete product');
       }

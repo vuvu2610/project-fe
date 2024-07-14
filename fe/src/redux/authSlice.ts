@@ -1,35 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { GetUserInfoDto } from "../types/types";
-
 interface AuthState {
-  user: GetUserInfoDto | null;
+  currentUser: GetUserInfoDto | null;
   cart: any;
 }
-
 const initialState: AuthState = {
-  user: null,
-  cart: null,
+  currentUser: null,
+  cart: null
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginSuccess: (state, action) => {
-      state.user = {
-        ...action.payload,
+    loginSuccess: (state, action: PayloadAction<GetUserInfoDto>) => {
+      state.currentUser = {
+        ...action.payload
       };
     },
 
     registerSuccess: (state, action) => {},
 
     logOutSuccess: (state) => {
-      state.user = null;
+      state.currentUser = null;
     },
 
     updateUserSuccess: (state, action) => {
-      state.user = {
-        ...state.user,
+      state.currentUser = {
+        ...state.currentUser,
         ...action.payload,
       };
     },
