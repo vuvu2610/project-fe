@@ -4,46 +4,32 @@ import { IoCartOutline } from "react-icons/io5";
 import { AiOutlineLogin } from "react-icons/ai";
 import navItems from "../../api/navItems.json";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import {logoutUser} from "../../api/axios"
+import { callApi, getCartByUser, logoutUser } from "../../api/axios"
 import DynamicPlaceholder from "./DynamicPlaceholder";
 import { useDispatch, useSelector } from "react-redux";
 import routes from "../../config/routes";
 import ReactSelect from "react-select";
-import { changeLang } from "../../redux/persistSlice";
-import { Menu, Transition } from "@headlessui/react";
-import { FaAngleDown } from "react-icons/fa6";
-import { Fragment } from "react";
-import { FaUserLarge } from "react-icons/fa6";
 import { FaBars } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-
-interface NavItem {
-  title: string;
-  to: string;
-}
-
-interface State {
-  auth: {
-    user: any;
-  };
-  allCart: {
-    cartsValue: any[];
-  };
-}
+import Logo from "../../assets/images/logo.png";
+import { RootState } from "../../redux/store";
+import { updateCartNumber } from "../../redux/appSlice";
+import { GetUserInfoDto } from "../../types/types";
+import { Emitter } from "../../eventEmitter/EventEmitter";
 
 const Navbar: FC = () => {
-  const user = useSelector((state: State) => state.auth.user);
-  const cartCount = useSelector((state: any) => state.app.cartCount); 
+  const [cartCount, setCartCount] = useState<number>(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const isLogin = localStorage.getItem("user");
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
   const [langOptions] = useState([
     { value: "vi", label: "Tiếng việt" },
     { value: "en", label: "English" },
   ]);
+
+  const user: GetUserInfoDto|null = useSelector((state: RootState) => state.auth.currentUser);
+  console.log(user);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -52,6 +38,25 @@ const Navbar: FC = () => {
   const activeNavLink = ({ isActive }: { isActive: boolean }) => {
     return isActive ? "text-base  underline" : "text-base ";
   };
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      const listCartPay = await  getCartByUser(user?.id);
+      setCartCount(listCartPay.length);
+    }
+    if (user) {   
+      fetchCart();
+    }
+    const handleEvent = () => {
+      fetchCart();
+    };
+
+    Emitter.on("updateCartNumber", handleEvent);
+
+    return () => {
+      Emitter.off("updateCartNumber", handleEvent);
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -76,7 +81,7 @@ const Navbar: FC = () => {
       <div className="wrapper px-6 xl:px-0">
         <div className="flex justify-between items-center gap-8">
           <Link to="/" className="font-[IntegralCf] text-[24px]">
-            SEEDLING
+            <img src={Logo} alt="" className="w-32" />
           </Link>
           <DynamicPlaceholder />
 
@@ -119,7 +124,7 @@ const Navbar: FC = () => {
               <div className="relative">
                 <Link to="/cart" className="relative">
                   <IoCartOutline className="w-7 h-7 mt-1" />
-                  <div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">{cartCount}</div>
+                  {cartCount > 0 && (<div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">{cartCount}</div>)}
                 </Link>
               </div>
               {isLogin ? (<button className="hidden lg:block" onClick={logoutUser}>
@@ -152,9 +157,8 @@ const Navbar: FC = () => {
         {/* Menu mobile */}
         <div
           ref={menuRef}
-          className={`bg-black w-custom-width h-full text-white z-50 ${
-            isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
-          }`}
+          className={`bg-black w-custom-width h-full text-white z-50 ${isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
+            }`}
         >
           <Link
             to="/"

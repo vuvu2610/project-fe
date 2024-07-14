@@ -17,4 +17,7 @@ public interface ProductDao extends CrudRepository<ProductEntity, Integer> {
 
     @Query("SELECT p FROM ProductEntity p ORDER BY p.quantitySold DESC")
     List<ProductEntity> findByQuantitySoldOrderByDesc(Pageable pageable);
+
+    @Query("SELECT p FROM ProductEntity p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+    List<ProductEntity> findByName(String name);
 }

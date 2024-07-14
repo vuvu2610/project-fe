@@ -3,6 +3,8 @@ import { getDispatch } from "../utils/helper";
 import { fetchEnd, fetchStart } from "../redux/appSlice";
 
 import { Login, SignUpInfo, Cart, CartItem, CartRequestDto, GetUserInfoDto, CardInfo } from "../types/types";
+import { Dispatch } from "redux";
+import { logOutSuccess, loginSuccess } from "../redux/authSlice";
 
 export const baseAxios = axios.create({
   baseURL: process.env.REACT_APP_API_URL || "http://localhost:8081/api/v1/",
@@ -25,10 +27,12 @@ export const currentUser: GetUserInfoDto = localStorage.getItem("user") ? JSON.p
 
 export const loginUser = async (loginProp: Login) => {
   try {
-    const res = await baseAxios.post("auth/login", loginProp);
-    localStorage.setItem("user", JSON.stringify(res.data));
+    const res: GetUserInfoDto = (await baseAxios.post("auth/login", loginProp)).data;
+    console.log(res);
+    localStorage.setItem("user", JSON.stringify(res));
+    dispatch(loginSuccess(res));
     navigate("/");
-    return res.data;
+    return res;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -38,6 +42,7 @@ export const logoutUser = async () => {
   try {  
       await baseAxios.post('/auth/logout');  
       localStorage.removeItem('user');  
+      dispatch(logOutSuccess());
       navigate("/login");
   } catch (error) {  
     return Promise.reject(error);
@@ -84,9 +89,9 @@ export const updateCartItem = async (
   }
 };
 
-export const getAllProduct = async () => {
+export const getAllProduct = async (name: string|null) => {
   try {
-    const res = await baseAxios.get("products");
+    const res = await baseAxios.get("products", {params: {name}});
     return res.data;
   } catch (error) {
     return Promise.reject(error);
@@ -111,7 +116,7 @@ export const addToCart = async (cartRequestDto: CartRequestDto) => {
   }
 };
 
-export const getCartByUser = async (id : number) => {
+export const getCartByUser = async (id? : number) => {
   try {
     const res = await baseAxios.get(`carts/user/${id}`);
     return res.data;
