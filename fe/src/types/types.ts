@@ -13,6 +13,15 @@ export interface Product {
   date: string;
 }
 
+export interface Review {
+  id: number;
+  userId: number,
+  userName: string,
+  content: string,
+  rating: number;
+  updated: [number, number, number, number, number, number, number]
+}
+
 export interface RoomData {
   data: Room[];
 }
@@ -96,6 +105,13 @@ export interface CartRequestDto {
   userId: number;
   productId?: number;
   quantity: number;
+}
+
+export interface ReviewRequestDto {
+  userId: number|null;
+  productId: number|null;
+  content: string;
+  rating: number;
 }
 
 export interface GetCartReponseDto {

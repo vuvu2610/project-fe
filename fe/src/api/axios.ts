@@ -1,10 +1,11 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { getDispatch } from "../utils/helper";
 import { fetchEnd, fetchStart } from "../redux/appSlice";
 
-import { Login, SignUpInfo, Cart, CartItem, CartRequestDto, GetUserInfoDto, CardInfo } from "../types/types";
+import { Login, SignUpInfo, Cart, CartItem, ReviewRequestDto, CartRequestDto, GetUserInfoDto, CardInfo } from "../types/types";
 import { Dispatch } from "redux";
 import { logOutSuccess, loginSuccess } from "../redux/authSlice";
+import Swal from "sweetalert2";
 
 export const baseAxios = axios.create({
   baseURL: process.env.REACT_APP_API_URL || "http://localhost:8081/api/v1/",
@@ -46,8 +47,8 @@ export const logoutUser = async () => {
       navigate("/login");
   } catch (error) {  
     return Promise.reject(error);
-  }  
-};  
+  }
+};
 
 export const getCart = async (userId: number): Promise<Cart> => {
   try {
@@ -55,7 +56,6 @@ export const getCart = async (userId: number): Promise<Cart> => {
     return res.data;
   } catch (error) {
     return Promise.reject(error);
-    throw error;
   }
 };
 
@@ -107,6 +107,45 @@ export const getProduct = async (id : number) => {
   }
 };
 
+export const getReviewsByProductId = async (productId: number) => {
+    try {
+        const res = await baseAxios.get(`review/${productId}`);
+        return res.data;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+
+export const registerReview = async (review: ReviewRequestDto) => {
+    try {
+        const res = await baseAxios.post(`review`, review);
+        return res.data;
+    } catch (error:any) {
+        Swal.fire({
+            title: "Error",
+            text: error.response.data.error,
+            icon: "error",
+            confirmButtonText: "Okay",
+        })
+    }
+};
+
+export const editReview = async (review:any) => {
+    console.log(review);
+
+    try {
+        const res = await baseAxios.put(`review`, review);
+        return res.data;
+    } catch (error:any) {
+        Swal.fire({
+            title: "Error",
+            text: error.response.data.error,
+            icon: "error",
+            confirmButtonText: "Okay",
+        })
+    }
+};
+
 export const addToCart = async (cartRequestDto: CartRequestDto) => {
   try {
     const res = await baseAxios.post("carts", cartRequestDto);
@@ -143,7 +182,6 @@ export const payCart = async (cartList : CardInfo[]) => {
   }
 };
 
-
 export const callApi = async (callBack: any) => {
   try {
     dispatch(fetchStart());
@@ -157,12 +195,9 @@ export const callApi = async (callBack: any) => {
 };
 
 export const registerNewUser = async(user: SignUpInfo) => {
-
     try {
         const res = await baseAxios.post('/auth/register',user);
     } catch (error) {
         console.log(error);
     }
-
-     
 }

@@ -13,8 +13,6 @@ function Chat(props: Props) {
   const listMessage = useRef<HTMLUListElement>(null);
   const meeting = useMeeting();
 
-  console.log(meeting.participants);
-  console.log(messages[0] && messages[0].senderId);
   const owner = useMemo(() => {
     const result = Array.from(meeting.participants.entries()).find(
       ([id, participant]) => {
@@ -23,7 +21,6 @@ function Chat(props: Props) {
     );
     return result;
   }, []);
-  console.log(owner?.[0]);
 
   const handleClick = () => {
     if (input.current) {

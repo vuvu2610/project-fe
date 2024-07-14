@@ -1,12 +1,14 @@
-import CartDetail from "./CartDetail";
-import { CardInfo, GetCartReponseDto, GetUserInfoDto } from "../../types/types";
-import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
 import { useEffect, useState } from "react";
-import { callApi, getCart, getCartByUser, currentUser, payCart } from "../../api/axios";
-import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { callApi, getCartByUser, payCart } from "../../api/axios";
 import Button from "../../components/Button";
 import routes from "../../config/routes";
+import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
+import { RootState } from "../../redux/store";
+import { CardInfo, GetCartReponseDto } from "../../types/types";
+import CartDetail from "./CartDetail";
 function CartPage() {
   const [products, setProducts] = useState<GetCartReponseDto[]>([]);
   const [totalCard, setTotalCard] = useState<number>(0);
@@ -14,19 +16,18 @@ function CartPage() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isRerender, setIsRerender] = useState<boolean>(false);
   const [listCartPay, setListCartPay] = useState<CardInfo[]>([]);
+  const user = useSelector((state: RootState) =>  state.auth.currentUser)
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isCheckedNew = e.target.checked;
-    console.log(isCheckedNew);
     setIsChecked(isCheckedNew);
     emitter.emit("checkAll", isCheckedNew);
   };
 
   useEffect(() => {
-    console.log(currentUser);
     const fecth = async () => {
-      currentUser ? setProducts(await callApi(() => getCartByUser(currentUser.id))) : setProducts([]);
+      user ? setProducts(await callApi(() => getCartByUser(Number(user.id)))) : setProducts([]);
     }
     fecth();
   }, [isRerender]);

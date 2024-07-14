@@ -44,7 +44,7 @@ const Navbar: FC = () => {
       const listCartPay = await  getCartByUser(user?.id);
       setCartCount(listCartPay.length);
     }
-    if (user) {   
+    if (user) {
       fetchCart();
     }
     const handleEvent = () => {

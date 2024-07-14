@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { GetCartReponseDto, Product } from "../../types/types";
-import products from "../../api/product.json";
-import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
-import {callApi, getCartByUser, currentUser, deleteCart} from '../../api/axios'
-import ActiveQuantity from "../../components/ActiveQuantity";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { callApi, deleteCart } from '../../api/axios';
+import ActiveQuantity from "../../components/ActiveQuantity";
 import routes from "../../config/routes";
-import Button from "../../components/Button";
+import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
+import { GetCartReponseDto } from "../../types/types";
 
 interface CartDetailProps {
   getCardReponseDto: GetCartReponseDto;
@@ -51,7 +49,6 @@ const CartDetail = (props: CartDetailProps) => {
         productId: props.getCardReponseDto.productId
       });
     } else if (quantity !== prevQuantity) {
-        console.log("quantity changed" , quantity - prevQuantity);
       if (checked) {
         emitter.emit("elementChecked", {
           price: (quantity - prevQuantity) * props.getCardReponseDto.price,
@@ -79,6 +76,7 @@ const CartDetail = (props: CartDetailProps) => {
       try {
         await callApi(() => deleteCart([props.getCardReponseDto.cartId]));
         emitter.emit("deletedCard")
+        emitter.emit("updateCartNumber");
       } catch (error) {
         console.error('Failed to delete product');
       }

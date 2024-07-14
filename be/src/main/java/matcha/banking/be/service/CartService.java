@@ -88,6 +88,13 @@ public class CartService {
         return cartDao.findByUserId(userId).stream().filter(cartEntity -> cartEntity.getStatusCode() == 0).toList();
     }
 
+    public List<CartEntity> getAllValidCartByUserId(Integer userId) {
+        if (!userDao.existsById(userId)) {
+            throw new EmptyResultDataAccessException("User not found", 1);
+        }
+        return cartDao.findByUserId(userId).stream().filter(cartEntity -> cartEntity.getStatusCode() == 1).toList();
+    }
+
     public CartEntity getCartById(Long id) {
         return cartDao.findById(id).orElseThrow(() -> new EmptyResultDataAccessException("Cart not found", 1));
     }
