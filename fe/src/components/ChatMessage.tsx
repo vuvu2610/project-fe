@@ -5,6 +5,7 @@ import ChatGptImg from "../assets/images/chatGpt.png"
 
 
 function ChatMessage(props: ChatHistory) {
+    console.log(props)
 
     return (
         <div className="flex items-start gap-2.5">

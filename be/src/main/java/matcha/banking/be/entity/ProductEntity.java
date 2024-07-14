@@ -33,6 +33,9 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "detail")
+    private String detail;
+
     @Column(name = "image")
     private String image;
 
