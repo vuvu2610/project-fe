@@ -85,6 +85,7 @@ function CartPage() {
         setTotalPrice(0);
         setIsChecked(false);
         navigate(routes.thank);
+        emitter.emit("updateCartNumber");
       } catch (error) {
         toast.error("Số lượng mua vượt quá số lượng trong kho");
       }

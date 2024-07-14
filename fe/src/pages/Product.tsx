@@ -1,24 +1,22 @@
-import {useEffect, useImperativeHandle, useMemo, useRef, useState} from "react";
+import { useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import ReactSelect, { SelectInstance } from "react-select";
 // import listProduct from "../api/product.json";
 import Pagianate from "../components/PagianateNavBar/Paginate";
 import ProductItem from "../components/ProductItem";
 import { Product } from "../types/types";
-import {callApi, getAllProduct} from '../api/axios'
+import { callApi, getAllProduct } from '../api/axios'
+import { useLocation } from 'react-router-dom';
 
 function ProductPage() {
   const [page, setPage] = useState(0);
   const numItemsOfPage = 12;
 
   const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
+  const location = useLocation();
+  const [query, setQuery] = useState<string | null>(null);
 
   const filterCurrentProducts = useMemo(() => {
-    // return listProduct.filter((_, index) => {
-    //   return (
-    //     index >= page * numItemsOfPage && index < (page + 1) * numItemsOfPage
-    //   );
-    // });
     const startIndex = page * numItemsOfPage;
     const endIndex = (page + 1) * numItemsOfPage;
 
@@ -39,18 +37,47 @@ function ProductPage() {
 
   useImperativeHandle(selectRef, () => selectRef.current!, []);
 
+  useEffect(() => {  
+    const queryParams = new URLSearchParams(location.search);  
+    const name = queryParams.get('name') || null;  
+    setQuery(name);  
+    callApi(() => getAllProduct(name)).then((res) => {  
+      setCurrentProducts(res);  
+    });  
+  }, [location]); 
+
+  // useEffect(() => {
+  //   const handleUrlChange = () => {
+  //     const queryParams = new URLSearchParams(window.location.search);
+  //     setSearchName(queryParams.get("name"));
+  //   };
+
+  //   // Cập nhật searchName khi component mount
+  //   handleUrlChange();
+
+  //   // Lắng nghe sự thay đổi của URL
+  //   window.addEventListener("popstate", handleUrlChange);
+  //   window.addEventListener("hashchange", handleUrlChange);
+
+  //   // Dọn dẹp khi component unmount
+  //   return () => {
+  //     window.removeEventListener("popstate", handleUrlChange);
+  //     window.removeEventListener("hashchange", handleUrlChange);
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   callApi(() => getAllProduct(searchName)).then((res) => {
+  //     setCurrentProducts(res);
+  //   });
+  // }, [searchName]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
     setCurrentProducts(filterCurrentProducts);
     selectRef.current?.selectOption(sortOption[0]);
   }, [page]);
-
-  useEffect(() => {
-    callApi(() => getAllProduct()).then((res) => {
-      setCurrentProducts(res);
-    });
-  }, []);
 
   const handleSort = (value: number) => {
     switch (value) {

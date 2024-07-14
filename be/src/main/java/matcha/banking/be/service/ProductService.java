@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -29,5 +30,12 @@ public class ProductService {
 
     public List<ProductEntity> getTop5ProductsByQuantitySold(Integer pageSize) {
         return productDao.findByQuantitySoldOrderByDesc(PageRequest.of(0, pageSize));
+    }
+
+    public List<ProductEntity> searchByName(String name) {
+        if (Objects.isNull(name) || name.isEmpty()){
+            return productDao.findAll();
+        }
+        return productDao.findByName(name);
     }
 }

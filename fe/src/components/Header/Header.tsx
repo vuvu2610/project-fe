@@ -26,7 +26,7 @@ function Header() {
 
     return (
         <>
-            <header className={`${isSticky ? 'sticky top-0 left-0 right-0 z-20' : ''}`}>
+            <header className={`${isSticky ? 'sticky top-0 left-0 right-0 z-20' : ''} border-b`}>
                 {!isLogin && <TopHeader />}
                 <Navbar />
             </header>

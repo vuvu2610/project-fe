@@ -4,7 +4,7 @@ import Title from "../components/Title";
 import { FaShippingFast, FaStar } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { reviews } from "../constants";
+import reviews from "../api/review.json";
 import { Product } from "../types/types";
 import ProductItem from "../components/ProductItem";
 import { addToCart, callApi, getProduct, currentUser, getCartByUser } from '../api/axios'
@@ -17,7 +17,9 @@ import Button from "../components/Button";
 import ActiveQuantity from "../components/ActiveQuantity";
 import StarRating from "../components/StarRating";
 import { useDispatch } from "react-redux";
-import { updateCartCount } from '../redux/appSlice';
+import { updateCartNumber } from "../redux/appSlice";
+import { emit } from "process";
+import { Emitter } from "../eventEmitter/EventEmitter";
 
 interface Props { }
 
@@ -31,8 +33,21 @@ function ProductDetail(_props: Props) {
     setQuantity(newQuantity);
   };
 
+  const initProductData: Product = {
+    id: 0,
+    image: "",
+    description: "",
+    name: "",
+    rating: 5,
+    price: 0,
+    quantitySold: 0,
+    remainingQuantity: 0,
+    category: "",
+    date: ""
+  };
 
-  const [data, setData] = useState<Product>();
+
+  const [data, setData] = useState<Product>(initProductData);
   const [topSelling, setTopSelling] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -52,13 +67,10 @@ function ProductDetail(_props: Props) {
       try {
         console.log(id)
         await callApi(() => addToCart({ productId: Number(id), userId: currentUser?.id, quantity: quantity }));
-        const number = await callApi(() => getCartByUser(currentUser?.id));
-        dispatch(updateCartCount(number.length));
         toast.success('Bạn đã thêm sản phẩm thành công!');
+        Emitter.emit('updateCartNumber');
       } catch (error: any) {
-        if (error.response.status === 403) {
-          toast.error('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!');
-        }
+        toast.error('Có lỗi xảy ra');
       }
     };
     addCart();
@@ -74,7 +86,8 @@ function ProductDetail(_props: Props) {
             <img
               src={data?.image}
               alt=""
-              className="w-full rounded-[20px]"
+              loading="lazy"
+              className="w-full rounded-[20px] transition-all duration-300"
             />
           </div>
 
@@ -84,14 +97,14 @@ function ProductDetail(_props: Props) {
               {data?.name}
             </Title>
             <div className="flex gap-x-2 items-center mt-2">
-            <StarRating rating={data?.rating} />
+              <StarRating rating={data?.rating} />
               <span>{data?.rating ?? 0}/ 5</span>
             </div>
             <span className="my-3 block  text-[32px]">
               {data?.price} VND
             </span>
             <p className="text-[#003b31] font-semibold pb-4">Số lượng còn trong kho: <span className="font-normal">{data?.remainingQuantity}</span></p>
- 
+
             <p className="pb-4 border-b">{data?.description}</p>
             <div className="flex items-center gap-4 pt-4">
               <ActiveQuantity className="" onQuantityChange={handleQuantityChange} quantity={quantity}></ActiveQuantity>
