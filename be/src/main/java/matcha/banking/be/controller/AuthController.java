@@ -3,14 +3,14 @@ package matcha.banking.be.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import matcha.banking.be.dto.GetUserInfoDto;
-import matcha.banking.be.dto.LoginDto;
-import matcha.banking.be.dto.LoginReponseBodyDto;
-import matcha.banking.be.dto.RegisterDto;
+import matcha.banking.be.dto.*;
 import matcha.banking.be.entity.UserEntity;
 import matcha.banking.be.mapper.UserMapper;
 import matcha.banking.be.service.AuthService;
+import matcha.banking.be.service.EmailService;
+import matcha.banking.be.service.ForgotPasswordService;
 import matcha.banking.be.service.UserService;
+import matcha.banking.be.util.JwtUtil;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -29,6 +29,9 @@ public class AuthController {
     private final AuthService authService;
     private final UserService userService;
     private final UserMapper userMapper;
+    private final EmailService emailService;
+    private final JwtUtil jwtUtil;
+    private final ForgotPasswordService forgotPasswordService;
 
     @PostMapping("/register")
     public ResponseEntity<Object> createUser(@RequestBody RegisterDto registerDto) {
@@ -106,5 +109,29 @@ public class AuthController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/forgot-pass/{email}")
+    public ResponseEntity<Object> sendPassToMail(@PathVariable String email) {
+        UserEntity userEntity = userService.getUserByEmail(email);
+        Map<String, String> responseBody = new HashMap<>();
+        if (userEntity == null) {
+            responseBody.put("error", "User not found");
+            return ResponseEntity.notFound().build();
+        }
+        forgotPasswordService.processForgotPassword(email);
+        responseBody.put("status", "Successfully!!!");
+        return ResponseEntity.ok(responseBody);
+    }
+
+    @GetMapping("/reset-password")
+    public String resetPassword(@RequestParam("token") String token, @RequestParam("password") String password) {
+        String email = jwtUtil.getEmailFromJwt(token);
+        boolean isTokenValid = jwtUtil.validateTokenByEmail(token, email);
+        if (isTokenValid) {
+            userService.updatePassword(email, password);
+            return "Password has been successfully reset.";
+        } else {
+            return "Invalid or expired reset token.";
+        }
+    }
 
 }

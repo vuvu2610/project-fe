@@ -8,7 +8,9 @@ const routes = {
   cart: "/cart",
   stream: "/live/stream",
   thank: "/thank",
-  'produc-detail': "/products/:id",
+  "forgot-pass": "/forgot-password",
+  "reset-pass": "/reset-password",
+  "produc-detail": "/products/:id",
   "page-not-found": "*",
 };
 

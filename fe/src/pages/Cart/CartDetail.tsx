@@ -6,6 +6,7 @@ import ActiveQuantity from "../../components/ActiveQuantity";
 import routes from "../../config/routes";
 import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
 import { GetCartReponseDto } from "../../types/types";
+import { useTranslation } from "react-i18next";
 
 interface CartDetailProps {
   getCardReponseDto: GetCartReponseDto;
@@ -16,6 +17,7 @@ const CartDetail = (props: CartDetailProps) => {
   const [quantity, setQuantity] = useState<number>(props.getCardReponseDto.quantity);
   const [checked, setChecked] = useState<boolean>(false);
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
 
   const prevCheckedRef = useRef(checked);
@@ -104,9 +106,9 @@ const CartDetail = (props: CartDetailProps) => {
             <p className="break-all max-h-8 text-ellipsis text-sm leading-4 overflow-hidden line-clamp-2">
               {props.getCardReponseDto.productName}
             </p>
-            <p className="text-sm font-semibold">Số lượng hàng còn lại: <span className="text-[#003b31]">{props.getCardReponseDto.remainingQuantity}</span></p>
+            <p className="text-sm font-semibold">{t("text.remainQuantity")}: <span className="text-[#003b31]">{props.getCardReponseDto.remainingQuantity}</span></p>
             <p className="border border-[#EE4D2D] px-1 w-44 text-[#EE4D2D] text-sm">
-              Đổi trả miễn phí 15 ngày
+            {t("text.lie")}
             </p>
           </div>
         </div>

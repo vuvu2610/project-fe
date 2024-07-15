@@ -2,7 +2,16 @@ import axios, { AxiosError } from "axios";
 import { getDispatch } from "../utils/helper";
 import { fetchEnd, fetchStart } from "../redux/appSlice";
 
-import { Login, SignUpInfo, Cart, CartItem, ReviewRequestDto, CartRequestDto, GetUserInfoDto, CardInfo } from "../types/types";
+import {
+  Login,
+  SignUpInfo,
+  Cart,
+  CartItem,
+  ReviewRequestDto,
+  CartRequestDto,
+  GetUserInfoDto,
+  CardInfo,
+} from "../types/types";
 import { Dispatch } from "redux";
 import { logOutSuccess, loginSuccess } from "../redux/authSlice";
 import Swal from "sweetalert2";
@@ -13,22 +22,23 @@ export const baseAxios = axios.create({
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   },
-  withCredentials: true
+  withCredentials: true,
 });
 
 const dispatch = getDispatch();
 
-
-
 const navigate = (href: string) => {
   window.location.href = href;
-}
+};
 
-export const currentUser: GetUserInfoDto = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : null;
+export const currentUser: GetUserInfoDto = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user") as string)
+  : null;
 
 export const loginUser = async (loginProp: Login) => {
   try {
-    const res: GetUserInfoDto = (await baseAxios.post("auth/login", loginProp)).data;
+    const res: GetUserInfoDto = (await baseAxios.post("auth/login", loginProp))
+      .data;
     console.log(res);
     localStorage.setItem("user", JSON.stringify(res));
     dispatch(loginSuccess(res));
@@ -39,14 +49,32 @@ export const loginUser = async (loginProp: Login) => {
   }
 };
 
-export const logoutUser = async () => {  
-  try {  
-      await baseAxios.post('/auth/logout');  
-      localStorage.removeItem('user');  
-      dispatch(logOutSuccess());
-      navigate("/login");
-  } catch (error) {  
+export const logoutUser = async () => {
+  try {
+    await baseAxios.post("/auth/logout");
+    localStorage.removeItem("user");
+    dispatch(logOutSuccess());
+    navigate("/login");
+  } catch (error) {
     return Promise.reject(error);
+  }
+};
+
+export const forgotPass = async (email: string) => {
+  try {
+    await baseAxios.get(`/auth/forgot-pass/${email}`);
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const resetPass = async (token: string, password: string) => {
+  try {
+    await baseAxios.get(`/auth/reset-password`, {
+      params: { token: token, password: password },
+    });
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -89,16 +117,16 @@ export const updateCartItem = async (
   }
 };
 
-export const getAllProduct = async (name: string|null) => {
+export const getAllProduct = async (name: string | null) => {
   try {
-    const res = await baseAxios.get("products", {params: {name}});
+    const res = await baseAxios.get("products", { params: { name } });
     return res.data;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const getProduct = async (id : number) => {
+export const getProduct = async (id: number) => {
   try {
     const res = await baseAxios.get(`products/${id}`);
     return res.data;
@@ -108,42 +136,42 @@ export const getProduct = async (id : number) => {
 };
 
 export const getReviewsByProductId = async (productId: number) => {
-    try {
-        const res = await baseAxios.get(`review/${productId}`);
-        return res.data;
-    } catch (error) {
-        return Promise.reject(error);
-    }
+  try {
+    const res = await baseAxios.get(`review/${productId}`);
+    return res.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const registerReview = async (review: ReviewRequestDto) => {
-    try {
-        const res = await baseAxios.post(`review`, review);
-        return res.data;
-    } catch (error:any) {
-        Swal.fire({
-            title: "Error",
-            text: error.response.data.error,
-            icon: "error",
-            confirmButtonText: "Okay",
-        })
-    }
+  try {
+    const res = await baseAxios.post(`review`, review);
+    return res.data;
+  } catch (error: any) {
+    Swal.fire({
+      title: "Error",
+      text: error.response.data.error,
+      icon: "error",
+      confirmButtonText: "Okay",
+    });
+  }
 };
 
-export const editReview = async (review:any) => {
-    console.log(review);
+export const editReview = async (review: any) => {
+  console.log(review);
 
-    try {
-        const res = await baseAxios.put(`review`, review);
-        return res.data;
-    } catch (error:any) {
-        Swal.fire({
-            title: "Error",
-            text: error.response.data.error,
-            icon: "error",
-            confirmButtonText: "Okay",
-        })
-    }
+  try {
+    const res = await baseAxios.put(`review`, review);
+    return res.data;
+  } catch (error: any) {
+    Swal.fire({
+      title: "Error",
+      text: error.response.data.error,
+      icon: "error",
+      confirmButtonText: "Okay",
+    });
+  }
 };
 
 export const addToCart = async (cartRequestDto: CartRequestDto) => {
@@ -155,7 +183,7 @@ export const addToCart = async (cartRequestDto: CartRequestDto) => {
   }
 };
 
-export const getCartByUser = async (id? : number) => {
+export const getCartByUser = async (id?: number) => {
   try {
     const res = await baseAxios.get(`carts/user/${id}`);
     return res.data;
@@ -164,16 +192,16 @@ export const getCartByUser = async (id? : number) => {
   }
 };
 
-export const deleteCart = async (ids : number[]) => {
+export const deleteCart = async (ids: number[]) => {
   try {
-    const res = await baseAxios.delete(`carts`, {data: ids});
+    const res = await baseAxios.delete(`carts`, { data: ids });
     return res.data;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const payCart = async (cartList : CardInfo[]) => {
+export const payCart = async (cartList: CardInfo[]) => {
   try {
     const res = await baseAxios.post(`carts/pay`, cartList);
     return res.data;
@@ -194,10 +222,10 @@ export const callApi = async (callBack: any) => {
   }
 };
 
-export const registerNewUser = async(user: SignUpInfo) => {
-    try {
-        const res = await baseAxios.post('/auth/register',user);
-    } catch (error) {
-        console.log(error);
-    }
-}
+export const registerNewUser = async (user: SignUpInfo) => {
+  try {
+    const res = await baseAxios.post("/auth/register", user);
+  } catch (error) {
+    console.log(error);
+  }
+};

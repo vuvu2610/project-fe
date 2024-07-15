@@ -31,6 +31,7 @@ import { convertLocalDateTimeToDate } from "../../utils/helper";
 import { Emitter } from "../../eventEmitter/EventEmitter";
 import Markdown from "react-markdown";
 import SkeletonLoader from "./SkeletonLoader";
+import { useTranslation } from "react-i18next";
 
 interface Props {}
 
@@ -42,7 +43,7 @@ function ProductDetail(_props: Props) {
   const detailH = useRef<HTMLDivElement | null>(null);
   const expandIconRef = useRef<HTMLDivElement | null>(null);
   const [loaded, setLoaded] = useState(false);
-
+  const {t} = useTranslation();
   // page use for review
   const [page, setPage] = useState<number>(0);
   const textReview = useRef<HTMLTextAreaElement>(null);
@@ -243,7 +244,7 @@ function ProductDetail(_props: Props) {
                   {data?.price} VND
                 </span>
                 <p className="text-[#003b31] font-semibold pb-4">
-                  Số lượng còn trong kho:{" "}
+                {t("text.stock")}:{" "}
                   <span className="font-normal">{data?.remainingQuantity}</span>
                 </p>
 
@@ -255,7 +256,7 @@ function ProductDetail(_props: Props) {
                     quantity={quantity}
                   ></ActiveQuantity>
                   <Button onClick={handleAddToCart} className="">
-                    <strong className="">Thêm vào giỏ hàng</strong>
+                    <strong className="">{t("button.addCart")}</strong>
                   </Button>
                 </div>
               </div>
@@ -265,37 +266,33 @@ function ProductDetail(_props: Props) {
           )}
           <div className="border w-64 rounded-md flex flex-col gap-3 p-2 text-sm">
             <div className="uppercase text-[#003b31] text-lg text-center">
-              Chăm sóc khách hàng
+              {t("text.customerCare")}
             </div>
             <div className="flex border-t py-1 justify-center items-center gap-2">
               <CiViewList size={60} color="#003b31" />
               <p>
-                Đảm bảo sản phẩm{" "}
-                <span className="font-semibold">
-                  đạt chuẩn ATVSTP, tươi ngon
-                </span>
+              {t("text.customerCare1")}
               </p>
             </div>
             <div className="flex border-t py-1 justify-center items-center gap-2">
               <AiTwotoneLike size={60} color="#003b31" />
-              <p>Vị ngon tinh tế, mang đúng đặc trưng vùng miền</p>
+              <p>{t("text.customerCare2")}</p>
             </div>
             <div className="flex border-t py-1 justify-center items-center gap-2">
               <FaShippingFast size={60} color="#003b31" />
               <p>
-                <span className="font-semibold">Miễn phí </span>vận chuyển cho
-                đơn hàng từ 350.000đ
+              {t("text.customerCare3")}
               </p>
             </div>
             <div className="flex border-t py-1 justify-center items-center gap-2">
               <BsClockHistory size={40} color="#003b31" />
-              <p>Giao hàng nhanh gọn trong 3h</p>
+              <p>{t("text.customerCare4")}</p>
             </div>
           </div>
         </div>
         <p className="text-center font-normal mt-4 text-xl uppercase text-[#003b31] border-b mb-4">
           <span className="relative after:content-[''] after:ml-0.5 after:w-full after:h-[2px] after:bg-[#003b31] after:bottom-0 after:block inline-block">
-            Mô tả
+          {t("text.description")}
           </span>
         </p>
         <div
@@ -317,7 +314,7 @@ function ProductDetail(_props: Props) {
         <div className="py-8">
           <div className="flex justify-between items-center pb-8">
             <div className="flex gap-1 items-center">
-              <h3 className=" text-xl">All Reviews</h3>
+              <h3 className=" text-xl">{t("text.allReviews")}</h3>
               <span>({reviews.length})</span>
             </div>
           </div>
@@ -346,9 +343,9 @@ function ProductDetail(_props: Props) {
               <button
                 ref={submitReview}
                 type="submit"
-                className="w-fit bg-gray-300 px-4 py-2  rounded-xl"
+                className="w-fit bg-gray-300 px-4 py-2  rounded-xl hover:bg-primary hover:text-white transition-all duration-500"
               >
-                Submit
+                {t("button.submit")}
               </button>
             </div>
           </form>

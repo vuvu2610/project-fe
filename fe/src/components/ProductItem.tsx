@@ -3,6 +3,7 @@ import StarRating from './StarRating';
 import { Product } from '../types/types';
 import routes from '../config/routes';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface ProductItemProps {
     product: Product;
@@ -10,6 +11,7 @@ interface ProductItemProps {
 
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     const [loaded, setLoaded] = useState(false);
+    const {t} = useTranslation();
 
     return (
         <div className="cursor-pointer overflow-hidden shadow p-4 rounded-[20px]">
@@ -35,7 +37,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
                 </div>
                 <div className='flex justify-between'>
                     <span className=" font-semibold">{product?.price} VND</span>
-                    <span className=" font-semibold">Đã bán: {product?.quantitySold}</span>
+                    <span className=" font-semibold">{t("text.sold")}: {product?.quantitySold}</span>
                 </div>
             </div>
         </div>

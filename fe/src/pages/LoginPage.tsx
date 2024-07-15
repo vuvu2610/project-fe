@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/authSlice";
 import routes from "../config/routes";
+import { useTranslation } from "react-i18next";
 
 interface Errors {
   [key: string]: string;
@@ -16,6 +17,7 @@ interface Errors {
 
 function LoginPage() {
   const [isShowPassword, setIsShowPassword] = useState<boolean>(true);
+  const {t} = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formValues, setFormValues] = useState<Login>({
@@ -69,9 +71,9 @@ function LoginPage() {
     <div className="wrapper">
       <div className="select-none mb-[140px] grid md:grid-cols-2 gap-16 items-center relative overflow-hidden p-10 rounded-3xl bg-white text-black">
         <div>
-          <h2 className="text-3xl font-extrabold">Đăng nhập</h2>
+          <h2 className="text-3xl font-extrabold">{t("nav.login")}</h2>
           <p className="text-sm text-gray-400 mt-3">
-            Đăng nhập để nhận ưu đãi và thông tin mới nhất từ chúng tôi.
+          {t("text.loginDescription")}
           </p>
           <form onSubmit={handleSubmit}>
             <div className="space-y-4 mt-8">
@@ -80,7 +82,7 @@ function LoginPage() {
                 name="email"
                 value={formValues.email}
                 onChange={handleChange}
-                placeholder="Email"
+                placeholder={t("input.placeholder.email")}
                 className={`px-3 py-4 bg-white text-black w-full text-sm border rounded-lg ${
                   errors.email ? "border-red-500" : "border-gray-300"
                 } focus:border-[#333] outline-none`}
@@ -94,7 +96,7 @@ function LoginPage() {
                   name="password"
                   value={formValues.password}
                   onChange={handleChange}
-                  placeholder="Mật khẩu"
+                  placeholder={t("input.placeholder.password")}
                   className={`pl-3 py-4 pr-12 bg-white w-full text-sm border rounded-lg ${
                     errors.password ? "border-red-500" : "border-gray-300"
                   } focus:border-[#333] outline-none`}
@@ -113,18 +115,18 @@ function LoginPage() {
               )}
             </div>
             <div className="text-end mt-2">
-              <button className="hover:text-primary">Quên mật khẩu ?</button>
+              <button onClick={() => navigate(routes["forgot-pass"])} className="hover:text-primary">{t("button.forgotPassword")} ?</button>
             </div>
             <button
               type="submit"
               className="mt-6 flex items-center justify-center text-sm w-full rounded-lg px-4 py-3 font-semibold bg-[#333] text-white hover:bg-[#222]"
             >
-              Đăng nhập
+              {t("nav.login")}
             </button>
             <p className="pt-4 text-center">
-              Bạn chưa có tài khoản?{" "}
+            {t("text.noAccount")}?{" "}
               <Link to={"/signup"} className="text-primary hover:underline">
-                Đăng kí ngay
+              {t("button.signup")}
               </Link>
             </p>
           </form>

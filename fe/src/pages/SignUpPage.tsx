@@ -4,12 +4,14 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Login, SignUpInfo } from "../types/types";
 import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 interface Errors {
     [key: string]: string;
 }
 
 function SignUpPage() {
+    const {t} = useTranslation();
     const navigate = useNavigate();
     const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
     const [formValues, setFormValues] = useState<SignUpInfo>({
@@ -65,9 +67,9 @@ function SignUpPage() {
         <div className="wrapper">
             <div className="select-none w-[70%] mx-auto mb-[140px] grid gap-16 items-center relative overflow-hidden p-10 rounded-3xl bg-white text-black">
                 <div>
-                    <h2 className="text-3xl font-extrabold">Đăng ký</h2>
+                    <h2 className="text-3xl font-extrabold">{t("button.signup")}</h2>
                     <p className="text-sm text-gray-400 mt-3">
-                        Đăng ký để nhận ưu đãi và thông tin mới nhất từ chúng tôi.
+                    {t("text.signupDescription")}
                     </p>
                     <form onSubmit={handleSubmit}>
                         <div className="space-y-4 mt-8">
@@ -76,7 +78,7 @@ function SignUpPage() {
                                 name="name"
                                 value={formValues.name}
                                 onChange={handleChange}
-                                placeholder="Tên của bạn"
+                                placeholder={t("input.placeholder.name")}
                                 className={`px-3 py-4 bg-white text-black w-full text-sm border rounded-lg ${errors.name ? 'border-red-500' : 'border-gray-300'
                                     } focus:border-[#333] outline-none`}
                             />
@@ -86,7 +88,7 @@ function SignUpPage() {
                                 name="email"
                                 value={formValues.email}
                                 onChange={handleChange}
-                                placeholder="Email"
+                                placeholder={t("input.placeholder.email")}
                                 className={`px-3 py-4 bg-white text-black w-full text-sm border rounded-lg ${errors.email ? 'border-red-500' : 'border-gray-300'
                                     } focus:border-[#333] outline-none`}
                             />
@@ -97,7 +99,7 @@ function SignUpPage() {
                                     name="password"
                                     value={formValues.password}
                                     onChange={handleChange}
-                                    placeholder="Mật khẩu"
+                                    placeholder={t("input.placeholder.password")}
                                     className={`pl-3 py-4 pr-12 bg-white w-full text-sm border rounded-lg ${errors.password ? 'border-red-500' : 'border-gray-300'
                                         } focus:border-[#333] outline-none`}
                                 />
@@ -112,9 +114,9 @@ function SignUpPage() {
                             type="submit"
                             className="mt-6 flex items-center justify-center text-sm w-full rounded-lg px-4 py-3 font-semibold bg-[#333] text-white hover:bg-[#222]"
                         >
-                            Đăng nhập
+                            {t("button.signup")}
                         </button>
-                        <p className='pt-4 text-center'>Bạn đã có tài khoản? <Link to={"/login"} className='text-primary hover:underline'>Đăng nhập ngay</Link></p>
+                        <p className='pt-4 text-center'>{t("text.hasAccount")}? <Link to={"/login"} className='text-primary hover:underline'>{t("nav.login")}</Link></p>
                     </form>
                 </div>
             </div>

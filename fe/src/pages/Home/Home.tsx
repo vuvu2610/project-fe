@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 
-import Reviews from './Reviews';
 import Arrivals from './Arrivals';
 import Banner from './Banner';
+import Reviews from './Reviews';
 import Browser from './SeedlingType';
 import TopSelling from './TopSelling';
-import products from '../../api/product.json';
-import { Product } from '../../types/types'; // import Product from types.ts
 
 const Home: React.FC = () => {
 

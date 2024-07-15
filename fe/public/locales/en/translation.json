@@ -3,18 +3,107 @@
     "home": "Home",
     "products": "Products",
     "contact": "Contact",
-    "about-us": "About us",
+    "about-us": "About Us",
     "live": "Live",
     "login": "Login"
   },
   "title": {
-    "new-product": "New products",
-    "best-selling-seed": "Best selling seeds",
-    "type-seed": "Varieties of seedlings",
-    "comment": "Comments"
+    "new-product": "New Product",
+    "best-selling-seed": "Best Selling Seed",
+    "type-seed": "Seed Types",
+    "comment": "Customer Feedback"
   },
   "button": {
-    "buy": "Buy now",
-    "read-more": "View more"
+    "buy": "Buy Now",
+    "read-more": "Read More",
+    "signup": "Sign Up",
+    "logout": "Log Out",
+    "addCart": "Add to Cart",
+    "submit": "Submit",
+    "forgotPassword": "Forgot Password",
+    "continue": "Continue"
+  },
+  "banner": {
+    "title": "Find Seedlings for You",
+    "description": "Welcome to seedling - where you can find high-quality and diverse seedlings, bringing greenery to your space."
+  },
+  "input": {
+    "placeholder": {
+      "email": "Enter your email address",
+      "search-product": "Enter product name...",
+      "search-live": "Enter live session ID here",
+      "password": "Enter your password",
+      "confirmPassword": "Confirm password",
+      "name": "Enter your name",
+      "phone": "Enter your phone number",
+      "address": "Enter your address",
+      "comment": "Enter your feedback content"
+    }
+  },
+  "footer": {
+    "top": {
+      "title": "Stay Updated with Our Latest Offers"
+    },
+    "main": {
+      "description": "A place where you can find the best seedlings for your home. We provide the highest quality products from the most reputable sources.",
+      "company": "Company",
+      "feature": "Features",
+      "job": "Careers",
+      "quesAndAns": "Q&A",
+      "account": "Account",
+      "order": "Order",
+      "pay": "Payment",
+      "manageDeliveries": "Manage Deliveries",
+      "help": "Help",
+      "helpCustomer": "Customer Support",
+      "deliveriesDetail": "Delivery Details",
+      "term": "Terms of Use",
+      "policy": "Policy",
+      "human": "Human Resources",
+      "tutorial": "Tutorial"
+    }
+  },
+  "text": {
+    "product": "Product",
+    "quality": "High Quality",
+    "customer": "Customer",
+    "sold": "Sold",
+    "stock": "Stock Quantity",
+    "description": "Description",
+    "allReviews": "All Reviews",
+    "noReview": "No Reviews Yet",
+    "customerCare": "Customer Care",
+    "customerCare1": "Ensure products meet food safety standards, fresh and delicious",
+    "customerCare2": "Exquisite taste, embodying regional characteristics",
+    "customerCare3": "Free shipping for orders over 350,000 VND",
+    "customerCare4": "Fast delivery within 3 hours",
+    "chooseAll": "Select All",
+    "unitPrice": "Unit Price",
+    "quantity": "Quantity",
+    "price": "Price",
+    "operation": "Operation",
+    "totalPrice": "Total Payment",
+    "join": "Join",
+    "well-back": "Welcome Back!!!",
+    "remainQuantity": "Remaining Quantity",
+    "lie": "15-Day Free Return",
+    "loginDescription": "Log in to receive the latest deals and information from us.",
+    "signupDescription": "Sign up to receive the latest deals and information from us.",
+    "noAccount": "Don't have an account",
+    "hasAccount": "Already have an account",
+    "contactUs": "Contact Us",
+    "contactDescription": "Have specific questions or want to explore new opportunities? Our experienced team is ready to collaborate with you.",
+    "topHeaderDes": "Sign up and get 20% off your first order",
+    "resetPass": "Change Password",
+    "resetPassDescription": "Please enter your new password below.",
+    "forgotPassDescription": "Please enter your email to continue."
+  },
+  "sort": {
+    "title": "Sort By",
+    "default": "Default",
+    "nameAsc": "Name: (A-Z)",
+    "nameDesc": "Name: (Z-A)",
+    "priceAsc": "Price: Low to High",
+    "priceDesc": "Price: High to Low"
   }
 }

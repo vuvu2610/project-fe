@@ -11,6 +11,7 @@ import { CardInfo, GetCartReponseDto } from "../../types/types";
 import CartDetail from "./CartDetail";
 import { useDispatch } from "react-redux";
 import { addListCartPay } from "../../redux/appSlice";
+import { useTranslation } from "react-i18next";
 function CartPage() {
   const [products, setProducts] = useState<GetCartReponseDto[]>([]);
   const [totalCard, setTotalCard] = useState<number>(0);
@@ -20,7 +21,8 @@ function CartPage() {
   const [listCartPay, setListCartPay] = useState<CardInfo[]>([]);
   const user = useSelector((state: RootState) =>  state.auth.currentUser)
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const {t} = useTranslation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isCheckedNew = e.target.checked;
@@ -110,13 +112,13 @@ function CartPage() {
               onChange={handleChange}
               checked={isChecked}
             />
-            <label htmlFor="checkAll" className="cursor-pointer select-none">Chọn tất cả</label>
+            <label htmlFor="checkAll" className="cursor-pointer select-none">{t("text.chooseAll")}</label>
           </div>
           <div className="flex flex-1 justify-between text-[#888888]">
-            <div className="flex-1 text-center">Đơn giá</div>
-            <div className="flex-1 text-center">Số lượng</div>
-            <div className="flex-1 text-center">Số tiền</div>
-            <div className="flex-1 text-end">Thao Tác</div>
+            <div className="flex-1 text-center">{t("text.unitPrice")}</div>
+            <div className="flex-1 text-center">{t("text.quantity")}</div>
+            <div className="flex-1 text-center">{t("text.price")}</div>
+            <div className="flex-1 text-end">{t("text.operation")}</div>
           </div>
         </div>
         <div className="flex flex-col gap-1 mb-4">
@@ -131,11 +133,11 @@ function CartPage() {
           </div>
           <div className="flex flex-1 justify-between text-[#888888] items-center">
             <div className="text-center">
-              Tổng thanh toán ({totalCard} Sản phẩm):{" "}
+            {t("text.totalPrice")} ({totalCard} {t("text.product")}):{" "}
               <span className="text-[#EE4D2D]">đ{totalPrice}</span>
             </div>
             <Button onClick={handleBuyProduct} className={`${products.length !== 0 ? "" : "select-none cursor-not-allowed"}`}>
-              Mua hàng
+            {t("button.buy")}
             </Button>
           </div>
         </div>

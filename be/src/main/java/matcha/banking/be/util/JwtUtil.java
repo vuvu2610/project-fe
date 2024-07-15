@@ -57,6 +57,11 @@ public class JwtUtil {
         return email.equals(userEntity.getEmail());
     }
 
+    public boolean validateTokenByEmail(String authToken, String e) {
+        final String email = getEmailFromJwt(authToken);
+        return email.equals(e);
+    }
+
     private Key getSignKey(){
         byte[] keyBytes = Decoders.BASE64.decode(JWT_SECRET);
         return Keys.hmacShaKeyFor(keyBytes);

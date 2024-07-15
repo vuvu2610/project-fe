@@ -1,21 +1,20 @@
-import { useState, useEffect, useRef, FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { AiOutlineLogin } from "react-icons/ai";
+import { FaBars } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
-import { AiOutlineLogin } from "react-icons/ai";
-import navItems from "../../api/navItems.json";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { callApi, getCartByUser, logoutUser } from "../../api/axios"
-import DynamicPlaceholder from "./DynamicPlaceholder";
-import { useDispatch, useSelector } from "react-redux";
-import routes from "../../config/routes";
+import { useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 import ReactSelect from "react-select";
-import { FaBars } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
+import { getCartByUser, logoutUser } from "../../api/axios";
+import navItems from "../../api/navItems.json";
 import Logo from "../../assets/images/logo.png";
-import { RootState } from "../../redux/store";
-import { updateCartNumber } from "../../redux/appSlice";
-import { GetUserInfoDto } from "../../types/types";
+import routes from "../../config/routes";
 import { Emitter } from "../../eventEmitter/EventEmitter";
+import { RootState } from "../../redux/store";
+import { GetUserInfoDto } from "../../types/types";
+import DynamicPlaceholder from "./DynamicPlaceholder";
 
 const Navbar: FC = () => {
   const [cartCount, setCartCount] = useState<number>(0);
@@ -28,7 +27,9 @@ const Navbar: FC = () => {
     { value: "en", label: "English" },
   ]);
 
-  const user: GetUserInfoDto|null = useSelector((state: RootState) => state.auth.currentUser);
+  const user: GetUserInfoDto | null = useSelector(
+    (state: RootState) => state.auth.currentUser
+  );
   console.log(user);
 
   const toggleMenu = () => {
@@ -41,9 +42,9 @@ const Navbar: FC = () => {
 
   useEffect(() => {
     const fetchCart = async () => {
-      const listCartPay = await  getCartByUser(user?.id);
+      const listCartPay = await getCartByUser(user?.id);
       setCartCount(listCartPay.length);
-    }
+    };
     if (user) {
       fetchCart();
     }
@@ -124,19 +125,30 @@ const Navbar: FC = () => {
               <div className="relative">
                 <Link to="/cart" className="relative">
                   <IoCartOutline className="w-7 h-7 mt-1" />
-                  {cartCount > 0 && (<div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">{cartCount}</div>)}
+                  {cartCount > 0 && (
+                    <div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">
+                      {cartCount}
+                    </div>
+                  )}
                 </Link>
               </div>
-              {isLogin ? (<button className="hidden lg:block" onClick={logoutUser}>
-                Logout <AiOutlineLogin className="w-6 h-6 inline-block" />
-              </button>
-              ) : (<Link to={"/login"} className="hidden lg:block" >
-                Login <AiOutlineLogin className="w-6 h-6 inline-block" />
-              </Link>)}
+              {isLogin ? (
+                <button className="hidden lg:block" onClick={logoutUser}>
+                  {t("button.logout")}{" "}
+                  <AiOutlineLogin className="w-6 h-6 inline-block" />
+                </button>
+              ) : (
+                <Link to={"/login"} className="hidden lg:block">
+                  {t("nav.login")}{" "}
+                  <AiOutlineLogin className="w-6 h-6 inline-block" />
+                </Link>
+              )}
               <ReactSelect
                 options={langOptions}
                 isSearchable={false}
-                defaultValue={langOptions.find(option => option.value === i18n.language)}
+                defaultValue={langOptions.find(
+                  (option) => option.value === i18n.language
+                )}
                 onChange={(option) => i18n.changeLanguage(option?.value)}
               />
             </div>
@@ -157,8 +169,9 @@ const Navbar: FC = () => {
         {/* Menu mobile */}
         <div
           ref={menuRef}
-          className={`bg-black w-custom-width h-full text-white z-50 ${isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
-            }`}
+          className={`bg-black w-custom-width h-full text-white z-50 ${
+            isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
+          }`}
         >
           <Link
             to="/"
@@ -168,12 +181,49 @@ const Navbar: FC = () => {
             SEEDLING
           </Link>
           <ul className="space-y-2 border-b ">
-            {navItems.map(({ title, to }) => (
+            {/* {navItems.map(({ title, to }) => (
               <Link onClick={toggleMenu} to={to} key={to}>
                 <li className="py-3 px-4 hover:bg-[#484a4b]">{title}</li>
               </Link>
-            ))}
+            ))} */}
+
+            <Link onClick={toggleMenu} to={routes.home} key={routes.home}>
+              <li className="py-3 px-4 hover:bg-[#484a4b]">{t("nav.home")}</li>
+            </Link>
+
+            <Link onClick={toggleMenu} to={routes.product} key={routes.product}>
+              <li className="py-3 px-4 hover:bg-[#484a4b]">
+                {t("nav.products")}
+              </li>
+            </Link>
+
+            <Link onClick={toggleMenu} to={routes.contact} key={routes.contact}>
+              <li className="py-3 px-4 hover:bg-[#484a4b]">
+                {t("nav.contact")}
+              </li>
+            </Link>
+
+            <Link onClick={toggleMenu} to={routes.live} key={routes.live}>
+              <li className="py-3 px-4 hover:bg-[#484a4b]">{t("nav.live")}</li>
+            </Link>
           </ul>
+          {isLogin ? (
+            <button
+              onClick={logoutUser}
+              className="w-full text-left py-3 px-4 hover:bg-[#484a4b]"
+            >
+              {t("button.logout")}{" "}
+              <AiOutlineLogin className="w-6 h-6 inline-block" />
+            </button>
+          ) : (
+            <Link
+              to={"/login"}
+              className="w-full text-left py-3 px-4 hover:bg-[#484a4b] block"
+            >
+              {t("nav.login")}{" "}
+              <AiOutlineLogin className="w-6 h-6 inline-block" />
+            </Link>
+          )}
         </div>
       </div>
     </nav>
