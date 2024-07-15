@@ -15,6 +15,7 @@
   },
   "button": {
     "buy": "Mua ngay",
+
     "read-more": "Xem thêm",
     "signup": "Đăng ký",
     "logout": "Đăng xuất",
@@ -105,5 +106,20 @@
     "nameDesc": "Tên: (Z-A)",
     "priceAsc": "Giá: thấp đến cao",
     "priceDesc": "Giá: cao đến thấp"
+    "read-more": "Xem thêm"
+  },
+  "pdf": {
+    "title": "Hóa đơn mua hàng",
+    "download": "Tải về",
+    "hotline": "Số điện thoại",
+    "customer": "Khách hàng",
+    "date": "Ngày mua hàng",
+    "productId": "Mã sản phẩm",
+    "productName": "Tên sản phẩm",
+    "quantity": "Số lượng",
+    "price": "Giá",
+    "total": "Tổng tiền",
+    "totalPrice": "Tổng giá trị"
   }
+  
 }

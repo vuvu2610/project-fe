@@ -8,4 +8,5 @@ public class CartRequestPayDto {
     private Integer productId;
     private Integer quantity;
     private Double price;
+    private String productName;
 }

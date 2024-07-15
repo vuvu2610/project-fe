@@ -14,6 +14,7 @@
     "comment": "Customer Feedback"
   },
   "button": {
+
     "buy": "Buy Now",
     "read-more": "Read More",
     "signup": "Sign Up",
@@ -105,5 +106,20 @@
     "nameDesc": "Name: (Z-A)",
     "priceAsc": "Price: Low to High",
     "priceDesc": "Price: High to Low"
+
+    "buy": "Buy now",
+    "read-more": "View more"
+  },
+  "pdf": {
+    "title": "Invoice",
+    "hotline": "Hotline",
+    "customer": "Customer",
+    "date": "Purchase date",
+    "productId": "Product ID",
+    "productName": "Product name",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total",
+    "totalPrice": "Total price"
   }
 }

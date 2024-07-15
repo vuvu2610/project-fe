@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { getDispatch } from "../utils/helper";
 import { fetchEnd, fetchStart } from "../redux/appSlice";
 
+
 import {
   Login,
   SignUpInfo,
@@ -12,6 +13,7 @@ import {
   GetUserInfoDto,
   CardInfo,
 } from "../types/types";
+
 import { Dispatch } from "redux";
 import { logOutSuccess, loginSuccess } from "../redux/authSlice";
 import Swal from "sweetalert2";
@@ -117,7 +119,8 @@ export const updateCartItem = async (
   }
 };
 
-export const getAllProduct = async (name: string | null) => {
+
+export const getAllProduct = async (name: string|null): Promise<Product[]> => {
   try {
     const res = await baseAxios.get("products", { params: { name } });
     return res.data;
@@ -172,6 +175,21 @@ export const editReview = async (review: any) => {
       confirmButtonText: "Okay",
     });
   }
+};
+
+export const getTopReview = async (limit:number): Promise<Review[]|null> => {
+  try {
+      const res = await baseAxios.get(`review/top`, {params: {limit}});
+      return res.data;
+  } catch (error:any) {
+      Swal.fire({
+          title: "Error",
+          text: error.response.data.error,
+          icon: "error",
+          confirmButtonText: "Okay",
+      })
+  }
+  return null;
 };
 
 export const addToCart = async (cartRequestDto: CartRequestDto) => {
@@ -229,3 +247,4 @@ export const registerNewUser = async (user: SignUpInfo) => {
     console.log(error);
   }
 };
+

@@ -2,9 +2,12 @@ import { useTranslation } from "react-i18next";
 import BannerImg from "../../assets/images/bg.png";
 import Button from "../../components/Button";
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import routes from "../../config/routes";
 
 function Banner() {
   const {t} = useTranslation();
+  const navigate = useNavigate();
   return (
     <div className="bg-slate-100" >
       <div className="wrapper flex lg:flex-row flex-col bg-cover bg-no-repeat relative">
@@ -16,7 +19,7 @@ function Banner() {
           {t("banner.description")}
           </p>
 
-          <Button className="px-6 mb-4">
+          <Button className="px-6 mb-4" onClick={() => navigate(routes.product)}>
           {t("button.buy")}
           </Button>
 
