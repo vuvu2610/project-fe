@@ -8,9 +8,11 @@ import Pagianate from "../../components/PagianateNavBar/Paginate";
 import routes from "../../config/routes";
 import { MeetingData } from "../../types/types";
 import Sidebar from "./Sidebar";
+import { useTranslation } from "react-i18next";
 
 function Watch() {
   const [meetings, setMeetings] = useState<Array<MeetingData>>([]);
+  const {t} = useTranslation();
   const navigate = useNavigate();
   const roomInput = useRef<HTMLInputElement>(null);
 
@@ -57,7 +59,7 @@ function Watch() {
           <input
             ref={roomInput}
             type="text"
-            placeholder="Nhập id phiên live tại đây"
+            placeholder={t("input.placeholder.search-live")}
             className="p-3 border border-gray-300 rounded-md  focus:outline-primary caret-primary"
           />
           <button
@@ -66,7 +68,7 @@ function Watch() {
             }
             className="flex items-center justify-center gap-x-2 py-3 px-4 bg-gray-300 rounded-md ml-3 hover:bg-primary hover:text-white transition-all duration-300"
           >
-            Tham gia <IoPersonAdd />{" "}
+            {t("text.join")} <IoPersonAdd />{" "}
           </button>
         </div>
 

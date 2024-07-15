@@ -15,7 +15,96 @@
   },
   "button": {
     "buy": "Mua ngay",
-    "read-more": "Xem thêm"
+    "read-more": "Xem thêm",
+    "signup": "Đăng ký",
+    "logout": "Đăng xuất",
+    "addCart": "Thêm vào giỏ hàng",
+    "submit": "Gửi",
+    "forgotPassword": "Quên mật khẩu",
+    "continue": "Tiếp tục"
+  },
+  "banner": {
+    "title": "Tìm kiếm cây giống cho bạn",
+    "description": "Chào mừng bạn đến với seedling - nơi bạn có thể tìm thấy những cây giống chất lượng cao và đa dạng, đem lại sự xanh tươi cho không gian của bạn."
+  },
+  "input": {
+    "placeholder": {
+      "email": "Nhập địa chỉ email của bạn",
+      "search-product": "Nhập tên sản phẩm...",
+      "search-live": "Nhập id phiên live tại đây",
+      "password": "Nhập mật khẩu của bạn",
+      "confirmPassword": "Xác nhận mật khẩu",
+      "name": "Nhập tên của bạn",
+      "phone": "Nhập số điện thoại của bạn",
+      "address": "Nhập địa chỉ của bạn",
+      "comment": "Nhập nội dung của phản hồi của bạn"
+    }
+  },
+  "footer": {
+    "top": {
+      "title": "Cập nhật về ưu đãi mới nhất của chúng tôi"
+    },
+    "main": {
+      "description": "Là nơi bạn có thể tìm thấy những cây giống tốt nhất cho ngôi nhà của mình. Chúng tôi cung cấp những sản phẩm chất lượng nhất từ những nguồn cung cấp uy tín nhất.",
+      "company": "Công ty",
+      "feature": "Tính năng",
+      "job": "Nghề nghiệp",
+      "quesAndAns": "Hỏi và trả lời",
+      "account": "Tài khoản",
+      "order": "Đặt hàng",
+      "pay": "Thanh toán",
+      "manageDeliveries": "Quản lý việc giao hàng",
+      "help": "Hỗ trợ",
+      "helpCustomer": "Hỗ trợ khách hàng",
+      "deliveriesDetail": "Chi tiết giao hàng",
+      "term": "Điều khoản sử dụng",
+      "policy": "Chính sách",
+      "human": "Nhân lực",
+      "tutorial": "Hướng dẫn"
+    }
+  },
+  "text": {
+    "product": "Sản phẩm",
+    "quality": "Chất lươợng cao",
+    "customer": "Khách hàng",
+    "sold": "Đã bán",
+    "stock": "Số lượng còn trong kho",
+    "description": "Mô tả",
+    "allReviews": "Tất cả bình luận",
+    "noReview": "Chưa có bình luận nào",
+    "customerCare": "Chăm sóc khách hàng",
+    "customerCare1": "Đảm bảo sản phẩm đạt chuẩn ATVSTP, tươi ngon",
+    "customerCare2": "Vị ngon tinh tế, mang đúng đặc trưng vùng miền",
+    "customerCare3": "Miễn phí vận chuyển cho đơn hàng từ 350.000đ",
+    "customerCare4": "Giao hàng nhanh gọn trong 3h",
+    "chooseAll": "Chọn tất cả",
+    "unitPrice": "Đơn giá",
+    "quantity": "Số lượng",
+    "price": "Số tiền",
+    "operation": "Thao tác",
+    "totalPrice": "Tổng thanh toán",
+    "join": "Tham gia",
+    "well-back": "Chào mừng bạn quay trở lại !!!",
+    "remainQuantity": "Số lượng hàng còn lại",
+    "lie": "Đổi trả miễn phí 15 ngày",
+    "loginDescription": "Đăng nhập để nhận ưu đãi và thông tin mới nhất từ chúng tôi.",
+    "signupDescription": "Đăng ký để nhận ưu đãi và thông tin mới nhất từ chúng tôi.",
+    "noAccount": "Bạn chưa có tài khoản",
+    "hasAccount": "Bạn đã có tài khoản",
+    "contactUs": "Liên hệ với chúng tôi",
+    "contactDescription": "Bạn có câu hỏi cụ thể hoặc muốn khám phá những cơ hội mới? Đội ngũ giàu kinh nghiệm của chúng tôi sẵn sàng hợp tác với bạn.",
+    "topHeaderDes": "Đăng ký và được giảm giá 20% cho đơn hàng đầu tiên của bạn",
+    "resetPass": "Thay đổi mật khẩu",
+    "resetPassDescription": "Hãy nhập mật khẩu mới ở dưới nhé.",
+    "forgotPassDescription": "Hãy nhập email của bạn để tiếp tục nhé."
+  },
+  "sort": {
+    "title": "Sắp xếp theo",
+    "default": "Mặc định",
+    "nameAsc": "Tên: (A-Z)",
+    "nameDesc": "Tên: (Z-A)",
+    "priceAsc": "Giá: thấp đến cao",
+    "priceDesc": "Giá: cao đến thấp"
   },
   "pdf": {
     "title": "Hóa đơn mua hàng",
@@ -30,5 +119,4 @@
     "total": "Tổng tiền",
     "totalPrice": "Tổng giá trị"
   }
-  
 }

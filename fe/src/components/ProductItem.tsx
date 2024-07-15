@@ -10,12 +10,14 @@ import { toast } from "react-toastify";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
 import { AiOutlineLoading } from "react-icons/ai";
+import { useTranslation } from 'react-i18next';
 
 interface ProductItemProps {
   product: Product;
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
+  const {t} = useTranslation();
   const [loaded, setLoaded] = useState(false);
   const [isCallApi, setIsCallApi] = useState(false);
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
@@ -23,7 +25,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
   function handleAddToCart() {
     if (isCallApi) return;
     const addCart = async () => {
-        
+
       try {
         setIsCallApi(() => true)
         await addToCart({
@@ -76,13 +78,13 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
             onClick={handleAddToCart}
           >
             {isCallApi ? <AiOutlineLoading size={25} className="animate-spin" />: <CiShoppingCart size={25} />}
-            
+
           </div>
         </div>
         <div className="flex justify-between">
           <span className=" font-semibold">{product?.price} VND</span>
           <span className=" font-semibold">
-            Đã bán: {product?.quantitySold}
+            {t("text.sold")}: {product?.quantitySold}
           </span>
         </div>
       </div>

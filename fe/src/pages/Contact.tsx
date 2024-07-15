@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaPhone } from 'react-icons/fa';
 import { MdOutlineEmail } from 'react-icons/md';
 import { toast } from 'react-toastify';
@@ -16,6 +17,7 @@ interface Errors {
 }
 
 function Contact() {
+    const {t} = useTranslation();
     const [formValues, setFormValues] = useState<FormValues>({
         fullName: '',
         street: '',
@@ -67,9 +69,9 @@ function Contact() {
         <div className="wrapper">
             <div className="mb-[140px] grid md:grid-cols-2 gap-16 items-center relative overflow-hidden p-10 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-3xl bg-white text-black before:absolute before:right-0 before:w-[300px] before:bg-blue-400 before:h-full max-md:before:hidden">
                 <div>
-                    <h2 className="text-3xl font-semibold">Liên hệ với chúng tôi</h2>
+                    <h2 className="text-3xl font-semibold">{t("text.contactUs")}</h2>
                     <p className="text-sm text-gray-400 mt-3">
-                    Bạn có câu hỏi cụ thể hoặc muốn khám phá những cơ hội mới? Đội ngũ giàu kinh nghiệm của chúng tôi sẵn sàng hợp tác với bạn.
+                    {t("text.contactDescription")}
                     </p>
                     <form onSubmit={handleSubmit}>
                         <div className="space-y-4 mt-8">
@@ -78,7 +80,7 @@ function Contact() {
                                 name="fullName"
                                 value={formValues.fullName}
                                 onChange={handleChange}
-                                placeholder="Họ và tên"
+                                placeholder={t("input.placeholder.name")}
                                 className={`px-2 py-3 bg-white w-full text-sm border-b-2 ${
                                     errors.fullName ? 'border-red-500' : 'border-gray-300'
                                 } focus:border-[#333] outline-none`}
@@ -90,7 +92,7 @@ function Contact() {
                                 name="street"
                                 value={formValues.street}
                                 onChange={handleChange}
-                                placeholder="Địa chỉ"
+                                placeholder={t("input.placeholder.address")}
                                 className={`px-2 py-3 bg-white w-full text-sm border-b-2 ${
                                     errors.street ? 'border-red-500' : 'border-gray-300'
                                 } focus:border-[#333] outline-none`}
@@ -102,7 +104,7 @@ function Contact() {
                                 name="phoneNo"
                                 value={formValues.phoneNo}
                                 onChange={handleChange}
-                                placeholder="Số điện thoại"
+                                placeholder={t("input.placeholder.phone")}
                                 className={`px-2 py-3 bg-white text-black w-full text-sm border-b-2 ${
                                     errors.phoneNo ? 'border-red-500' : 'border-gray-300'
                                 } focus:border-[#333] outline-none`}
@@ -114,7 +116,7 @@ function Contact() {
                                 name="email"
                                 value={formValues.email}
                                 onChange={handleChange}
-                                placeholder="Email"
+                                placeholder={t("input.placeholder.email")}
                                 className={`px-2 py-3 bg-white text-black w-full text-sm border-b-2 ${
                                     errors.email ? 'border-red-500' : 'border-gray-300'
                                 } focus:border-[#333] outline-none`}
@@ -125,7 +127,7 @@ function Contact() {
                                 name="message"
                                 value={formValues.message}
                                 onChange={handleChange}
-                                placeholder="Nội dung tin nhắn"
+                                placeholder={t("input.placeholder.comment")}
                                 className={`px-2 pt-3 bg-white text-black w-full text-sm border-b-2 ${
                                     errors.message ? 'border-red-500' : 'border-gray-300'
                                 } focus:border-[#333] outline-none`}
@@ -136,7 +138,7 @@ function Contact() {
                             type="submit"
                             className="mt-8 flex items-center justify-center text-sm w-full rounded px-4 py-2.5 font-semibold bg-[#333] text-white hover:bg-[#222]"
                         >
-                            Gửi
+                            {t("button.submit")}
                         </button>
                     </form>
                     <ul className="mt-4 flex justify-center lg:space-x-6 max-lg:flex-col max-lg:items-center max-lg:space-y-2 ">

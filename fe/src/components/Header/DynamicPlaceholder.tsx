@@ -2,10 +2,12 @@ import React, { useRef, useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import routes from "../../config/routes";
+import { useTranslation } from "react-i18next";
 
 const DynamicPlaceholder: React.FC = () => {
+  const {t} = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
-  const originPlaceHolder = "Search product...";
+  const originPlaceHolder = t("input.placeholder.search-product");
   const [placeHolder, setPlaceHolder] = useState<string>("");
   const [isAdding, setIsAdding] = useState<boolean>(true);
   const [index, setIndex] = useState<number>(0);

@@ -13,12 +13,10 @@ function Banner() {
       <div className="wrapper flex lg:flex-row flex-col bg-cover bg-no-repeat relative">
         <div className="lg:my-[80px] my-10 max-w-[577px] px-6">
           <h3 className="lg:text-[64px] text-[32px] font-semibold leading-[1]">
-            Tìm kiếm cây giống cho bạn
+           {t("banner.title")}
           </h3>
           <p className="my-[32px]">
-            Chào mừng bạn đến với seedling - nơi bạn có thể tìm thấy
-            những cây giống chất lượng cao và đa dạng, đem lại sự xanh tươi cho
-            không gian của bạn.
+          {t("banner.description")}
           </p>
 
           <Button className="px-6 mb-4" onClick={() => navigate(routes.product)}>
@@ -28,15 +26,15 @@ function Banner() {
           <div className="flex items-center flex-wrap text-center">
             <div className="border-r border-[rgba(0, 0, 0, 0.10)] px-2">
               <span className=" text-3xl">200+</span>
-              <p>Sản phẩm</p>
+              <p>{t("text.product")}</p>
             </div>
             <div className="border-r border-[rgba(0, 0, 0, 0.10)] px-2">
               <span className=" text-3xl">2,000+</span>
-              <p>Chất lượng cao</p>
+              <p>{t("text.quality")}</p>
             </div>
             <div className="px-2">
               <span className=" text-3xl">30,000+</span>
-              <p>Khách hàng</p>
+              <p>{t("text.customer")}</p>
             </div>
           </div>
         </div>

@@ -65,4 +65,12 @@ public class UserService {
         }
         return error.toString();
     }
+
+    public void updatePassword(String email, String newPassword) {
+        UserEntity user = userDao.findByEmail(email).orElse(null);
+        if (user != null) {
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userDao.save(user);
+        }
+    }
 }
