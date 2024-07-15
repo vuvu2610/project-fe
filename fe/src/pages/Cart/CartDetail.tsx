@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+
 import { callApi, deleteCart } from '../../api/axios';
-import ActiveQuantity from "../../components/ActiveQuantity";
-import routes from "../../config/routes";
 import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
 import { GetCartReponseDto } from "../../types/types";
+
+import ActiveQuantity from "../../components/ActiveQuantity";
+import routes from "../../config/routes";
 
 interface CartDetailProps {
   getCardReponseDto: GetCartReponseDto;
@@ -20,7 +22,6 @@ const CartDetail = (props: CartDetailProps) => {
 
   const prevCheckedRef = useRef(checked);
   const prevQuantityRef = useRef(quantity);
-
   const checkElement = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
