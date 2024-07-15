@@ -33,6 +33,7 @@ function CartPage() {
       user ? setProducts(await callApi(() => getCartByUser(Number(user.id)))) : setProducts([]);
     }
     fecth();
+    window.scrollTo(0, 0);
   }, [isRerender]);
 
   useEffect(() => {

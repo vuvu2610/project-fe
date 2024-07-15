@@ -8,7 +8,7 @@ import { logOutSuccess, loginSuccess } from "../redux/authSlice";
 import Swal from "sweetalert2";
 
 export const baseAxios = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://3.1.101.169:8080/api/v1/",
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:8081/api/v1/",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",

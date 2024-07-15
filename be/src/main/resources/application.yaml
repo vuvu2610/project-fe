@@ -11,5 +11,19 @@ spring:
 server:
   servlet:
     context-path: "/api/v1"
-  port: 8080
+  port: 8081
 
+#spring:
+#  application:
+#    name: "be"
+#  datasource:
+#    url: "jdbc:postgresql://localhost:5432/postgres"
+#    username: "postgres"
+#    password: "postgres"
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#server:
+#  servlet:
+#    context-path: "/api/v1"
+#  port: 8081

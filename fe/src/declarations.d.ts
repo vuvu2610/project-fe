@@ -1,6 +1,7 @@
 declare module "*.png";
 declare module "*.svg";
 declare module "*.jpg";
+declare module "*.ttf"
 declare module 'jspdf' {
     interface jsPDF {
       autoTable: (options: any) => jsPDF;
