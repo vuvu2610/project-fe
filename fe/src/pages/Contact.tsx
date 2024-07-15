@@ -67,7 +67,7 @@ function Contact() {
         <div className="wrapper">
             <div className="mb-[140px] grid md:grid-cols-2 gap-16 items-center relative overflow-hidden p-10 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-3xl bg-white text-black before:absolute before:right-0 before:w-[300px] before:bg-blue-400 before:h-full max-md:before:hidden">
                 <div>
-                    <h2 className="text-3xl font-extrabold">Liên hệ với chúng tôi</h2>
+                    <h2 className="text-3xl font-semibold">Liên hệ với chúng tôi</h2>
                     <p className="text-sm text-gray-400 mt-3">
                     Bạn có câu hỏi cụ thể hoặc muốn khám phá những cơ hội mới? Đội ngũ giàu kinh nghiệm của chúng tôi sẵn sàng hợp tác với bạn.
                     </p>
