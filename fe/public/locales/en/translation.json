@@ -41,7 +41,14 @@
     "addCart": "Add to Cart",
     "submit": "Submit",
     "forgotPassword": "Forgot Password",
-    "continue": "Continue"
+    "continue": "Continue",
+    "congratulation": "Congratulations on your successful purchase",
+    "backHome": "Back to Home",
+    "promotion": "You have received a discount on your next purchase",
+    "promotionCode": "Promotion code",
+    "nextInvoice": "Next invoice",
+    "dateEnd": "End date",
+    "copy": "Copy"
   },
   "banner": {
     "title": "Find Seedlings for You",
