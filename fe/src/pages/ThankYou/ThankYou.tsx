@@ -105,17 +105,16 @@ function ThankYou() {
   return (
     <div className="w-full max-w-[1024px] md:mx-auto  py-20 gap-y-3 mt-6 mb-40 flex gap-4 justify-between items-center relative">
       <div className="flex flex-col gap-2 flex-1">
-        <h1 className="text-4xl">Đặt hàng thành công 🎉</h1>
+        <h1 className="text-4xl">{t("pdf.congratulation")} 🎉</h1>
         <p>
-          Bạn đã nhận được phiếu giảm giá
-          <br /> cho đơn hàng tiếp theo
+          {t("pdf.promotion")}
         </p>
 
         <Link
           to={routes.home}
           className="rounded-xl bg-rgb(0, 136, 84)-300 font-semibold transition-all duration-300 ease-in-out text-black p-4 w-content underline"
         >
-          Quay về Trang chủ ➡
+          {t("pdf.backHome")} ➡
         </Link>
       </div>
       <div className="flex-1">

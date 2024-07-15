@@ -1,14 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { CardInfo } from "../../types/types";
-import { isNum } from "react-toastify/dist/utils";
 import { useSelector } from 'react-redux';
 import Button from '../Button';
+import { useTranslation } from 'react-i18next';
 
 const CouponCard = () => {
     const [discount, setDiscount] = useState(0);
     const copyValueRef = useRef<HTMLInputElement>(null);
     const buttonCopyRef = useRef<HTMLButtonElement>(null);
     const listCartPay: CardInfo[] = useSelector((state: any) => state.app.listCartPay)
+
+    const {t} = useTranslation();
 
     useEffect(() => {
         const calculateDiscount = () => {
@@ -74,11 +76,11 @@ const CouponCard = () => {
                         />
                     </div>
                     <div className="ml-6">
-                        <h2 className="text-lg text-gray-600 uppercase">PHIẾU GIẢM GIÁ</h2>
+                        <h2 className="text-lg text-gray-600 uppercase">{t("pdf.promotionCode")}</h2>
                         <h1 className="text-4xl text-red-600">
-                            {discount + "%"} <span className="text-lg">cho hoá đơn tiếp theo</span>
+                            {discount + "%"} <span className="text-lg">{t("pdf.nextInvoice")}</span>
                         </h1>
-                        <p className="text-gray-500">Ngày hết hạn {expiryDateCoupon()}</p>
+                        <p className="text-gray-500">{t("pdf.dateEnd")} {expiryDateCoupon()}</p>
                         <div className="flex justify-between items-center mt-4 border rounded px-2 py-1">
                             <input
                             ref={copyValueRef}
@@ -89,7 +91,7 @@ const CouponCard = () => {
                                 className=" h-full border-none outline-none text-sm"
                             />
                             <Button className="px-5 py-1 text-white rounded flex-1 w-40" onClick={copyIt} ref={buttonCopyRef}>
-                                Sao chép
+                            {t("pdf.copy")}
                             </Button>
                         </div>
                     </div>

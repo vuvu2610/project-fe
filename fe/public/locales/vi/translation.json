@@ -117,6 +117,13 @@
     "quantity": "Số lượng",
     "price": "Giá",
     "total": "Tổng tiền",
-    "totalPrice": "Tổng giá trị"
+    "totalPrice": "Tổng giá trị",
+    "congratulation": "Đặt hàng thành công",
+    "backHome": "Quay lại trang chủ",
+    "promotion": "Bạn đã nhận được phiếu giảm giá cho đơn hàng tiếp theo",
+    "promotionCode": "Mã giảm giá",
+    "nextInvoice": "Cho hóa đơn tiếp theo",
+    "dateEnd": "Ngày hết hạn",
+    "copy": "Sao chép"
   }
 }
