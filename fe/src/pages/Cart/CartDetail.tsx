@@ -46,7 +46,8 @@ const CartDetail = (props: CartDetailProps) => {
         price: props.getCardReponseDto.price * quantity,
         quantity,
         id: props.getCardReponseDto.cartId,
-        productId: props.getCardReponseDto.productId
+        productId: props.getCardReponseDto.productId,
+        productName: props.getCardReponseDto.productName
       });
     } else if (quantity !== prevQuantity) {
       if (checked) {
@@ -54,7 +55,8 @@ const CartDetail = (props: CartDetailProps) => {
           price: (quantity - prevQuantity) * props.getCardReponseDto.price,
           quantity: quantity - prevQuantity,
           id: props.getCardReponseDto.cartId,
-          productId: props.getCardReponseDto.productId
+          productId: props.getCardReponseDto.productId,
+          productName: props.getCardReponseDto.productName
         });
       }
     }
