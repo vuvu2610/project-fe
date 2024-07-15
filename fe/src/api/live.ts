@@ -1,7 +1,7 @@
 import { MeetingData, Room, RoomData, ThumbnailResponse } from "../types/types";
 
 export const authToken: string =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiIyNzEwNzY2My0yYjhhLTQyNDAtYTIwOC01OGRhNWExYjlhMWYiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcxODgwNjA5MywiZXhwIjoxNzI2NTgyMDkzfQ.PCuCU2tnlqVW4898XGv0vCNRM8ccC3tQESBVr2oTN1I";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiIzNTQ3NDNiZi1iMGQ4LTQ3ZDEtYmFmOS05NmE1NjdjOTQyMjkiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcyMTA1NzA5MiwiZXhwIjoxODc4ODQ1MDkyfQ.jPUMwg93QIj8ERpbYPjJCO-aNOh27ZBOEE2ZK81_Apc";
 
 export const createMeeting = async (): Promise<string> => {
   try {
