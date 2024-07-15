@@ -79,4 +79,17 @@ public class ReviewController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", exception.getMessage()));
         }
     }
+
+    @GetMapping("/top")
+    public ResponseEntity<Object> getTopReview(@RequestParam(required = false) Integer limit) {
+        try {
+            List<ReviewEntity> listReview = reviewService.getTopReview(limit);
+            List<GetReviewResponseDto> listReviewDto = reviewMapper.toResponseDtoList(listReview).stream()
+                    .peek(reviewDto -> reviewDto.setUserName(userService.getUserById(reviewDto.getUserId()).getName()))
+                    .toList();
+            return ResponseEntity.ok(listReviewDto);
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.badRequest().body(Map.of("error", exception.getMessage()));
+        }
+    }
 }

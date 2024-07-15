@@ -3,17 +3,16 @@ import { FaXmark } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
 import { AiOutlineLogin } from "react-icons/ai";
 import navItems from "../../api/navItems.json";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { callApi, getCartByUser, logoutUser } from "../../api/axios"
 import DynamicPlaceholder from "./DynamicPlaceholder";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import routes from "../../config/routes";
 import ReactSelect from "react-select";
 import { FaBars } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import Logo from "../../assets/images/logo.png";
 import { RootState } from "../../redux/store";
-import { updateCartNumber } from "../../redux/appSlice";
 import { GetUserInfoDto } from "../../types/types";
 import { Emitter } from "../../eventEmitter/EventEmitter";
 
@@ -29,7 +28,6 @@ const Navbar: FC = () => {
   ]);
 
   const user: GetUserInfoDto|null = useSelector((state: RootState) => state.auth.currentUser);
-  console.log(user);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -124,10 +122,10 @@ const Navbar: FC = () => {
               <div className="relative">
                 <Link to="/cart" className="relative">
                   <IoCartOutline className="w-7 h-7 mt-1" />
-                  {cartCount > 0 && (<div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">{cartCount}</div>)}
+                  {cartCount > 0 && (<div className="transition-all duration-300 w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">{cartCount}</div>)}
                 </Link>
               </div>
-              {isLogin ? (<button className="hidden lg:block" onClick={logoutUser}>
+              {isLogin ? (<button className="hidden lg:block" onClick={() => callApi(logoutUser)}>
                 Logout <AiOutlineLogin className="w-6 h-6 inline-block" />
               </button>
               ) : (<Link to={"/login"} className="hidden lg:block" >

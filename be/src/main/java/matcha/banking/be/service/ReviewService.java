@@ -27,6 +27,12 @@ public class ReviewService {
         return reviewDao.findAll();
     }
 
+    public List<ReviewEntity> getTopReview(Integer limit) {
+        if (limit < 0) throw new IllegalArgumentException("Limit must be greater than 0");
+        List<ReviewEntity> topReview = reviewDao.getTopReview();
+        return reviewDao.getTopReview().subList(0, Math.min(topReview.size(), limit));
+    }
+
     public List<ReviewEntity> getReviewsByProductId(Integer productId) {
         return reviewDao.findByProductId(productId);
     }
