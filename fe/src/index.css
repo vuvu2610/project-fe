@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {  
+  @keyframes gradient {  
+      0% {  
+          background-position: 200% 0;  
+      }  
+      100% {  
+          background-position: -200% 0;  
+      }  
+  }  
+
+  .animate-gradient {  
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);  
+      background-size: 400% 100%;  
+      animation: gradient 2.5s ease-in-out infinite;  
+  }  
+}  
+
 @font-face {
   font-family: "Satoshi";
   font-weight: 700;

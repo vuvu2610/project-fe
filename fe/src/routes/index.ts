@@ -8,8 +8,8 @@ import Live from "../pages/Live/Live";
 import Watch from "../pages/Live/Watch";
 import LoginPage from "../pages/LoginPage";
 import PageNotFound from "../pages/PageNotFound";
-import Product from "../pages/Product";
-import ProductDetail from "../pages/ProductDetail";
+import Product from "../pages/Product/Product";
+import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import SignUpPage from "../pages/SignUpPage";
 import ThankYou from "../pages/ThankYou/ThankYou";
 

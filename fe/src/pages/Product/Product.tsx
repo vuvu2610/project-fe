@@ -6,10 +6,11 @@ import {
 } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import ReactSelect, { SelectInstance } from "react-select";
-import { callApi, getAllProduct } from "../api/axios";
-import Paginate from "../components/PagianateNavBar/Paginate";
-import ProductItem from "../components/ProductItem";
-import { Product } from "../types/types";
+import { callApi, getAllProduct } from "../../api/axios";
+import Paginate from "../../components/PagianateNavBar/Paginate";
+import ProductItem from "../../components/ProductItem";
+import { Product } from "../../types/types";
+import SkeletonLoader from "./SkeletonLoader";
 
 function ProductPage() {
     const [page, setPage] = useState(0);
@@ -19,7 +20,7 @@ function ProductPage() {
     const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
 
     const fetchAllProducts = useCallback(() => {
-        callApi(getAllProduct).then((res) => {
+        getAllProduct(null).then((res) => {
             setAllProducts(res);
         });
     }, []);
@@ -99,11 +100,11 @@ function ProductPage() {
                 </div>
 
                 <div className="flex-1">
-                    <ul className=" grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
+                    {allProducts.length !==0 ? <ul className=" grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-10 auto-rows-max">
                         {currentProducts.map((prod, index) => (
                             <ProductItem product={prod} key={index} />
                         ))}
-                    </ul>
+                    </ul> : <SkeletonLoader />}
                     <Paginate
                         onPageChange={(pageNumber) => {
                             setPage(pageNumber);
