@@ -1,35 +1,39 @@
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import ReactSelect, { SelectInstance } from "react-select";
-import { getAllProduct } from "../../api/axios";
+import { callApi, getAllProduct } from "../../api/axios";
 import Paginate from "../../components/PagianateNavBar/Paginate";
 import ProductItem from "../../components/ProductItem";
 import { Product } from "../../types/types";
 import SkeletonLoader from "./SkeletonLoader";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 import { useTranslation } from "react-i18next";
 
 function ProductPage() {
   const [page, setPage] = useState(0);
   const numItemsOfPage = 12;
-  const { t } = useTranslation();
-
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
+  const [query, setQuery] = useState<string | null>(null);
 
-  const fetchAllProducts = useCallback(() => {
-    getAllProduct(null).then((res) => {
-      setAllProducts(res);
-    });
-  }, []);
-
-  const [filter, setFilter] = useState({
-    category: ["tree", "fruit", "spice", "wood", "flower"],
-  });
+    const { t } = useTranslation();
+  const isLoading = useSelector((state: RootState) => state.app.loading);
+  const location = useLocation();
 
   useEffect(() => {
-    fetchAllProducts();
-  }, [fetchAllProducts]);
-
+    const queryParams = new URLSearchParams(location.search);
+    const name = queryParams.get("name") || null;
+    setQuery(name);
+    callApi(() => getAllProduct(name)).then((res) => {
+        setAllProducts(res);
+        setCurrentProducts(res.slice(0, numItemsOfPage));
+    });
+  }, [location]);
+    const [filter, setFilter] = useState({
+        category: ["tree", "fruit", "spice", "wood", "flower"],
+    });
   const filterCurrentProducts = useCallback(() => {
     const startIndex = page * numItemsOfPage;
     const endIndex = (page + 1) * numItemsOfPage;

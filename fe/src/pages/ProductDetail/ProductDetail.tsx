@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { AiTwotoneLike } from "react-icons/ai";
 import { BsClockHistory } from "react-icons/bs";
-import { CiViewList } from "react-icons/ci";
+import { CiShoppingCart, CiViewList } from "react-icons/ci";
 import { FaAngleDown, FaEdit, FaShippingFast, FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";

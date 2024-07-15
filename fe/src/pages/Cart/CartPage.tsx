@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+
 import { callApi, getCartByUser, payCart } from "../../api/axios";
-import Button from "../../components/Button";
-import routes from "../../config/routes";
 import { Emitter as emitter } from "../../eventEmitter/EventEmitter";
 import { RootState } from "../../redux/store";
 import { CardInfo, GetCartReponseDto } from "../../types/types";
-import CartDetail from "./CartDetail";
-import { useDispatch } from "react-redux";
 import { addListCartPay } from "../../redux/appSlice";
+
+import CartDetail from "./CartDetail";
+import Button from "../../components/Button";
+
+import routes from "../../config/routes";
+
 import { useTranslation } from "react-i18next";
 function CartPage() {
   const [products, setProducts] = useState<GetCartReponseDto[]>([]);
@@ -19,22 +23,20 @@ function CartPage() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isRerender, setIsRerender] = useState<boolean>(false);
   const [listCartPay, setListCartPay] = useState<CardInfo[]>([]);
-  const user = useSelector((state: RootState) =>  state.auth.currentUser)
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {t} = useTranslation();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isCheckedNew = e.target.checked;
-    setIsChecked(isCheckedNew);
-    emitter.emit("checkAll", isCheckedNew);
-  };
+  const user = useSelector((state: RootState) =>  state.auth.currentUser)
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch()
+    const {t} = useTranslation();
 
   useEffect(() => {
     const fecth = async () => {
       user ? setProducts(await callApi(() => getCartByUser(Number(user.id)))) : setProducts([]);
     }
     fecth();
+    window.scrollTo(0, 0);
   }, [isRerender]);
 
   useEffect(() => {
@@ -76,6 +78,12 @@ function CartPage() {
       emitter.off("deletedCard", handleDeletedCard);
     };
   }, [products]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isCheckedNew = e.target.checked;
+    setIsChecked(isCheckedNew);
+    emitter.emit("checkAll", isCheckedNew);
+  };
 
   const handleBuyProduct = async () => {
     if (products.length === 0) return;

@@ -2,16 +2,7 @@ import axios, { AxiosError } from "axios";
 import { getDispatch } from "../utils/helper";
 import { fetchEnd, fetchStart } from "../redux/appSlice";
 
-import {
-  Login,
-  SignUpInfo,
-  Cart,
-  CartItem,
-  ReviewRequestDto,
-  CartRequestDto,
-  GetUserInfoDto,
-  CardInfo,
-} from "../types/types";
+import { Login, SignUpInfo, Cart, CartItem, ReviewRequestDto, CartRequestDto, GetUserInfoDto, CardInfo, Review, Product } from "../types/types";
 import { Dispatch } from "redux";
 import { logOutSuccess, loginSuccess } from "../redux/authSlice";
 import Swal from "sweetalert2";
@@ -22,7 +13,7 @@ export const baseAxios = axios.create({
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   },
-  withCredentials: true,
+  withCredentials: true
 });
 
 const dispatch = getDispatch();
@@ -37,8 +28,7 @@ export const currentUser: GetUserInfoDto = localStorage.getItem("user")
 
 export const loginUser = async (loginProp: Login) => {
   try {
-    const res: GetUserInfoDto = (await baseAxios.post("auth/login", loginProp))
-      .data;
+    const res: GetUserInfoDto = (await baseAxios.post("auth/login", loginProp)).data;
     console.log(res);
     localStorage.setItem("user", JSON.stringify(res));
     dispatch(loginSuccess(res));
@@ -117,7 +107,7 @@ export const updateCartItem = async (
   }
 };
 
-export const getAllProduct = async (name: string | null) => {
+export const getAllProduct = async (name: string|null): Promise<Product[]> => {
   try {
     const res = await baseAxios.get("products", { params: { name } });
     return res.data;
@@ -174,6 +164,21 @@ export const editReview = async (review: any) => {
   }
 };
 
+export const getTopReview = async (limit:number): Promise<Review[]|null> => {
+  try {
+      const res = await baseAxios.get(`review/top`, {params: {limit}});
+      return res.data;
+  } catch (error:any) {
+      Swal.fire({
+          title: "Error",
+          text: error.response.data.error,
+          icon: "error",
+          confirmButtonText: "Okay",
+      })
+  }
+  return null;
+};
+
 export const addToCart = async (cartRequestDto: CartRequestDto) => {
   try {
     const res = await baseAxios.post("carts", cartRequestDto);
@@ -222,10 +227,10 @@ export const callApi = async (callBack: any) => {
   }
 };
 
-export const registerNewUser = async (user: SignUpInfo) => {
-  try {
-    const res = await baseAxios.post("/auth/register", user);
-  } catch (error) {
-    console.log(error);
-  }
-};
+export const registerNewUser = async(user: SignUpInfo) => {
+    try {
+        const res = await baseAxios.post('/auth/register',user);
+    } catch (error) {
+        return Promise.reject(error);
+    }
+}

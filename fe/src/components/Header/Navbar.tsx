@@ -7,14 +7,13 @@ import { IoCartOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import ReactSelect from "react-select";
-import { getCartByUser, logoutUser } from "../../api/axios";
-import navItems from "../../api/navItems.json";
+import { getCartByUser, logoutUser } from "../../api/axios"
+import DynamicPlaceholder from "./DynamicPlaceholder";
 import Logo from "../../assets/images/logo.png";
 import routes from "../../config/routes";
 import { Emitter } from "../../eventEmitter/EventEmitter";
 import { RootState } from "../../redux/store";
 import { GetUserInfoDto } from "../../types/types";
-import DynamicPlaceholder from "./DynamicPlaceholder";
 
 const Navbar: FC = () => {
   const [cartCount, setCartCount] = useState<number>(0);
@@ -125,11 +124,7 @@ const Navbar: FC = () => {
               <div className="relative">
                 <Link to="/cart" className="relative">
                   <IoCartOutline className="w-7 h-7 mt-1" />
-                  {cartCount > 0 && (
-                    <div className="w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">
-                      {cartCount}
-                    </div>
-                  )}
+                  {cartCount > 0 && (<div className="transition-all duration-300 w-5 h-5 rounded-full bg-red-600 text-white absolute top-0 text-sm right-[-10px] border border-white text-center">{cartCount}</div>)}
                 </Link>
               </div>
               {isLogin ? (
@@ -146,9 +141,7 @@ const Navbar: FC = () => {
               <ReactSelect
                 options={langOptions}
                 isSearchable={false}
-                defaultValue={langOptions.find(
-                  (option) => option.value === i18n.language
-                )}
+                defaultValue={langOptions.find(option => option.value === i18n.language)}
                 onChange={(option) => i18n.changeLanguage(option?.value)}
               />
             </div>
@@ -169,9 +162,8 @@ const Navbar: FC = () => {
         {/* Menu mobile */}
         <div
           ref={menuRef}
-          className={`bg-black w-custom-width h-full text-white z-50 ${
-            isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
-          }`}
+          className={`bg-black w-custom-width h-full text-white z-50 ${isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
+            }`}
         >
           <Link
             to="/"

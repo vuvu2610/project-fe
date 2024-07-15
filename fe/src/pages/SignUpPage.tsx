@@ -1,4 +1,4 @@
-import { registerNewUser } from "../api/axios";
+import { callApi, registerNewUser } from "../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Login, SignUpInfo } from "../types/types";
@@ -7,61 +7,78 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 interface Errors {
-    [key: string]: string;
+  [key: string]: string;
 }
 
 function SignUpPage() {
+  const navigate = useNavigate();
     const {t} = useTranslation();
-    const navigate = useNavigate();
-    const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
-    const [formValues, setFormValues] = useState<SignUpInfo>({
-        name: '',
-        email: '',
-        password: '',
-    });
-    const [errors, setErrors] = useState<Errors>({});
+  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
+  const [formValues, setFormValues] = useState<SignUpInfo>({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState<Errors>({});
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormValues(prev => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-    const validate = (): boolean => {
-        let tempErrors: Errors = {};
-        tempErrors.name = formValues.name ? '' : 'Bạn cần nhập tên.';
-        tempErrors.email = formValues.email ? '' : 'Bạn cần nhập email.';
-        tempErrors.password = formValues.password ? '' : 'Bạn cần nhập mật khẩu.';
+  const validate = (): boolean => {
+    let tempErrors: Errors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        setErrors(tempErrors);
-        return Object.values(tempErrors).every((x) => x === '');
-    };
+    tempErrors.name = formValues.name ? "" : "Bạn cần nhập tên.";
+    tempErrors.email = formValues.email
+      ? emailRegex.test(formValues.email)
+        ? ""
+        : "Email không hợp lệ."
+      : "Bạn cần nhập email.";
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        if (validate()) {
-            setFormValues({
-                name: '',
-                email: '',
-                password: '',
-            });
-            await registerNewUser(formValues)
-            setTimeout(() => {
-                navigate('/login');
-            }, 2000);
-            toast.success('Send Message successfully!');
-        }
-    };
+    tempErrors.password = formValues.password
+      ? formValues.password.length > 6
+        ? ""
+        : "Mật khẩu phải lớn hơn 6 ký tự."
+      : "Bạn cần nhập mật khẩu.";
 
-    const handleChangeShowPassword = () => {
-        setIsShowPassword(!isShowPassword);
+    setErrors(tempErrors);
+    return Object.values(tempErrors).every((x) => x === "");
+  };
+
+const handleSubmit = async (e: FormEvent) => {
+  e.preventDefault();
+  if (validate()) {
+    try {
+      await callApi(() => registerNewUser(formValues));
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+      setFormValues({
+        name: "",
+        email: "",
+        password: "",
+      });
+      toast.success("Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...");
+    } catch (error) {
+      toast.error("Đăng ký thất bại. Vui lòng thử lại.");
     }
+  }
+};
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+  const handleChangeShowPassword = () => {
+    setIsShowPassword(!isShowPassword);
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
     return (
         <div className="wrapper">

@@ -14,6 +14,26 @@
     "comment": "Customer Feedback"
   },
   "button": {
+    "buy": "Buy now",
+    "read-more": "View more",
+    "signup": "Sign Up",
+    "logout": "Log Out",
+    "addCart": "Add to Cart",
+    "submit": "Submit",
+    "forgotPassword": "Forgot Password",
+    "continue": "Continue"
+  },
+  "pdf": {
+    "title": "Invoice",
+    "hotline": "Hotline",
+    "customer": "Customer",
+    "date": "Purchase date",
+    "productId": "Product ID",
+    "productName": "Product name",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total",
+    "totalPrice": "Total price",
     "buy": "Buy Now",
     "read-more": "Read More",
     "signup": "Sign Up",
