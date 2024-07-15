@@ -48,10 +48,10 @@ function ResetPassword() {
         <div className="relative">
           <input
             ref={input}
-            title="Mật khẩu không được chứa khoảng trắng và có ít nhất 6 kí tự"
+            title="Mật khẩu không được chứa khoảng trắng và có ít nhất 7 kí tự"
             required
             type={!isShowPassword ? "text" : "password"}
-            pattern="^\S{6,}$"
+            pattern="^\S{7,}$"
             placeholder={t("input.placeholder.password")}
             className="outline outline-1 outline-gray-300 focus:outline-primary rounded-lg  p-4"
           />
