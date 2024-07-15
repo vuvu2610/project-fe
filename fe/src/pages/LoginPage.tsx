@@ -1,6 +1,4 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { FaPhone } from "react-icons/fa";
-import { MdOutlineEmail } from "react-icons/md";
 import { toast } from "react-toastify";
 import { Login } from "../types/types";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -9,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/authSlice";
 import routes from "../config/routes";
+
 
 interface Errors {
   [key: string]: string;
@@ -50,10 +49,13 @@ function LoginPage() {
         email: "",
         password: "",
       });
-      await callApi(() => loginUser(formValues)).then((data) => {
+      try {
+        const data = await callApi(() => loginUser(formValues));
         dispatch(loginSuccess(data));
         navigate(routes.home);
-      });
+      } catch (error) {
+        toast.error("Đăng nhập thất bại");
+      }
     }
   };
 
